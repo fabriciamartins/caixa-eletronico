@@ -1,0 +1,12 @@
+package br.edu.facisa.caixa.enumerador;
+
+public enum Operacao {
+
+	ABRE_BANDEJA_DEPOSITO,
+	ACENDE_LUZ_DO_LEITOR_DE_BARRA,
+	ABRE_SAIDA_DINHEIRO,
+	IMPRIME_DOCUMENTO,
+	EMITE_SOM,
+	TROCA_DE_MAQUINA
+	
+}
