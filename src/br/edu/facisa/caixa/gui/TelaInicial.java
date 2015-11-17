@@ -17,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 
 import br.edu.facisa.caixa.adapter.IMaquinaDeEstados;
 import br.edu.facisa.caixa.adapter.MaquinaPrimaria;
@@ -114,12 +113,10 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		button_6.setContentAreaFilled(false);
 		button_6.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
-		panel = new JPanel();
-		panel.setBackground(SystemColor.text);
-		panel.setForeground(Color.GRAY);
-		panel.setBorder(new LineBorder(new Color(192, 192, 192), 0));
+		
+		/*Altera a tela do caixa*/
+		panel = new Deposito().getPanelDeposito();
 		getContentPane().setLayout(getLayout(panel));
-		panel.setLayout(null);
 		
 		labelLogoBancos = new JLabel("");
 		labelLogoBancos.setBounds(233, 12, 75, 75);
