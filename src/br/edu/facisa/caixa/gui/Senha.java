@@ -14,7 +14,6 @@ public class Senha {
 
 	private JPanel panel;
 	private JTextField textField;
-	private JLabel lbl;
 	
 	public JPanel getPanelDeposito() {
 		return panel;
@@ -30,14 +29,6 @@ public class Senha {
 
 	public void setTextField(JTextField textField) {
 		this.textField = textField;
-	}
-
-	public JLabel getLbl() {
-		return lbl;
-	}
-
-	public void setLbl(JLabel lbl) {
-		this.lbl = lbl;
 	}
 
 	/**
@@ -72,8 +63,9 @@ public class Senha {
 		panel.setSize(535,  320);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Digite o valor para dep\u00F3sito");
-		lblNewLabel.setBounds(181, 136, 178, 27);
+		JLabel lblNewLabel = new JLabel("Insira sua senha para continuar");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(147, 136, 236, 27);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel.add(lblNewLabel);
 		
@@ -82,14 +74,6 @@ public class Senha {
 		textField.setEditable(false);
 		panel.add(textField);
 		textField.setColumns(10);
-		
-		lbl = new JLabel("Deposito realizado com sucesso!");
-		lbl.setBounds(145, 120, 246, 14);
-		lbl.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lbl.setForeground(new Color(0, 128, 0));
-		lbl.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl.setVisible(false);
-		panel.add(lbl);
 		
 	}
 }
