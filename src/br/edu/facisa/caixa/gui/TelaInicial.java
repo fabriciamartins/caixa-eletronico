@@ -3,6 +3,7 @@ package br.edu.facisa.caixa.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -115,7 +116,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		
 		
 		/*Altera a tela do caixa*/
-		panel = new Deposito().getPanelDeposito();
+		panel = new Operacoes().getPanel();
 		getContentPane().setLayout(getLayout(panel));
 		
 		labelLogoBancos = new JLabel("");
@@ -229,6 +230,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		tecla01.setBackground(Color.LIGHT_GRAY);
 		tecla01.setForeground(Color.DARK_GRAY);
 		tecla01.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		tecla01.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla01.setBounds(6, 5, 40, 35);
 		panel_teclas.add(tecla01);
 		
@@ -236,6 +238,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		tecla02.setBackground(Color.LIGHT_GRAY);
 		tecla02.setForeground(Color.DARK_GRAY);
 		tecla02.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		tecla02.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla02.setBounds(50, 5, 40, 35);
 		panel_teclas.add(tecla02);
 		
@@ -243,6 +246,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		tecla03.setBackground(Color.LIGHT_GRAY);
 		tecla03.setForeground(Color.DARK_GRAY);
 		tecla03.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		tecla03.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla03.setBounds(94, 5, 40, 35);
 		panel_teclas.add(tecla03);
 		
@@ -250,6 +254,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		tecla05.setBackground(Color.LIGHT_GRAY);
 		tecla05.setForeground(Color.DARK_GRAY);
 		tecla05.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		tecla05.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla05.setBounds(49, 45, 40, 35);
 		panel_teclas.add(tecla05);
 		
@@ -257,6 +262,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		tecla06.setBackground(Color.LIGHT_GRAY);
 		tecla06.setForeground(Color.DARK_GRAY);
 		tecla06.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		tecla06.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla06.setBounds(93, 45, 40, 35);
 		panel_teclas.add(tecla06);
 		
@@ -264,12 +270,14 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		tecla07.setBackground(Color.LIGHT_GRAY);
 		tecla07.setForeground(Color.DARK_GRAY);
 		tecla07.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		tecla07.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla07.setBounds(6, 84, 40, 35);
 		panel_teclas.add(tecla07);
 		
 		tecla04 = new JButton("4");
 		tecla04.setBackground(Color.LIGHT_GRAY);
 		tecla04.setForeground(Color.DARK_GRAY);
+		tecla04.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla04.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		tecla04.setBounds(5, 45, 40, 35);
 		panel_teclas.add(tecla04);
@@ -283,6 +291,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		tecla00.setBackground(Color.LIGHT_GRAY);
 		tecla00.setForeground(Color.DARK_GRAY);
 		tecla00.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		tecla00.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla00.setBounds(50, 122, 40, 35);
 		panel_teclas.add(tecla00);
 		
@@ -290,6 +299,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		tecla08.setBackground(Color.LIGHT_GRAY);
 		tecla08.setForeground(Color.DARK_GRAY);
 		tecla08.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		tecla00.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla08.setBounds(50, 84, 40, 35);
 		panel_teclas.add(tecla08);
 		
@@ -297,6 +307,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		tecla09.setBackground(Color.LIGHT_GRAY);
 		tecla09.setForeground(Color.DARK_GRAY);
 		tecla09.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		tecla09.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla09.setBounds(94, 84, 40, 35);
 		panel_teclas.add(tecla09);
 		
