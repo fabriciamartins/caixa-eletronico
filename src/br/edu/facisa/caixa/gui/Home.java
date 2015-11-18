@@ -31,14 +31,11 @@ public class Home extends JPanel {
 	 * Create the panel.
 	 */
 	private Home() {
-		setBackground(Color.LIGHT_GRAY);
-		
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(Home.class.getResource("/br/edu/facisa/caixa/resource/logo-banco24horas.jpg")));
+		setBackground(Color.WHITE);
 		
 		JLabel lblInsiraONumero = new JLabel("INSIRA O NUMERO DO SEU CART\u00C3O:");
 		lblInsiraONumero.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblInsiraONumero.setForeground(new Color(0, 0, 0));
+		lblInsiraONumero.setForeground(Color.DARK_GRAY);
 		
 		textField = new JTextField();
 		textField.setEnabled(false);
@@ -47,27 +44,20 @@ public class Home extends JPanel {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(27)
-							.addComponent(label))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(130)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(textField, Alignment.LEADING)
-								.addComponent(lblInsiraONumero, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-					.addContainerGap(24, Short.MAX_VALUE))
+					.addGap(123)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(textField, Alignment.LEADING)
+						.addComponent(lblInsiraONumero, Alignment.LEADING))
+					.addGap(131))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(label)
-					.addGap(26)
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(127, Short.MAX_VALUE)
 					.addComponent(lblInsiraONumero)
 					.addGap(18)
-					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(120, Short.MAX_VALUE))
+					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+					.addGap(106))
 		);
 		setLayout(groupLayout);
 

@@ -10,10 +10,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 
-public class Deposito {
+public class Senha {
 
 	private JPanel panel;
 	private JTextField textField;
+	private JLabel lbl;
 	
 	public JPanel getPanelDeposito() {
 		return panel;
@@ -46,7 +47,7 @@ public class Deposito {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Deposito window = new Deposito();
+					Senha window = new Senha();
 					window.panel.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,7 +59,7 @@ public class Deposito {
 	/**
 	 * Create the application.
 	 */
-	public Deposito() {
+	public Senha() {
 		initialize();
 	}
 
@@ -81,6 +82,14 @@ public class Deposito {
 		textField.setEditable(false);
 		panel.add(textField);
 		textField.setColumns(10);
+		
+		lbl = new JLabel("Deposito realizado com sucesso!");
+		lbl.setBounds(145, 120, 246, 14);
+		lbl.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lbl.setForeground(new Color(0, 128, 0));
+		lbl.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl.setVisible(false);
+		panel.add(lbl);
 		
 	}
 }

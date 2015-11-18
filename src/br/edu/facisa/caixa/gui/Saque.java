@@ -14,7 +14,6 @@ public class Saque {
 
 	private JPanel panel;
 	private JTextField textField;
-	private JLabel lbl;
 	
 	public JPanel getPanel() {
 		return panel;
@@ -32,13 +31,6 @@ public class Saque {
 		this.textField = textField;
 	}
 
-	public JLabel getLbl() {
-		return lbl;
-	}
-
-	public void setLblDeposito(JLabel lbl) {
-		this.lbl = lbl;
-	}
 
 	/**
 	 * Launch the application.
@@ -73,7 +65,8 @@ public class Saque {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Digite o valor para saque");
-		lblNewLabel.setBounds(181, 136, 178, 27);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(181, 136, 168, 27);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel.add(lblNewLabel);
 		
@@ -82,14 +75,6 @@ public class Saque {
 		textField.setEditable(false);
 		panel.add(textField);
 		textField.setColumns(10);
-		
-		lbl = new JLabel("Saque realizado com sucesso!");
-		lbl.setBounds(145, 120, 246, 14);
-		lbl.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lbl.setForeground(new Color(0, 128, 0));
-		lbl.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl.setVisible(false);
-		panel.add(lbl);
 		
 	}
 }
