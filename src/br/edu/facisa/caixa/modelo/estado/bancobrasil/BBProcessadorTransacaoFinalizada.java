@@ -1,92 +1,81 @@
-package br.edu.facisa.caixa.modelo.estado.santander;
+package br.edu.facisa.caixa.modelo.estado.bancobrasil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
-import br.edu.facisa.caixa.adapter.MaquinaSantander;
-import br.edu.facisa.caixa.modelo.Dados;
+import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
+import br.edu.facisa.caixa.enumerador.Operacao;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
+import br.edu.facisa.caixa.modelo.estado.ProcessadorEstadoInicial;
 
-public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter implements ProcessadorEstado{
+public class BBProcessadorTransacaoFinalizada extends MaquinaAdapter implements ProcessadorEstado {
 
 	private List<EstadoListener> listeners;
 	
-	public SantanderProcessadorEscolhendoTransacao() {
+	public BBProcessadorTransacaoFinalizada(){
 		listeners = new ArrayList<EstadoListener>();
 	}
-	
 
 	@Override
 	public void teclaNum01Digitada() {
 		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new SantanderProcessadorRealizandoDeposito());
+			listener.estadoAcabou(new BBProcessadorEscolhendoTransacao());
 		}
-		MaquinaSantander.instance.configurarEvento(" - Digite o valor de Depósito - Valor: ", REALIZANDO_DEPOSITO, null);
+		MaquinaBancoBrasil.instance.configurarEvento(exibirTela3(), ESCOLHENDO_TRANSACAO, null);
 	}
 
 	@Override
 	public void teclaNum02Digitada() {
-		// TODO Auto-generated method stub
-		
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(new ProcessadorEstadoInicial());
+		}
+		MaquinaBancoBrasil.instance.configurarEvento("Maquina Primaria", null, Operacao.TROCA_DE_MAQUINA);
 	}
 
 	@Override
 	public void teclaNum03Digitada() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void teclaNum04Digitada() {
-		MaquinaSantander.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.instance.getContaDigitada()));
-		MaquinaSantander.instance.getTransacaoBancaria().consultarExtrato();
-		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new SantanderProcessadorTransacaoFinalizada());
-		}
-		MaquinaSantander.instance.configurarEvento(exibirTela4(), ESCOLHENDO_OPCAO, null);
+		
 	}
 
 	@Override
 	public void teclaNum05Digitada() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void teclaNum06Digitada() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void teclaNum07Digitada() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void teclaNum08Digitada() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void teclaNum09Digitada() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void teclaNum00Digitada() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void teclaConfirmaDigitada() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -154,7 +143,6 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 	public void addEstadoListener(EstadoListener listener) {
 		this.listeners.add(listener);
 	}
-
 
 	@Override
 	public void iniciar() {

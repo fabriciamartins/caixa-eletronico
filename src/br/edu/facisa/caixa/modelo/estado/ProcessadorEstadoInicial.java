@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
-import br.edu.facisa.caixa.adapter.MaquinaGenericaDeBancos;
 import br.edu.facisa.caixa.adapter.MaquinaPrimaria;
 
 

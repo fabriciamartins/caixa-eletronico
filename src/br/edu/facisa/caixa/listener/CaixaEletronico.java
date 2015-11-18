@@ -36,6 +36,12 @@ public class CaixaEletronico implements MaquinaDeEstadosListener {
 		} else*/
 		if (mudanca.getTrocaMaquinaDeEstados() != null) {
 			switch (mudanca.getTrocaMaquinaDeEstados()) {
+				case "Maquina Primaria":
+					this.maquinaAtual.parar();
+					this.maquinaAtual = MaquinaDeEstadosFactory.criaMaquinaPrimaria();
+					this.maquinaAtual.adicionaMaquinaDeEstadosListener(this);
+					this.maquinaAtual.iniciar();
+					break;
 				case "Santander" :
 					this.maquinaAtual.parar();
 					this.maquinaAtual = MaquinaDeEstadosFactory.criaMaquinaSatander();
