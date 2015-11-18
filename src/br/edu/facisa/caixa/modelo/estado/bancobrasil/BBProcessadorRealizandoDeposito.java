@@ -5,9 +5,12 @@ import java.util.List;
 
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
+import br.edu.facisa.caixa.adapter.MaquinaSantander;
 import br.edu.facisa.caixa.enumerador.Operacao;
+import br.edu.facisa.caixa.modelo.Dados;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
+import br.edu.facisa.caixa.modelo.estado.santander.SantanderProcessadorTransacaoFinalizada;
 
 public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements ProcessadorEstado {
 
@@ -95,7 +98,13 @@ public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements P
 
 	@Override
 	public void teclaConfirmaDigitada() {
-		MaquinaBancoBrasil.instance.configurarEvento(" - Digite CONFIRMA quando Inserir o envelope na bandeja", FINALIZANDO_TRANSACAO, Operacao.ABRE_BANDEJA_DEPOSITO);
+		MaquinaBancoBrasil.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.instance.getContaDigitada()));
+		MaquinaBancoBrasil.instance.getTransacaoBancaria().setValor(valorDigitado);
+		MaquinaBancoBrasil.instance.getTransacaoBancaria().depositar();
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
+		}
+		MaquinaBancoBrasil.instance.configurarEvento(" - Deposito realizado com Sucesso!\n" + exibirTela4(), ESCOLHENDO_OPCAO, null);
 	}
 
 	@Override

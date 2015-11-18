@@ -43,7 +43,7 @@ public class Dados {
 	public boolean isContaValida(String key, int conta, int senha){
 		boolean ok = false;
 		Conta aux = getConta(key, conta);
-		if(aux.getSenha() == senha) {
+		if((aux != null)&&(aux.getSenha() == senha)) {
 			ok = true;
 		}
 		return ok;
@@ -64,6 +64,7 @@ public class Dados {
 		conta2.incrementar(1500.00);
 		santander.addContas(conta2);
 		this.bancos.put(santander.getNome(), santander);
+		
 		Banco bradesco = new Banco("Bradesco");
 		Conta conta3 = new Conta();
 		conta3.setBanco(santander);
@@ -72,6 +73,15 @@ public class Dados {
 		conta3.incrementar(1000.00);
 		bradesco.addContas(conta3);
 		this.bancos.put(bradesco.getNome(), bradesco);
+		
+		Banco bb = new Banco("Banco do Brasil");
+		Conta conta4 = new Conta();
+		conta4.setBanco(bb);
+		conta4.setNumero(4);
+		conta4.setSenha(4);
+		conta4.incrementar(500.00);
+		bb.addContas(conta4);
+		this.bancos.put(bb.getNome(), bb);
 	}	
 
 }

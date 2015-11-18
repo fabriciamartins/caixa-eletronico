@@ -103,7 +103,7 @@ public class SantanderProcessadorDigitandoSenha extends MaquinaAdapter implement
 
 	@Override
 	public void teclaConfirmaDigitada() {
-		System.out.println("conta: "+MaquinaSantander.instance.getSenhaDigitada());
+		System.out.println("conta: "+senhaDigitada);
 		if (Dados.getInstance().isContaValida("Santander", MaquinaSantander.instance.getContaDigitada(), senhaDigitada)) {
 			this.senhaDigitada = 0;
 			this.asteriscos = "";

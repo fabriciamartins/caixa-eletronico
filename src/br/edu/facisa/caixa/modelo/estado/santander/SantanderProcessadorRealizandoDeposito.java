@@ -5,7 +5,6 @@ import java.util.List;
 
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaSantander;
-import br.edu.facisa.caixa.enumerador.Operacao;
 import br.edu.facisa.caixa.modelo.Dados;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
@@ -99,6 +98,9 @@ public class SantanderProcessadorRealizandoDeposito extends MaquinaAdapter imple
 		MaquinaSantander.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.instance.getContaDigitada()));
 		MaquinaSantander.instance.getTransacaoBancaria().setValor(valorDigitado);
 		MaquinaSantander.instance.getTransacaoBancaria().depositar();
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(new SantanderProcessadorTransacaoFinalizada());
+		}
 		MaquinaSantander.instance.configurarEvento(" - Deposito realizado com Sucesso!\n" + exibirTela4(), ESCOLHENDO_OPCAO, null);
 	}
 

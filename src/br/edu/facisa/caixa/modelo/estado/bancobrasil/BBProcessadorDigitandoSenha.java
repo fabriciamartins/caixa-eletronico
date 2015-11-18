@@ -103,7 +103,8 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 
 	@Override
 	public void teclaConfirmaDigitada() {
-		if (Dados.getInstance().isContaValida("Santander", MaquinaBancoBrasil.instance.getContaDigitada(), MaquinaBancoBrasil.instance.getSenhaDigitada())){
+		System.out.println("senha: "+senhaDigitada);
+		if (Dados.getInstance().isContaValida("Banco do Brasil", MaquinaBancoBrasil.instance.getContaDigitada(), senhaDigitada)){
 			this.senhaDigitada = 0;
 			this.asteriscos = "";
 			for (EstadoListener listener : this.listeners) {

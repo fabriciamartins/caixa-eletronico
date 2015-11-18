@@ -1,8 +1,6 @@
 package br.edu.facisa.caixa.adapter;
 
-import br.edu.facisa.caixa.enumerador.Operacao;
 import br.edu.facisa.caixa.facade.TransacaoBancariaFacade;
-import br.edu.facisa.caixa.modelo.Dados;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
 
@@ -32,34 +30,6 @@ public abstract class MaquinaGenericaDeBancos extends MaquinaAdapter implements 
 		configurarEvento(telaInicial, DIGITANDO_CONTA, null);
 	}
 	
-	private void processaSenha(int i) {
-		this.senhaDigitada *= 10;
-		this.senhaDigitada += i;
-		this.asteriscos += "*";
-		/*MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(" - Continue a digitar a senha ou digite CONFIRMA\n - Senha: " + asteriscos);
-		notificaMudanca(evento);*/
-		configurarEvento(" - Continue a digitar a senha ou digite CONFIRMA\n - Senha: " + asteriscos, this.estado, null);
-	}
-
-	private void processaConta(int i) {
-		this.contaDigitada *= 10;
-		this.contaDigitada += i;
-		/*MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(" - Continue a digitar a conta ou digite CONFIRMA\n - Conta: " + this.contaDigitada);
-		notificaMudanca(evento);*/
-		configurarEvento(" - Continue a digitar a conta ou digite CONFIRMA\n - Conta: " + this.contaDigitada, this.estado, null);
-	}
-	
-	private void processaValor(double d) {
-		this.valorDigitado *= 10;
-		this.valorDigitado += d;
-		/*MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(" - Continue a digitar o valor ou digite CONFIRMA\n - Valor: " + this.valorDigitado);
-		notificaMudanca(evento);*/
-		configurarEvento(" - Continue a digitar o valor ou digite CONFIRMA\n - Valor: " + this.valorDigitado, this.estado, null);
-	}
-
 	public void teclaNum01Digitada() {
 		processadorEstado.teclaNum01Digitada();
 		/*if (this.estado == DIGITANDO_CONTA) {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
+import br.edu.facisa.caixa.modelo.Dados;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
 
@@ -38,8 +39,12 @@ public class BBProcessadorEscolhendoTransacao extends MaquinaAdapter implements 
 
 	@Override
 	public void teclaNum04Digitada() {
-		// TODO Auto-generated method stub
-		
+		MaquinaBancoBrasil.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.instance.getContaDigitada()));
+		MaquinaBancoBrasil.instance.getTransacaoBancaria().consultarExtrato();
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
+		}
+		MaquinaBancoBrasil.instance.configurarEvento(exibirTela4(), ESCOLHENDO_OPCAO, null);
 	}
 
 	@Override
