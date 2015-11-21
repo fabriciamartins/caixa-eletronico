@@ -1,14 +1,16 @@
 package br.edu.facisa.caixa;
 
-import br.edu.facisa.caixa.gui.TelaInicial;
+import br.edu.facisa.caixa.gui.Tela;
+import br.edu.facisa.caixa.listener.CaixaEletronico;
 
 public class Main {
 	
 	public static void main(String[] args) {
-//		CaixaEletronico caixa = new CaixaEletronico();
-//		caixa.iniciaOperacoes();
-		TelaInicial home = TelaInicial.getInstance();
+		Tela home = Tela.instance;
+		CaixaEletronico caixa = new CaixaEletronico();
 		home.setVisible(true);
+		caixa.iniciaOperacoes();
+		
 	}
 	
 }

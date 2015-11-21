@@ -5,17 +5,18 @@ import java.util.List;
 
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
-import br.edu.facisa.caixa.adapter.MaquinaSantander;
-import br.edu.facisa.caixa.enumerador.Operacao;
+import br.edu.facisa.caixa.gui.Deposito;
+import br.edu.facisa.caixa.gui.OperacaoSucesso;
+import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.modelo.Dados;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
-import br.edu.facisa.caixa.modelo.estado.santander.SantanderProcessadorTransacaoFinalizada;
 
 public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements ProcessadorEstado {
 
 	private double valorDigitado;
 	private List<EstadoListener> listeners;
+	private Deposito telaDeposito = new Deposito();
 	
 	public BBProcessadorRealizandoDeposito(){
 		listeners = new ArrayList<EstadoListener>();
@@ -29,71 +30,90 @@ public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements P
 	@Override
 	public void teclaNum01Digitada() {
 		processaValor(1);
-		String msg = " - Continue a digitar o valor ou digite CONFIRMA\n - Valor: " + this.valorDigitado;
-		MaquinaBancoBrasil.instance.configurarEvento(msg, REALIZANDO_DEPOSITO, null);
+		telaDeposito.textField.setText(String.valueOf(valorDigitado));
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaNum02Digitada() {
 		processaValor(2);
-		String msg = " - Continue a digitar o valor ou digite CONFIRMA\n - Valor: " + this.valorDigitado;
-		MaquinaBancoBrasil.instance.configurarEvento(msg, REALIZANDO_DEPOSITO, null);
+		telaDeposito.textField.setText(String.valueOf(valorDigitado));
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaNum03Digitada() {
 		processaValor(3);
-		String msg = " - Continue a digitar o valor ou digite CONFIRMA\n - Valor: " + this.valorDigitado;
-		MaquinaBancoBrasil.instance.configurarEvento(msg, REALIZANDO_DEPOSITO, null);
+		telaDeposito.textField.setText(String.valueOf(valorDigitado));
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaNum04Digitada() {
 		processaValor(4);
-		String msg = " - Continue a digitar o valor ou digite CONFIRMA\n - Valor: " + this.valorDigitado;
-		MaquinaBancoBrasil.instance.configurarEvento(msg, REALIZANDO_DEPOSITO, null);
+		telaDeposito.textField.setText(String.valueOf(valorDigitado));
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaNum05Digitada() {
 		processaValor(5);
-		String msg = " - Continue a digitar o valor ou digite CONFIRMA\n - Valor: " + this.valorDigitado;
-		MaquinaBancoBrasil.instance.configurarEvento(msg, REALIZANDO_DEPOSITO, null);
+		telaDeposito.textField.setText(String.valueOf(valorDigitado));
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaNum06Digitada() {
-		processaValor(6);
-		String msg = " - Continue a digitar o valor ou digite CONFIRMA\n - Valor: " + this.valorDigitado;
-		MaquinaBancoBrasil.instance.configurarEvento(msg, REALIZANDO_DEPOSITO, null);
+		processaValor(6);telaDeposito.textField.setText(String.valueOf(valorDigitado));
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaNum07Digitada() {
 		processaValor(7);
-		String msg = " - Continue a digitar o valor ou digite CONFIRMA\n - Valor: " + this.valorDigitado;
-		MaquinaBancoBrasil.instance.configurarEvento(msg, REALIZANDO_DEPOSITO, null);
+		telaDeposito.textField.setText(String.valueOf(valorDigitado));
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaNum08Digitada() {
 		processaValor(8);
-		String msg = " - Continue a digitar o valor ou digite CONFIRMA\n - Valor: " + this.valorDigitado;
-		MaquinaBancoBrasil.instance.configurarEvento(msg, REALIZANDO_DEPOSITO, null);
+		telaDeposito.textField.setText(String.valueOf(valorDigitado));
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaNum09Digitada() {
 		processaValor(9);
-		String msg = " - Continue a digitar o valor ou digite CONFIRMA\n - Valor: " + this.valorDigitado;
-		MaquinaBancoBrasil.instance.configurarEvento(msg, REALIZANDO_DEPOSITO, null);
+		telaDeposito.textField.setText(String.valueOf(valorDigitado));
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaNum00Digitada() {
 		processaValor(0);
-		String msg = " - Continue a digitar o valor ou digite CONFIRMA\n - Valor: " + this.valorDigitado;
-		MaquinaBancoBrasil.instance.configurarEvento(msg, REALIZANDO_DEPOSITO, null);
+		telaDeposito.textField.setText(String.valueOf(valorDigitado));
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
@@ -101,10 +121,17 @@ public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements P
 		MaquinaBancoBrasil.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.instance.getContaDigitada()));
 		MaquinaBancoBrasil.instance.getTransacaoBancaria().setValor(valorDigitado);
 		MaquinaBancoBrasil.instance.getTransacaoBancaria().depositar();
+		
 		for (EstadoListener listener : this.listeners) {
 			listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
 		}
-		MaquinaBancoBrasil.instance.configurarEvento(" - Deposito realizado com Sucesso!\n" + exibirTela4(), ESCOLHENDO_OPCAO, null);
+		
+		this.removeEstadoListener(MaquinaBancoBrasil.instance);
+		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(new OperacaoSucesso().getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		
 	}
 
 	@Override
@@ -176,6 +203,11 @@ public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements P
 	public void iniciar() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void removeEstadoListener(EstadoListener listener) {
+		this.listeners.remove(listener);
 	}
 
 }

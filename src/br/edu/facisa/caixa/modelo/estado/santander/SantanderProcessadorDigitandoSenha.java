@@ -5,16 +5,20 @@ import java.util.List;
 
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaSantander;
-import br.edu.facisa.caixa.enumerador.Operacao;
+import br.edu.facisa.caixa.gui.Operacoes;
+import br.edu.facisa.caixa.gui.Senha;
+import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.modelo.Dados;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
+import br.edu.facisa.caixa.modelo.estado.ProcessadorEstadoInicial;
 
 public class SantanderProcessadorDigitandoSenha extends MaquinaAdapter implements ProcessadorEstado{
 
 	private List<EstadoListener> listeners;
 	private int senhaDigitada;	
 	private String asteriscos = "";
+	private Senha telaSenha = new Senha();
 	
 	public SantanderProcessadorDigitandoSenha(){
 		listeners = new ArrayList<EstadoListener>();
@@ -28,110 +32,104 @@ public class SantanderProcessadorDigitandoSenha extends MaquinaAdapter implement
 	
 	@Override
 	public void teclaNum01Digitada() {
-		processaSenha(1);
-		String msg = " - Continue a digitar a senha ou digite CONFIRMA\n - Senha: " + asteriscos;
-		MaquinaSantander.instance.configurarEvento(msg, DIGITANDO_SENHA, null);
-//		processaSenha(1);
-//		SantanderDigiteSenha.getInstance().textField.setText(asteriscos);
-//		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-//		evento.setNovaTela(SantanderDigiteSenha.getInstance());
-//		notificaMudanca(evento);
+		teclaDigitada(1);
 	}
 
 	@Override
 	public void teclaNum02Digitada() {
-		processaSenha(2);
-		String msg = " - Continue a digitar a senha ou digite CONFIRMA\n - Senha: " + asteriscos;
-		MaquinaSantander.instance.configurarEvento(msg, DIGITANDO_SENHA, null);
+		teclaDigitada(2);
 	}
 
 	@Override
 	public void teclaNum03Digitada() {
-		processaSenha(3);
-		String msg = " - Continue a digitar a senha ou digite CONFIRMA\n - Senha: " + asteriscos;
-		MaquinaSantander.instance.configurarEvento(msg, DIGITANDO_SENHA, null);
+		teclaDigitada(3);
 	}
 
 	@Override
 	public void teclaNum04Digitada() {
-		processaSenha(4);
-		String msg = " - Continue a digitar a senha ou digite CONFIRMA\n - Senha: " + asteriscos;
-		MaquinaSantander.instance.configurarEvento(msg, DIGITANDO_SENHA, null);
+		teclaDigitada(4);
 	}
 
 	@Override
 	public void teclaNum05Digitada() {
-		processaSenha(5);
-		String msg = " - Continue a digitar a senha ou digite CONFIRMA\n - Senha: " + asteriscos;
-		MaquinaSantander.instance.configurarEvento(msg, DIGITANDO_SENHA, null);
+		teclaDigitada(5);
 	}
 
 	@Override
 	public void teclaNum06Digitada() {
-		processaSenha(6);
-		String msg = " - Continue a digitar a senha ou digite CONFIRMA\n - Senha: " + asteriscos;
-		MaquinaSantander.instance.configurarEvento(msg, DIGITANDO_SENHA, null);
+		teclaDigitada(6);
 	}
 
 	@Override
 	public void teclaNum07Digitada() {
-		processaSenha(7);
-		String msg = " - Continue a digitar a senha ou digite CONFIRMA\n - Senha: " + asteriscos;
-		MaquinaSantander.instance.configurarEvento(msg, DIGITANDO_SENHA, null);
+		teclaDigitada(7);
 	}
 
 	@Override
 	public void teclaNum08Digitada() {
-		processaSenha(8);
-		String msg = " - Continue a digitar a senha ou digite CONFIRMA\n - Senha: " + asteriscos;
-		MaquinaSantander.instance.configurarEvento(msg, DIGITANDO_SENHA, null);
+		teclaDigitada(8);
 	}
 
 	@Override
 	public void teclaNum09Digitada() {
-		processaSenha(9);
-		String msg = " - Continue a digitar a senha ou digite CONFIRMA\n - Senha: " + asteriscos;
-		MaquinaSantander.instance.configurarEvento(msg, DIGITANDO_SENHA, null);
+		teclaDigitada(9);
 	}
 
 	@Override
 	public void teclaNum00Digitada() {
-		processaSenha(0);
-		String msg = " - Continue a digitar a senha ou digite CONFIRMA\n - Senha: " + asteriscos;
-		MaquinaSantander.instance.configurarEvento(msg, DIGITANDO_SENHA, null);
+		teclaDigitada(0);
 	}
 
 	@Override
 	public void teclaConfirmaDigitada() {
-		System.out.println("conta: "+senhaDigitada);
-		if (Dados.getInstance().isContaValida("Santander", MaquinaSantander.instance.getContaDigitada(), senhaDigitada)) {
+
+		if(Dados.getInstance().isContaValida("Santander", MaquinaSantander.instance.getContaDigitada(), senhaDigitada)){
+			MaquinaSantander.instance.setSenhaDigitada(senhaDigitada);
 			this.senhaDigitada = 0;
 			this.asteriscos = "";
+			
 			for (EstadoListener listener : this.listeners) {
 				listener.estadoAcabou(new SantanderProcessadorEscolhendoTransacao());
 			}
-			MaquinaSantander.instance.configurarEvento(exibirTela3(), ESCOLHENDO_TRANSACAO, null);
-		} else {
+			
+			this.removeEstadoListener(MaquinaSantander.instance);
+			
+			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+			evento.setNovaTela(new Operacoes().getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+			MaquinaSantander.instance.notificaMudanca(evento);
+		}
+		else {
 			this.senhaDigitada = 0;
 			this.asteriscos = "";
-			for (EstadoListener listener : this.listeners) {
-				listener.estadoAcabou(new SandanderProcessadorDigitandoConta());
-			}
-			MaquinaSantander.instance.configurarEvento("Santander", null, Operacao.TROCA_DE_MAQUINA);
+			telaSenha.textField.setText(asteriscos);
+			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+			evento.setNovaTela(telaSenha.getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+			MaquinaSantander.instance.notificaMudanca(evento);
 		}
+		
 	}
 
 	@Override
 	public void teclaCorrigeDigitada() {
 		this.senhaDigitada = 0;
 		this.asteriscos = "";
-		String msg = " - Continue a digitar a senha ou digite CONFIRMA\n - Senha: ";
-		MaquinaSantander.instance.configurarEvento(msg, DIGITANDO_SENHA, null);
+		telaSenha.textField.setText(asteriscos);
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaSenha.getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		MaquinaSantander.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaCancelarDigitada() {
-		//TO DO - voltar a tela anterior
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(new ProcessadorEstadoInicial());
+		}
+		
+		this.removeEstadoListener(MaquinaSantander.instance);
+		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setTrocaMaquinaDeEstados("Maquina Primaria");
+		MaquinaSantander.instance.notificaMudanca(evento);
 	}
 
 	@Override
@@ -193,4 +191,17 @@ public class SantanderProcessadorDigitandoSenha extends MaquinaAdapter implement
 		
 	}
 
+	@Override
+	public void removeEstadoListener(EstadoListener listener) {
+		this.listeners.remove(listener);
+	}
+
+	public void teclaDigitada(int tecla){
+		processaSenha(tecla);
+		telaSenha.textField.setText(asteriscos);
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaSenha.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		MaquinaSantander.instance.notificaMudanca(evento);
+	}
+	
 }

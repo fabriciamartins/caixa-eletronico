@@ -1,12 +1,10 @@
 package br.edu.facisa.caixa.gui;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 
@@ -15,11 +13,11 @@ public class OperacaoSucesso {
 	private JPanel panel;
 	private JLabel lbl;
 	
-	public JPanel getPanelDeposito() {
+	public JPanel getPanel() {
 		return panel;
 	}
 
-	public void setPanelDeposito(JPanel panel) {
+	public void setPanel(JPanel panel) {
 		this.panel = panel;
 	}
 
@@ -29,22 +27,6 @@ public class OperacaoSucesso {
 
 	public void setLbl(JLabel lbl) {
 		this.lbl = lbl;
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					OperacaoSucesso window = new OperacaoSucesso();
-					window.panel.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 
 	/**
@@ -64,12 +46,28 @@ public class OperacaoSucesso {
 		panel.setLayout(null);
 		
 		lbl = new JLabel("Opera\u00E7\u00E3o realizada com sucesso!");
-		lbl.setBounds(146, 141, 246, 26);
+		lbl.setBounds(147, 118, 246, 26);
 		lbl.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lbl.setForeground(new Color(0, 128, 0));
 		lbl.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl.setVisible(false);
+		lbl.setVisible(true);
 		panel.add(lbl);
+		
+		JLabel lbl_finalizar_sessao = new JLabel("Finalizar Sess\u00E3o");
+		lbl_finalizar_sessao.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_finalizar_sessao.setForeground(Color.DARK_GRAY);
+		lbl_finalizar_sessao.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lbl_finalizar_sessao.setBounds(24, 241, 141, 26);
+		lbl_finalizar_sessao.setVisible(true);
+		panel.add(lbl_finalizar_sessao);
+		
+		JLabel lblRetornarATela = new JLabel("Retornar a tela de opera\u00E7\u00F5es");
+		lblRetornarATela.setHorizontalAlignment(SwingConstants.LEFT);
+		lblRetornarATela.setForeground(Color.DARK_GRAY);
+		lblRetornarATela.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblRetornarATela.setBounds(314, 241, 211, 26);
+		lblRetornarATela.setVisible(true);
+		panel.add(lblRetornarATela);
 		
 	}
 }

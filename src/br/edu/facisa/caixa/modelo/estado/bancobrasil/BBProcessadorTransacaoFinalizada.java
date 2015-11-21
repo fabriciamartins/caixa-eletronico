@@ -5,10 +5,10 @@ import java.util.List;
 
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
-import br.edu.facisa.caixa.enumerador.Operacao;
+import br.edu.facisa.caixa.gui.Operacoes;
+import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
-import br.edu.facisa.caixa.modelo.estado.ProcessadorEstadoInicial;
 
 public class BBProcessadorTransacaoFinalizada extends MaquinaAdapter implements ProcessadorEstado {
 
@@ -20,18 +20,10 @@ public class BBProcessadorTransacaoFinalizada extends MaquinaAdapter implements 
 
 	@Override
 	public void teclaNum01Digitada() {
-		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new BBProcessadorEscolhendoTransacao());
-		}
-		MaquinaBancoBrasil.instance.configurarEvento(exibirTela3(), ESCOLHENDO_TRANSACAO, null);
 	}
 
 	@Override
 	public void teclaNum02Digitada() {
-		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new ProcessadorEstadoInicial());
-		}
-		MaquinaBancoBrasil.instance.configurarEvento("Maquina Primaria", null, Operacao.TROCA_DE_MAQUINA);
 	}
 
 	@Override
@@ -111,8 +103,11 @@ public class BBProcessadorTransacaoFinalizada extends MaquinaAdapter implements 
 
 	@Override
 	public void teclaEsquerda04Digitada() {
-		// TODO Auto-generated method stub
+		this.removeEstadoListener(MaquinaBancoBrasil.instance);
 		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setTrocaMaquinaDeEstados("Maquina Primaria");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
@@ -135,8 +130,15 @@ public class BBProcessadorTransacaoFinalizada extends MaquinaAdapter implements 
 
 	@Override
 	public void teclaDireita04Digitada() {
-		// TODO Auto-generated method stub
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(new BBProcessadorEscolhendoTransacao());
+		}
 		
+		this.removeEstadoListener(MaquinaBancoBrasil.instance);
+		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(new Operacoes().getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
@@ -148,6 +150,11 @@ public class BBProcessadorTransacaoFinalizada extends MaquinaAdapter implements 
 	public void iniciar() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void removeEstadoListener(EstadoListener listener) {
+		this.listeners.remove(listener);
 	}
 
 }

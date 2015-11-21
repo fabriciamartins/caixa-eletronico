@@ -3,7 +3,7 @@ package br.edu.facisa.caixa.modelo;
 public class Celular {
 
 	private String operadora;
-	private long numero;
+	private String numero;
 	private boolean recarregado;
 	
 	public Celular() {
@@ -18,11 +18,11 @@ public class Celular {
 		this.operadora = operadora;
 	}
 
-	public long getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(long numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 

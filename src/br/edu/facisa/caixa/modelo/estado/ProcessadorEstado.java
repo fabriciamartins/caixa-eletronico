@@ -47,4 +47,5 @@ public interface ProcessadorEstado {
 	
 	public void addEstadoListener(EstadoListener listener);
 
+	public void removeEstadoListener(EstadoListener listener);
 }

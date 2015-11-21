@@ -3,7 +3,6 @@ package br.edu.facisa.caixa.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -24,16 +23,16 @@ import br.edu.facisa.caixa.adapter.MaquinaPrimaria;
 import br.edu.facisa.caixa.factory.MaquinaDeEstadosFactory;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosListener;
-public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
+
+public class TelaInicial extends JFrame implements MaquinaDeEstadosListener {
 
 	/**
 	 * 
 	 */
-	
+
 	private static TelaInicial instance;
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JPanel telaAtual = new JPanel();
 	private IMaquinaDeEstados maquinaAtual;
 
 	/**
@@ -60,44 +59,45 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 	private JButton teclaCorrigir;
 	private JButton teclaConfirmar;
 
-	public static TelaInicial getInstance(){
-		if(instance == null){
+	public static TelaInicial getInstance() {
+		if (instance == null) {
 			instance = new TelaInicial();
 		}
 		return instance;
 	}
-	
+
 	JButton button;
 	private JPanel panel;
 	private JLabel labelLogoBancos;
 	private JLabel lblNewLabel_1;
+
 	/**
 	 * Create the frame.
 	 */
 	private TelaInicial() {
 		getContentPane().setForeground(Color.LIGHT_GRAY);
 		getContentPane().setBackground(SystemColor.control);
-		
+
 		MaquinaPrimaria.instance.adicionaMaquinaDeEstadosListener(this);
 		maquinaAtual = MaquinaPrimaria.instance;
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 905, 650);
-		
+
 		button = new JButton("");
 		button.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
 		button.setBorder(null);
 		button.setFocusPainted(false);
 		button.setContentAreaFilled(false);
 		button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
+
 		button_1 = new JButton("");
 		button_1.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
 		button_1.setBorder(null);
 		button_1.setFocusPainted(false);
 		button_1.setContentAreaFilled(false);
 		button_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
+
 		button_2 = new JButton("");
 		button_2.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
 		button_2.setBackground(Color.LIGHT_GRAY);
@@ -105,7 +105,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		button_2.setFocusPainted(false);
 		button_2.setContentAreaFilled(false);
 		button_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
+
 		button_6 = new JButton("");
 		button_6.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
 		button_6.setBackground(Color.LIGHT_GRAY);
@@ -113,30 +113,31 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		button_6.setFocusPainted(false);
 		button_6.setContentAreaFilled(false);
 		button_6.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
-		
-		/*Altera a tela do caixa*/
+
+		/* Altera a tela do caixa */
 		panel = new Operacoes().getPanel();
-		getContentPane().setLayout(getLayout(panel));
-		
+		getContentPane().setLayout(getLayout());
+
 		labelLogoBancos = new JLabel("");
 		labelLogoBancos.setBounds(233, 12, 75, 75);
-		labelLogoBancos.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/banco_brasil.jpg")));
+		labelLogoBancos.setIcon(
+				new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/banco_brasil.jpg")));
 		panel.add(labelLogoBancos);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 	}
-	
-	public GroupLayout getLayout(JPanel telaAtual){
-		
+
+	public GroupLayout getLayout() {
+
 		JPanel panel_teclas = new JPanel();
 		panel_teclas.setForeground(Color.WHITE);
 		panel_teclas.setBackground(SystemColor.control);
-		
+		panel_teclas.setLayout(null);
+
 		lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/header.jpg")));
-		
+
 		button_4 = new JButton("");
 		button_4.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
 		button_4.setBorder(null);
@@ -144,7 +145,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		button_4.setFocusPainted(false);
 		button_4.setContentAreaFilled(false);
 		button_4.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
+
 		button_3 = new JButton("");
 		button_3.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
 		button_3.setBackground(Color.LIGHT_GRAY);
@@ -152,7 +153,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		button_3.setFocusPainted(false);
 		button_3.setContentAreaFilled(false);
 		button_3.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
+
 		button_5 = new JButton("");
 		button_5.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
 		button_5.setBackground(Color.LIGHT_GRAY);
@@ -160,7 +161,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		button_5.setFocusPainted(false);
 		button_5.setContentAreaFilled(false);
 		button_5.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
+
 		button_7 = new JButton("");
 		button_7.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
 		button_7.setBackground(Color.LIGHT_GRAY);
@@ -169,63 +170,46 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		button_7.setContentAreaFilled(false);
 		button_7.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+		groupLayout
+				.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup().addGap(52)
+								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addComponent(button, GroupLayout.PREFERRED_SIZE, 101,
+												GroupLayout.PREFERRED_SIZE)
+								.addComponent(button_6, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+								.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+								.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
+				.addGap(31).addComponent(panel, GroupLayout.PREFERRED_SIZE, 533, GroupLayout.PREFERRED_SIZE).addGap(35)
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(button_3)
+						.addComponent(button_4).addComponent(button_5).addComponent(button_7)).addContainerGap(42,
+								Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING,
+								groupLayout.createSequentialGroup().addContainerGap(335, Short.MAX_VALUE)
+										.addComponent(panel_teclas, GroupLayout.PREFERRED_SIZE, 255,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(299))
+						.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 889, Short.MAX_VALUE));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(52)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(button, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-						.addComponent(button_6, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-						.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-						.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
-					.addGap(31)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 533, GroupLayout.PREFERRED_SIZE)
-					.addGap(35)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(button_3)
-						.addComponent(button_4)
-						.addComponent(button_5)
-						.addComponent(button_7))
-					.addContainerGap(42, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(335, Short.MAX_VALUE)
-					.addComponent(panel_teclas, GroupLayout.PREFERRED_SIZE, 255, GroupLayout.PREFERRED_SIZE)
-					.addGap(299))
-				.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 889, Short.MAX_VALUE)
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(138)
-							.addComponent(button)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(button_6))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(27)
-							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(145)
-							.addComponent(button_3)
-							.addGap(11)
-							.addComponent(button_4)
-							.addGap(8)
-							.addComponent(button_5)
-							.addGap(13)
-							.addComponent(button_7)))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(panel_teclas, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		panel_teclas.setLayout(null);
-		
+						.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup().addGap(138).addComponent(button)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 40,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 35,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(button_6))
+								.addGroup(groupLayout.createSequentialGroup().addGap(27).addComponent(panel,
+										GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createSequentialGroup().addGap(145).addComponent(button_3)
+										.addGap(11).addComponent(button_4).addGap(8).addComponent(button_5).addGap(13)
+										.addComponent(button_7)))
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(panel_teclas, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)));
+
 		tecla01 = new JButton("1");
 		tecla01.setBackground(Color.LIGHT_GRAY);
 		tecla01.setForeground(Color.DARK_GRAY);
@@ -233,7 +217,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		tecla01.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla01.setBounds(6, 5, 40, 35);
 		panel_teclas.add(tecla01);
-		
+
 		tecla02 = new JButton("2");
 		tecla02.setBackground(Color.LIGHT_GRAY);
 		tecla02.setForeground(Color.DARK_GRAY);
@@ -241,7 +225,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		tecla02.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla02.setBounds(50, 5, 40, 35);
 		panel_teclas.add(tecla02);
-		
+
 		tecla03 = new JButton("3");
 		tecla03.setBackground(Color.LIGHT_GRAY);
 		tecla03.setForeground(Color.DARK_GRAY);
@@ -249,7 +233,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		tecla03.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla03.setBounds(94, 5, 40, 35);
 		panel_teclas.add(tecla03);
-		
+
 		tecla05 = new JButton("5");
 		tecla05.setBackground(Color.LIGHT_GRAY);
 		tecla05.setForeground(Color.DARK_GRAY);
@@ -257,7 +241,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		tecla05.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla05.setBounds(49, 45, 40, 35);
 		panel_teclas.add(tecla05);
-		
+
 		tecla06 = new JButton("6");
 		tecla06.setBackground(Color.LIGHT_GRAY);
 		tecla06.setForeground(Color.DARK_GRAY);
@@ -265,7 +249,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		tecla06.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla06.setBounds(93, 45, 40, 35);
 		panel_teclas.add(tecla06);
-		
+
 		tecla07 = new JButton("7");
 		tecla07.setBackground(Color.LIGHT_GRAY);
 		tecla07.setForeground(Color.DARK_GRAY);
@@ -273,7 +257,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		tecla07.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla07.setBounds(6, 84, 40, 35);
 		panel_teclas.add(tecla07);
-		
+
 		tecla04 = new JButton("4");
 		tecla04.setBackground(Color.LIGHT_GRAY);
 		tecla04.setForeground(Color.DARK_GRAY);
@@ -286,7 +270,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 				maquinaAtual.teclaNum04Digitada();
 			}
 		});
-		
+
 		tecla00 = new JButton("0");
 		tecla00.setBackground(Color.LIGHT_GRAY);
 		tecla00.setForeground(Color.DARK_GRAY);
@@ -294,7 +278,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		tecla00.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla00.setBounds(50, 122, 40, 35);
 		panel_teclas.add(tecla00);
-		
+
 		tecla08 = new JButton("8");
 		tecla08.setBackground(Color.LIGHT_GRAY);
 		tecla08.setForeground(Color.DARK_GRAY);
@@ -302,7 +286,7 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		tecla00.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla08.setBounds(50, 84, 40, 35);
 		panel_teclas.add(tecla08);
-		
+
 		tecla09 = new JButton("9");
 		tecla09.setBackground(Color.LIGHT_GRAY);
 		tecla09.setForeground(Color.DARK_GRAY);
@@ -310,9 +294,10 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		tecla09.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		tecla09.setBounds(94, 84, 40, 35);
 		panel_teclas.add(tecla09);
-		
+
 		teclaConfirmar = new JButton("");
-		teclaConfirmar.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-confirma.png")));
+		teclaConfirmar
+				.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-confirma.png")));
 		teclaConfirmar.setBackground(Color.LIGHT_GRAY);
 		teclaConfirmar.setForeground(Color.DARK_GRAY);
 		teclaConfirmar.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -322,9 +307,10 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		teclaConfirmar.setContentAreaFilled(false);
 		teclaConfirmar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel_teclas.add(teclaConfirmar);
-		
+
 		teclaCorrigir = new JButton("");
-		teclaCorrigir.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-amarelo.png")));
+		teclaCorrigir
+				.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-amarelo.png")));
 		teclaCorrigir.setBackground(Color.LIGHT_GRAY);
 		teclaCorrigir.setForeground(Color.DARK_GRAY);
 		teclaCorrigir.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -334,9 +320,10 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		teclaCorrigir.setContentAreaFilled(false);
 		teclaCorrigir.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel_teclas.add(teclaCorrigir);
-		
+
 		teclaCancelar = new JButton("");
-		teclaCancelar.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-vermelho.png")));
+		teclaCancelar
+				.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-vermelho.png")));
 		teclaCancelar.setBackground(Color.LIGHT_GRAY);
 		teclaCancelar.setForeground(Color.DARK_GRAY);
 		teclaCancelar.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -346,6 +333,8 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 		teclaCancelar.setContentAreaFilled(false);
 		teclaCancelar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel_teclas.add(teclaCancelar);
+
+
 		teclaCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				maquinaAtual.teclaCancelarDigitada();
@@ -406,29 +395,31 @@ public class TelaInicial extends JFrame implements MaquinaDeEstadosListener{
 				maquinaAtual.teclaNum01Digitada();
 			}
 		});
-		
+
 		return groupLayout;
 	}
-	
-	public void setTelaAtual(JPanel tela){
+
+	public void setTelaAtual(JPanel tela) {
+		panel = tela;
 		getContentPane().removeAll();
-		getContentPane().setLayout(getLayout(tela));
-		
+		getContentPane().setLayout(getLayout());
+
 	}
-	
-	public JPanel getTelaAtual(){
-		return this.telaAtual;
+
+	public JPanel getTelaAtual() {
+		return this.panel;
 	}
 
 	@Override
 	public void houveMudanca(MaquinaDeEstadosEvent mudanca) {
 		if (mudanca.getTrocaMaquinaDeEstados() != null) {
 			switch (mudanca.getTrocaMaquinaDeEstados()) {
-			case "Santander" :
+			case "Santander":
 				this.maquinaAtual = MaquinaDeEstadosFactory.criaMaquinaSatander();
 				this.maquinaAtual.adicionaMaquinaDeEstadosListener(this);
-			case "Banco do Brasil" :
-				
+			case "Banco do Brasil":
+				this.maquinaAtual = MaquinaDeEstadosFactory.criaMaquinaBancoBrasil();
+				this.maquinaAtual.adicionaMaquinaDeEstadosListener(this);
 			}
 		}
 	}

@@ -5,10 +5,10 @@ import java.util.List;
 
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaSantander;
-import br.edu.facisa.caixa.enumerador.Operacao;
+import br.edu.facisa.caixa.gui.Operacoes;
+import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
-import br.edu.facisa.caixa.modelo.estado.ProcessadorEstadoInicial;
 
 public class SantanderProcessadorTransacaoFinalizada extends MaquinaAdapter implements ProcessadorEstado {
 
@@ -20,18 +20,12 @@ public class SantanderProcessadorTransacaoFinalizada extends MaquinaAdapter impl
 
 	@Override
 	public void teclaNum01Digitada() {
-		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new SantanderProcessadorEscolhendoTransacao());
-		}
-		MaquinaSantander.instance.configurarEvento(exibirTela3(), ESCOLHENDO_TRANSACAO, null);
+
 	}
 
 	@Override
 	public void teclaNum02Digitada() {
-		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new ProcessadorEstadoInicial());
-		}
-		MaquinaSantander.instance.configurarEvento("Maquina Primaria", this.estado, Operacao.TROCA_DE_MAQUINA);
+
 	}
 
 	@Override
@@ -111,8 +105,12 @@ public class SantanderProcessadorTransacaoFinalizada extends MaquinaAdapter impl
 
 	@Override
 	public void teclaEsquerda04Digitada() {
-		// TODO Auto-generated method stub
+
+		this.removeEstadoListener(MaquinaSantander.instance);
 		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setTrocaMaquinaDeEstados("Maquina Primaria");
+		MaquinaSantander.instance.notificaMudanca(evento);
 	}
 
 	@Override
@@ -135,8 +133,15 @@ public class SantanderProcessadorTransacaoFinalizada extends MaquinaAdapter impl
 
 	@Override
 	public void teclaDireita04Digitada() {
-		// TODO Auto-generated method stub
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(new SantanderProcessadorEscolhendoTransacao());
+		}
 		
+		this.removeEstadoListener(MaquinaSantander.instance);
+		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(new Operacoes().getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		MaquinaSantander.instance.notificaMudanca(evento);
 	}
 
 	@Override
@@ -148,6 +153,11 @@ public class SantanderProcessadorTransacaoFinalizada extends MaquinaAdapter impl
 	public void iniciar() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void removeEstadoListener(EstadoListener listener) {
+		this.listeners.remove(listener);
 	}
 
 }

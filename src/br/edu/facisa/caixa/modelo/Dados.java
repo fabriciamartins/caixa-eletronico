@@ -48,6 +48,17 @@ public class Dados {
 		}
 		return ok;
 	}
+	
+	public String validarConta(int numeroCartao){
+		for(Banco banco : bancos.values()){
+			for(Conta conta : banco.getContas()){
+				if(conta.getNumero() == numeroCartao){
+					return banco.getNome();
+				}
+			}
+		}
+		return null;
+	}
 
 	public void setBancos() {
 		Banco santander = new Banco("Santander");

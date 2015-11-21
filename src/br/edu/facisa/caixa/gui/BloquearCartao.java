@@ -6,7 +6,6 @@ import java.awt.SystemColor;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 
@@ -15,11 +14,11 @@ public class BloquearCartao {
 	private JPanel panel;
 	private JLabel lbl;
 	
-	public JPanel getPanelDeposito() {
+	public JPanel getPanel() {
 		return panel;
 	}
 
-	public void setPanelDeposito(JPanel panel) {
+	public void setPanel(JPanel panel) {
 		this.panel = panel;
 	}
 

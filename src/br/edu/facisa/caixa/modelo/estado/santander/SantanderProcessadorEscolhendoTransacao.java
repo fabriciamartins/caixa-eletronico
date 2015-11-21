@@ -3,11 +3,23 @@ package br.edu.facisa.caixa.modelo.estado.santander;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JPanel;
+
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaSantander;
+import br.edu.facisa.caixa.gui.BloquearCartao;
+import br.edu.facisa.caixa.gui.Deposito;
+import br.edu.facisa.caixa.gui.Emprestimo;
+import br.edu.facisa.caixa.gui.Extrato;
+import br.edu.facisa.caixa.gui.Pagamentos;
+import br.edu.facisa.caixa.gui.Recarga;
+import br.edu.facisa.caixa.gui.Saque;
+import br.edu.facisa.caixa.gui.Transferencia;
+import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.modelo.Dados;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
+import br.edu.facisa.caixa.modelo.estado.ProcessadorEstadoInicial;
 
 public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter implements ProcessadorEstado{
 
@@ -20,10 +32,7 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 
 	@Override
 	public void teclaNum01Digitada() {
-		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new SantanderProcessadorRealizandoDeposito());
-		}
-		MaquinaSantander.instance.configurarEvento(" - Digite o valor de Depósito - Valor: ", REALIZANDO_DEPOSITO, null);
+
 	}
 
 	@Override
@@ -40,12 +49,6 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 
 	@Override
 	public void teclaNum04Digitada() {
-		MaquinaSantander.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.instance.getContaDigitada()));
-		MaquinaSantander.instance.getTransacaoBancaria().consultarExtrato();
-		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new SantanderProcessadorTransacaoFinalizada());
-		}
-		MaquinaSantander.instance.configurarEvento(exibirTela4(), ESCOLHENDO_OPCAO, null);
 	}
 
 	@Override
@@ -98,56 +101,139 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 
 	@Override
 	public void teclaCancelarDigitada() {
-		// TODO Auto-generated method stub
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(new ProcessadorEstadoInicial());
+		}
 		
+		this.removeEstadoListener(MaquinaSantander.instance);
+		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setTrocaMaquinaDeEstados("Maquina Primaria");
+		MaquinaSantander.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaEsquerda01Digitada() {
-		// TODO Auto-generated method stub
+		// empréstimo
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(new SantanderProcessadorEmprestimo());
+		}
+		
+		this.removeEstadoListener(MaquinaSantander.instance);
+		
+		JPanel telaEmprestimo = new Emprestimo().getPanel();
+		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaEmprestimo, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		MaquinaSantander.instance.notificaMudanca(evento);
 		
 	}
 
 	@Override
 	public void teclaEsquerda02Digitada() {
-		// TODO Auto-generated method stub
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(new SantanderProcessadorPagamentos());
+		}
 		
+		this.removeEstadoListener(MaquinaSantander.instance);
+		
+		JPanel telaPagamentos = new Pagamentos().getPanel();
+		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaPagamentos, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		MaquinaSantander.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaEsquerda03Digitada() {
-		// TODO Auto-generated method stub
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(new SantanderProcessadorRecarga());
+		}
 		
+		this.removeEstadoListener(MaquinaSantander.instance);
+		
+		JPanel telaRecarga = new Recarga().getPanel();
+		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaRecarga, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		MaquinaSantander.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaEsquerda04Digitada() {
-		// TODO Auto-generated method stub
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(new SantanderProcessadorTransferencia());
+		}
 		
+		this.removeEstadoListener(MaquinaSantander.instance);
+		
+		JPanel telaTransferencia = new Transferencia().getPanel();
+		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaTransferencia, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		MaquinaSantander.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaDireita01Digitada() {
-		// TODO Auto-generated method stub
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(new SantanderProcessadorSaque());
+		}
 		
+		this.removeEstadoListener(MaquinaSantander.instance);
+		
+		JPanel telaSaque = new Saque().getPanel();
+		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaSaque, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		MaquinaSantander.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaDireita02Digitada() {
-		// TODO Auto-generated method stub
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(new SantanderProcessadorExtrato());
+		}
 		
+		this.removeEstadoListener(MaquinaSantander.instance);
+		
+		MaquinaSantander.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.instance.getContaDigitada()));
+		
+		Extrato telaExtrato = new Extrato();
+		telaExtrato.txtpnLoremIpsum.setText(MaquinaSantander.instance.getTransacaoBancaria().consultarExtrato());
+		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaExtrato.getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		MaquinaSantander.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaDireita03Digitada() {
-		// TODO Auto-generated method stub
 		
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(new SantanderProcessadorRealizandoDeposito());
+		}
+		
+		this.removeEstadoListener(MaquinaSantander.instance);
+		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(new Deposito().getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		MaquinaSantander.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaDireita04Digitada() {
-		// TODO Auto-generated method stub
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(new SantanderProcessadorBloquearCartao());
+		}
 		
+		this.removeEstadoListener(MaquinaSantander.instance);
+		
+		JPanel telaBloquearCartao = new BloquearCartao().getPanel();
+		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaBloquearCartao, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		MaquinaSantander.instance.notificaMudanca(evento);
 	}
 
 	@Override
@@ -160,6 +246,12 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 	public void iniciar() {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public void removeEstadoListener(EstadoListener listener) {
+		this.listeners.remove(listener);
 	}
 
 }

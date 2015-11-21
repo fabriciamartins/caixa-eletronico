@@ -7,8 +7,6 @@ import java.awt.SystemColor;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import java.awt.Color;
 
 public class Recarga {
 
@@ -16,20 +14,28 @@ public class Recarga {
 	private JTextField textNumeroRecarga;
 	private JTextField textValorRecarga;
 	
-	public JPanel getPanelDeposito() {
+	public JPanel getPanel() {
 		return panel;
 	}
 
-	public void setPanelDeposito(JPanel panel) {
+	public void setPanel(JPanel panel) {
 		this.panel = panel;
 	}
 
-	public JTextField getTextField() {
+	public JTextField getTextNumeroCelular() {
 		return textNumeroRecarga;
 	}
 
-	public void setTextField(JTextField textField) {
-		this.textNumeroRecarga = textField;
+	public void setTextNumeroCelular(String numero) {
+		this.textNumeroRecarga.setText(numero);
+	}
+	
+	public JTextField getTextValorRecarga() {
+		return textValorRecarga;
+	}
+	
+	public void setTextValorRecarga(String valor){
+		this.textValorRecarga.setText(valor);
 	}
 
 	/**

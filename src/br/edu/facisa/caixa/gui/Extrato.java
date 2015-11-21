@@ -14,12 +14,15 @@ public class Extrato {
 
 	private JPanel panel;
 	private JLabel lblSaque;
+	public JTextPane txtpnLoremIpsum;
+	private JLabel lbl_finalizar_sessao;
+	private JLabel lblRetornarATela;
 	
-	public JPanel getPanelSaque() {
+	public JPanel getPanel() {
 		return panel;
 	}
 
-	public void setPanelSaque(JPanel panel) {
+	public void setPanel(JPanel panel) {
 		this.panel = panel;
 	}
 
@@ -71,10 +74,26 @@ public class Extrato {
 		lblSaque.setVisible(false);
 		panel.add(lblSaque);
 		
-		JTextPane txtpnLoremIpsum = new JTextPane();
-		txtpnLoremIpsum.setText("Lorem Ipsum \u00E9 simplesmente uma simula\u00E7\u00E3o de texto da ind\u00FAstria tipogr\u00E1fica e de impressos, e vem sendo utilizado desde o s\u00E9culo XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos.");
+		txtpnLoremIpsum = new JTextPane();
+		txtpnLoremIpsum.setText("Extrato:");
 		txtpnLoremIpsum.setBounds(101, 150, 371, 95);
 		panel.add(txtpnLoremIpsum);
+		
+		lbl_finalizar_sessao = new JLabel("Finalizar Sess\u00E3o");
+		lbl_finalizar_sessao.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_finalizar_sessao.setForeground(Color.DARK_GRAY);
+		lbl_finalizar_sessao.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lbl_finalizar_sessao.setBounds(24, 241, 141, 26);
+		lbl_finalizar_sessao.setVisible(true);
+		panel.add(lbl_finalizar_sessao);
+		
+		lblRetornarATela = new JLabel("Retornar a tela de opera\u00E7\u00F5es");
+		lblRetornarATela.setHorizontalAlignment(SwingConstants.LEFT);
+		lblRetornarATela.setForeground(Color.DARK_GRAY);
+		lblRetornarATela.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblRetornarATela.setBounds(314, 241, 211, 26);
+		lblRetornarATela.setVisible(true);
+		panel.add(lblRetornarATela);
 		
 	}
 }

@@ -21,9 +21,9 @@ public class ConsultaExtrato implements TransacaoCommand{
 		for (TransacaoCommand transacao : this.conta.getExtrato()) {
 			this.extrato.add(transacao.toString());
 		}
-		System.out.println(this.toString());
 	}
 	
+	@Override
 	public String toString() {
 		String texto = "Extrato da Conta Nº " + conta.getNumero() + "\n";
 		for (String string : extrato) {
@@ -31,6 +31,14 @@ public class ConsultaExtrato implements TransacaoCommand{
 		}
 		texto += "Saldo: " + conta.getSaldo();
 		return texto;
+	}
+
+	public List<String> getExtrato() {
+		return extrato;
+	}
+
+	public void setExtrato(List<String> extrato) {
+		this.extrato = extrato;
 	}
 
 }

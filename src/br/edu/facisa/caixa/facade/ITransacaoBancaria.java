@@ -8,7 +8,7 @@ public interface ITransacaoBancaria {
 	
 	public void tranferir();
 	
-	public void consultarExtrato();
+	public String consultarExtrato();
 	
 	public void pagarConta();
 	

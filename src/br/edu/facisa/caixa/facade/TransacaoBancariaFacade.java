@@ -26,36 +26,32 @@ public class TransacaoBancariaFacade implements ITransacaoBancaria {
 	
 	public void sacar() {
 		new Saque(this).executar();
-		//setEvent(null, REALIZANDO_SAQUE, Operacao.ABRE_SAIDA_DINHEIRO);
 	}
 	
 	public void tranferir() {
 		new Transferencia(this).executar();
-		//setEvent(null, REALIZANDO_TRANSFERENCIA, null);
 	}
 	
-	public void consultarExtrato() {
-		new ConsultaExtrato(this).executar();
+	public String consultarExtrato() {
+		ConsultaExtrato consultaExtrato = new ConsultaExtrato(this);
+		consultaExtrato.executar();
+		return consultaExtrato.toString();
 	}
 	
 	public void pagarConta() {
 		new PagamentoTitulo(this).executar();
-		//setEvent(null, REALIZANDO_PAGAMENTO, Operacao.ACENDE_LUZ_DO_LEITOR_DE_BARRA);
 	}
 	
 	public void recarregarCelular() {
 		new RecargaCelular(this).executar();
-		//setEvent(null, REALIZANDO_REGARGA, null);
 	}
 	
 	public void obterEmprestimo() {
 		new Emprestimo(this).executar();
-		//setEvent(null, REALIZANDO_EMPRESTIMO, null);
 	}
 	
 	public void bloquearCartao() {
 		new BloqueioCartao(this).executar();
-		//setEvent(null, BLOQUEANDO_CARTAO, null);
 	}
 	
 	public Conta getContaOrigem() {

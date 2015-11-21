@@ -5,7 +5,6 @@ import javax.swing.JLabel;
 
 import java.awt.Color;
 
-import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;

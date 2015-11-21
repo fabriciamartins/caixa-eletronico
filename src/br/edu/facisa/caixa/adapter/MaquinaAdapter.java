@@ -3,6 +3,8 @@ package br.edu.facisa.caixa.adapter;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.JPanel;
+
 import br.edu.facisa.caixa.enumerador.Operacao;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosListener;
@@ -48,13 +50,13 @@ public abstract class MaquinaAdapter implements IMaquinaDeEstados {
 		this.estado = null;
 	}
 	
-	public void configurarEvento(String arg, String estado, Operacao operacao) {
+	public void configurarEvento(String tela, String estado, Operacao operacao) {
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		this.estado = estado;				
 		if (operacao == Operacao.TROCA_DE_MAQUINA) {
-			evento.setTrocaMaquinaDeEstados(arg);
+			evento.setTrocaMaquinaDeEstados(tela);
 		} else {
-			evento.setNovaTela(arg);
+			evento.setNovaTela(new JPanel());
 			evento.setOperacaoHardware(operacao);
 		}
 		notificaMudanca(evento);

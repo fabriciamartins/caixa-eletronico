@@ -1,14 +1,12 @@
 package br.edu.facisa.caixa.gui;
 
 import java.awt.EventQueue;
-import java.awt.Font;
 import java.awt.SystemColor;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import java.awt.Color;
 
 public class Emprestimo {
 
@@ -17,11 +15,11 @@ public class Emprestimo {
 	private JTextField textContaEmprestimo;
 	private JTextField textValorEmprestimo;
 	
-	public JPanel getPanelDeposito() {
+	public JPanel getPanel() {
 		return panel;
 	}
 
-	public void setPanelDeposito(JPanel panel) {
+	public void setPanel(JPanel panel) {
 		this.panel = panel;
 	}
 
