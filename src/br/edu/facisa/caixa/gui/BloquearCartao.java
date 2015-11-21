@@ -67,7 +67,7 @@ public class BloquearCartao {
 		lbl.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lbl.setForeground(new Color(204, 51, 0));
 		lbl.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl.setVisible(false);
+		lbl.setVisible(true);
 		panel.add(lbl);
 		
 	}

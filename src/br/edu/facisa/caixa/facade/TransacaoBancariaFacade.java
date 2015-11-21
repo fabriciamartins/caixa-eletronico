@@ -19,6 +19,8 @@ public class TransacaoBancariaFacade implements ITransacaoBancaria {
 	private double valor;
 	private Titulo titulo;
 	private Celular celular;
+	private boolean bloqueado;
+	private String mensagem;
 	
 	public void depositar() {
 		new Deposito(this).executar();	
@@ -92,6 +94,22 @@ public class TransacaoBancariaFacade implements ITransacaoBancaria {
 
 	public void setCelular(Celular celular) {
 		this.celular = celular;
+	}
+	
+	public String getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
+	
+	public boolean isBloqueado() {
+		return bloqueado;
+	}
+
+	public void setBloqueado(boolean bloqueado) {
+		this.bloqueado = bloqueado;
 	}
 			
 }

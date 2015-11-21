@@ -1,5 +1,7 @@
 package br.edu.facisa.caixa.modelo;
 
+import javax.swing.JOptionPane;
+
 import br.edu.facisa.caixa.adapter.IMaquinaDeEstados;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 
@@ -21,7 +23,7 @@ public class Timeout extends Thread {
 		while (System.currentTimeMillis() < (start + milliSegundos)) {
 			runnable.run();
 		}
-		System.out.println("Tempo limite excedido!");
+		JOptionPane.showMessageDialog(null,"Tempo limite excedido!");
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setTrocaMaquinaDeEstados("Maquina Primaria");
 		maquinaAtual.notificaMudanca(evento);

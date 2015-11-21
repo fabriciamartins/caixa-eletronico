@@ -1,82 +1,104 @@
-package br.edu.facisa.caixa.modelo.estado.santander;
+package br.edu.facisa.caixa.modelo.estado.bancobrasil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
 
-import br.edu.facisa.caixa.adapter.MaquinaSantander;
+import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
 import br.edu.facisa.caixa.gui.OperacaoSucesso;
 import br.edu.facisa.caixa.gui.OperacaoCancelada;
+import br.edu.facisa.caixa.gui.Operacoes;
+import br.edu.facisa.caixa.gui.Saque;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.modelo.Dados;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
 
-public class SantanderProcessadorBloquearCartao implements ProcessadorEstado {
+public class BBProcessadorSaque implements ProcessadorEstado {
 	
+	private MaquinaBancoBrasil maquina;
+	private double valorDigitado;
 	private List<EstadoListener> listeners;
-	
-	public SantanderProcessadorBloquearCartao(){
+	private Saque telaSaque = new Saque();
+
+	public BBProcessadorSaque(MaquinaBancoBrasil maquina){
+		this.maquina = maquina;
 		this.listeners = new ArrayList<>();
 	}
 	
 	@Override
 	public void teclaNum01Digitada() {
-		// TODO Auto-generated method stub
+		processaValor(1);
+		setEventoDeTeclaNumDigitada();
 	}
 
 	@Override
 	public void teclaNum02Digitada() {
-		// TODO Auto-generated method stub
+		processaValor(2);
+		setEventoDeTeclaNumDigitada();
 	}
 
 	@Override
 	public void teclaNum03Digitada() {
-		// TODO Auto-generated method stub
+		processaValor(3);
+		setEventoDeTeclaNumDigitada();
 	}
 
 	@Override
 	public void teclaNum04Digitada() {
-		// TODO Auto-generated method stub
+		processaValor(4);
+		setEventoDeTeclaNumDigitada();
 	}
 
 	@Override
 	public void teclaNum05Digitada() {
-		// TODO Auto-generated method stub
+		processaValor(5);
+		setEventoDeTeclaNumDigitada();
 	}
 
 	@Override
 	public void teclaNum06Digitada() {
-		// TODO Auto-generated method stub
+		processaValor(6);
+		setEventoDeTeclaNumDigitada();
 	}
 
 	@Override
 	public void teclaNum07Digitada() {
-		// TODO Auto-generated method stub
+		processaValor(7);
+		setEventoDeTeclaNumDigitada();
 	}
 
 	@Override
 	public void teclaNum08Digitada() {
-		// TODO Auto-generated method stub
+		processaValor(8);
+		setEventoDeTeclaNumDigitada();
 	}
 
 	@Override
 	public void teclaNum09Digitada() {
-		// TODO Auto-generated method stub
+		processaValor(9);
+		setEventoDeTeclaNumDigitada();
 	}
 
 	@Override
 	public void teclaNum00Digitada() {
-		// TODO Auto-generated method stub
+		processaValor(0);
+		setEventoDeTeclaNumDigitada();
 	}
 
 	@Override
 	public void teclaConfirmaDigitada() {
-		MaquinaSantander.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.instance.getContaDigitada()));
-		MaquinaSantander.instance.getTransacaoBancaria().setBloqueado(true);
-		MaquinaSantander.instance.getTransacaoBancaria().bloquearCartao();
-		setEventoDeEstadoFinal(new SantanderProcessadorTransacaoFinalizada(), new OperacaoSucesso().getPanel());
+		maquina.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", maquina.getContaDigitada()));
+		maquina.getTransacaoBancaria().setValor(valorDigitado);
+		maquina.getTransacaoBancaria().sacar();
+		String msg = maquina.getTransacaoBancaria().getMensagem();
+		if (msg != null) {
+			setEventoDeEstadoFinal(new BBProcessadorTransacaoFinalizada(), new OperacaoCancelada(msg).getPanel());
+		} else {
+			setEventoDeEstadoFinal(new BBProcessadorTransacaoFinalizada(), new OperacaoSucesso().getPanel());
+		}
+				
 	}
 
 	@Override
@@ -87,8 +109,7 @@ public class SantanderProcessadorBloquearCartao implements ProcessadorEstado {
 
 	@Override
 	public void teclaCancelarDigitada() {
-		setEventoDeEstadoFinal(new SantanderProcessadorTransacaoFinalizada(), new OperacaoCancelada("Operação cancelada pelo usuario!").getPanel());
-		
+		setEventoDeEstadoFinal(new BBProcessadorEscolhendoTransacao(), new Operacoes().getPanel());
 	}
 
 	@Override
@@ -142,7 +163,6 @@ public class SantanderProcessadorBloquearCartao implements ProcessadorEstado {
 	@Override
 	public void addEstadoListener(EstadoListener listener) {
 		this.listeners.add(listener);
-
 	}
 
 	@Override
@@ -150,16 +170,28 @@ public class SantanderProcessadorBloquearCartao implements ProcessadorEstado {
 		this.listeners.remove(listener);
 	}
 	
-	private void setEventoDeEstadoFinal(ProcessadorEstado processadorestado, JPanel operacao) {		
+	private void processaValor(double d) {
+		this.valorDigitado *= 10;
+		this.valorDigitado += d;
+	}
+	
+	private void setEventoDeTeclaNumDigitada() {
+		telaSaque.getTextField().setText(String.valueOf(valorDigitado));
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaSaque.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		maquina.notificaMudanca(evento);
+	}
+	
+	private void setEventoDeEstadoFinal(ProcessadorEstado processadorestado, JPanel operacao) {
 		for (EstadoListener listener : this.listeners) {
 			listener.estadoAcabou(processadorestado);
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(maquina);
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(operacao, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		evento.setNovaTela(operacao, "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		maquina.notificaMudanca(evento);
 	}
 
 }

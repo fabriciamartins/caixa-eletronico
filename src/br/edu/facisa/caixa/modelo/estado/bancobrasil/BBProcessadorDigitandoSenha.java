@@ -3,6 +3,7 @@ package br.edu.facisa.caixa.modelo.estado.bancobrasil;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
 import br.edu.facisa.caixa.gui.Operacoes;

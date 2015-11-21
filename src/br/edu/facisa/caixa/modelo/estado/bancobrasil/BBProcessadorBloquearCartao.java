@@ -1,11 +1,11 @@
-package br.edu.facisa.caixa.modelo.estado.santander;
+package br.edu.facisa.caixa.modelo.estado.bancobrasil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
 
-import br.edu.facisa.caixa.adapter.MaquinaSantander;
+import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
 import br.edu.facisa.caixa.gui.OperacaoSucesso;
 import br.edu.facisa.caixa.gui.OperacaoCancelada;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
@@ -13,11 +13,11 @@ import br.edu.facisa.caixa.modelo.Dados;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
 
-public class SantanderProcessadorBloquearCartao implements ProcessadorEstado {
+public class BBProcessadorBloquearCartao implements ProcessadorEstado {
 	
 	private List<EstadoListener> listeners;
-	
-	public SantanderProcessadorBloquearCartao(){
+
+	public BBProcessadorBloquearCartao(){
 		this.listeners = new ArrayList<>();
 	}
 	
@@ -73,10 +73,10 @@ public class SantanderProcessadorBloquearCartao implements ProcessadorEstado {
 
 	@Override
 	public void teclaConfirmaDigitada() {
-		MaquinaSantander.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.instance.getContaDigitada()));
-		MaquinaSantander.instance.getTransacaoBancaria().setBloqueado(true);
-		MaquinaSantander.instance.getTransacaoBancaria().bloquearCartao();
-		setEventoDeEstadoFinal(new SantanderProcessadorTransacaoFinalizada(), new OperacaoSucesso().getPanel());
+		MaquinaBancoBrasil.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.instance.getContaDigitada()));
+		MaquinaBancoBrasil.instance.getTransacaoBancaria().setBloqueado(true);
+		MaquinaBancoBrasil.instance.getTransacaoBancaria().bloquearCartao();
+		setEventoDeEstadoFinal(new BBProcessadorTransacaoFinalizada(), new OperacaoSucesso().getPanel());
 	}
 
 	@Override
@@ -87,8 +87,9 @@ public class SantanderProcessadorBloquearCartao implements ProcessadorEstado {
 
 	@Override
 	public void teclaCancelarDigitada() {
-		setEventoDeEstadoFinal(new SantanderProcessadorTransacaoFinalizada(), new OperacaoCancelada("Operação cancelada pelo usuario!").getPanel());
 		
+		setEventoDeEstadoFinal(new BBProcessadorTransacaoFinalizada(), new OperacaoCancelada("Operação cancelada pelo usuario!").getPanel());
+	
 	}
 
 	@Override
@@ -155,11 +156,11 @@ public class SantanderProcessadorBloquearCartao implements ProcessadorEstado {
 			listener.estadoAcabou(processadorestado);
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaBancoBrasil.instance);
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(operacao, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		evento.setNovaTela(operacao, "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 }
