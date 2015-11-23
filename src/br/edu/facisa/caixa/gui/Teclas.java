@@ -177,7 +177,7 @@ public class Teclas extends JPanel implements MaquinaDeEstadosListener{
 			}
 		});
 		teclaCancelar
-		.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-vermelho.png")));
+		.setIcon(new ImageIcon(Teclas.class.getResource("/br/edu/facisa/caixa/resource/bt-vermelho.png")));
 		teclaCancelar.setBackground(Color.LIGHT_GRAY);
 		teclaCancelar.setForeground(Color.DARK_GRAY);
 		teclaCancelar.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -194,7 +194,7 @@ public class Teclas extends JPanel implements MaquinaDeEstadosListener{
 			}
 		});
 		teclaConfirmar
-		.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-confirma.png")));
+		.setIcon(new ImageIcon(Teclas.class.getResource("/br/edu/facisa/caixa/resource/bt-confirma.png")));
 		teclaConfirmar.setBackground(Color.LIGHT_GRAY);
 		teclaConfirmar.setForeground(Color.DARK_GRAY);
 		teclaConfirmar.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -211,7 +211,7 @@ public class Teclas extends JPanel implements MaquinaDeEstadosListener{
 			}
 		});
 		teclaCorrigir
-		.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-amarelo.png")));
+		.setIcon(new ImageIcon(Teclas.class.getResource("/br/edu/facisa/caixa/resource/bt-amarelo.png")));
 		teclaCorrigir.setBackground(Color.LIGHT_GRAY);
 		teclaCorrigir.setForeground(Color.DARK_GRAY);
 		teclaCorrigir.setFont(new Font("Tahoma", Font.PLAIN, 10));

@@ -1,6 +1,5 @@
 package br.edu.facisa.caixa.gui;
 
-import java.awt.EventQueue;
 import java.awt.SystemColor;
 
 import javax.swing.JLabel;
@@ -11,9 +10,7 @@ import javax.swing.SwingConstants;
 public class Emprestimo {
 
 	private JPanel panel;
-	private JTextField textDataEmprestimo;
-	private JTextField textContaEmprestimo;
-	private JTextField textValorEmprestimo;
+	public JTextField textValorEmprestimo;
 	
 	public JPanel getPanel() {
 		return panel;
@@ -21,30 +18,6 @@ public class Emprestimo {
 
 	public void setPanel(JPanel panel) {
 		this.panel = panel;
-	}
-
-	public JTextField getTextField() {
-		return textDataEmprestimo;
-	}
-
-	public void setTextField(JTextField textField) {
-		this.textDataEmprestimo = textField;
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Emprestimo window = new Emprestimo();
-					window.panel.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 
 	/**
@@ -63,35 +36,15 @@ public class Emprestimo {
 		panel.setSize(535,  320);
 		panel.setLayout(null);
 		
-		textDataEmprestimo = new JTextField();
-		textDataEmprestimo.setBounds(98, 158, 147, 33);
-		textDataEmprestimo.setEditable(false);
-		panel.add(textDataEmprestimo);
-		textDataEmprestimo.setColumns(10);
-		
-		JLabel lblNewLabel = new JLabel("Data");
-		lblNewLabel.setBounds(98, 144, 46, 14);
-		panel.add(lblNewLabel);
-		
-		JLabel lblConta = new JLabel("Conta");
-		lblConta.setBounds(278, 144, 46, 14);
-		panel.add(lblConta);
-		
-		textContaEmprestimo = new JTextField();
-		textContaEmprestimo.setEditable(false);
-		textContaEmprestimo.setColumns(10);
-		textContaEmprestimo.setBounds(278, 158, 147, 33);
-		panel.add(textContaEmprestimo);
-		
 		JLabel lblNewLabel_1 = new JLabel("Valor");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(240, 207, 46, 14);
+		lblNewLabel_1.setBounds(225, 176, 46, 14);
 		panel.add(lblNewLabel_1);
 		
 		textValorEmprestimo = new JTextField();
 		textValorEmprestimo.setEditable(false);
 		textValorEmprestimo.setColumns(10);
-		textValorEmprestimo.setBounds(194, 223, 147, 33);
+		textValorEmprestimo.setBounds(179, 192, 147, 33);
 		panel.add(textValorEmprestimo);
 		
 	}

@@ -1,7 +1,6 @@
 package br.edu.facisa.caixa.gui;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 
@@ -20,22 +19,6 @@ public class Operacoes {
 
 	public void setPanel(JPanel panel) {
 		this.panel = panel;
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Operacoes window = new Operacoes();
-					window.panel.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 
 	/**

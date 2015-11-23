@@ -1,6 +1,5 @@
 package br.edu.facisa.caixa.gui;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 
@@ -36,22 +35,6 @@ public class Recarga {
 	
 	public void setTextValorRecarga(String valor){
 		this.textValorRecarga.setText(valor);
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Recarga window = new Recarga();
-					window.panel.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 
 	/**

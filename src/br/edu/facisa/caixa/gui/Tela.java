@@ -71,7 +71,7 @@ public class Tela extends JFrame implements MaquinaDeEstadosListener{
 				maquinaAtual.teclaEsquerda02Digitada();
 			}
 		});
-		button_esquerdo_2.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
+		button_esquerdo_2.setIcon(new ImageIcon(Tela.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
 		button_esquerdo_2.setBorder(null);
 		button_esquerdo_2.setFocusPainted(false);
 		button_esquerdo_2.setContentAreaFilled(false);
@@ -83,7 +83,7 @@ public class Tela extends JFrame implements MaquinaDeEstadosListener{
 				maquinaAtual.teclaEsquerda03Digitada();
 			}
 		});
-		button_esquerdo_3.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
+		button_esquerdo_3.setIcon(new ImageIcon(Tela.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
 		button_esquerdo_3.setBorder(null);
 		button_esquerdo_3.setFocusPainted(false);
 		button_esquerdo_3.setContentAreaFilled(false);
@@ -95,7 +95,7 @@ public class Tela extends JFrame implements MaquinaDeEstadosListener{
 				maquinaAtual.teclaEsquerda04Digitada();
 			}
 		});
-		button_esquerdo_4.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
+		button_esquerdo_4.setIcon(new ImageIcon(Tela.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
 		button_esquerdo_4.setBackground(Color.LIGHT_GRAY);
 		button_esquerdo_4.setBorder(null);
 		button_esquerdo_4.setFocusPainted(false);
@@ -108,7 +108,7 @@ public class Tela extends JFrame implements MaquinaDeEstadosListener{
 				maquinaAtual.teclaDireita01Digitada();
 			}
 		});
-		button_direito_1.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
+		button_direito_1.setIcon(new ImageIcon(Tela.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
 		button_direito_1.setBackground(Color.LIGHT_GRAY);
 		button_direito_1.setBorder(null);
 		button_direito_1.setFocusPainted(false);
@@ -121,7 +121,7 @@ public class Tela extends JFrame implements MaquinaDeEstadosListener{
 				maquinaAtual.teclaDireita02Digitada();
 			}
 		});
-		button_direito_2.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
+		button_direito_2.setIcon(new ImageIcon(Tela.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
 		button_direito_2.setBorder(null);
 		button_direito_2.setBackground(Color.LIGHT_GRAY);
 		button_direito_2.setFocusPainted(false);
@@ -134,7 +134,7 @@ public class Tela extends JFrame implements MaquinaDeEstadosListener{
 				maquinaAtual.teclaDireita03Digitada();
 			}
 		});
-		button_direito_3.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
+		button_direito_3.setIcon(new ImageIcon(Tela.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
 		button_direito_3.setBackground(Color.LIGHT_GRAY);
 		button_direito_3.setBorder(null);
 		button_direito_3.setFocusPainted(false);
@@ -147,7 +147,7 @@ public class Tela extends JFrame implements MaquinaDeEstadosListener{
 				maquinaAtual.teclaDireita04Digitada();
 			}
 		});
-		button_direito_4.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
+		button_direito_4.setIcon(new ImageIcon(Tela.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
 		button_direito_4.setBackground(Color.LIGHT_GRAY);
 		button_direito_4.setBorder(null);
 		button_direito_4.setFocusPainted(false);
@@ -161,7 +161,7 @@ public class Tela extends JFrame implements MaquinaDeEstadosListener{
 				maquinaAtual.teclaEsquerda01Digitada();
 			}
 		});
-		button_esquerdo_1.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
+		button_esquerdo_1.setIcon(new ImageIcon(Tela.class.getResource("/br/edu/facisa/caixa/resource/bt-laterais.png")));
 		button_esquerdo_1.setBackground(Color.LIGHT_GRAY);
 		button_esquerdo_1.setBorder(null);
 		button_esquerdo_1.setFocusPainted(false);
@@ -175,7 +175,7 @@ public class Tela extends JFrame implements MaquinaDeEstadosListener{
 		labelLogoBancos.setBounds(233, 12, 75, 75);
 		
 		lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(TelaInicial.class.getResource("/br/edu/facisa/caixa/resource/header.jpg")));
+		lblNewLabel_1.setIcon(new ImageIcon(Tela.class.getResource("/br/edu/facisa/caixa/resource/header.jpg")));
 				contentPane.setLayout(getLayout());
 		
 

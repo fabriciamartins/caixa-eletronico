@@ -1,10 +1,10 @@
-package br.edu.facisa.caixa.modelo.estado.santander;
+package br.edu.facisa.caixa.modelo.estado.bancobrasil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
-import br.edu.facisa.caixa.adapter.MaquinaSantander;
+import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
 import br.edu.facisa.caixa.gui.Emprestimo;
 import br.edu.facisa.caixa.gui.OperacaoSucesso;
 import br.edu.facisa.caixa.gui.Operacoes;
@@ -13,13 +13,13 @@ import br.edu.facisa.caixa.modelo.Dados;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
 
-public class SantanderProcessadorEmprestimo extends MaquinaAdapter implements ProcessadorEstado {
+public class BBProcessadorRealizandoEmprestimo extends MaquinaAdapter implements ProcessadorEstado{
 	
 	private double valorDigitado;
 	private List<EstadoListener> listeners;
 	private Emprestimo telaEmprestimo = new Emprestimo();
 	
-	public SantanderProcessadorEmprestimo() {
+	public BBProcessadorRealizandoEmprestimo() {
 		listeners = new ArrayList<EstadoListener>();
 	}
 	
@@ -27,19 +27,19 @@ public class SantanderProcessadorEmprestimo extends MaquinaAdapter implements Pr
 		this.valorDigitado *= 10;
 		this.valorDigitado += d;
 	}
-	
+
 	@Override
 	public void iniciar() {
-		// TODO Auto-generated method stub
 		
 	}
+
 	@Override
 	public void teclaNum01Digitada() {
 		processaValor(1);
 		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
@@ -47,8 +47,8 @@ public class SantanderProcessadorEmprestimo extends MaquinaAdapter implements Pr
 		processaValor(2);
 		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
@@ -56,8 +56,8 @@ public class SantanderProcessadorEmprestimo extends MaquinaAdapter implements Pr
 		processaValor(3);
 		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
@@ -65,8 +65,8 @@ public class SantanderProcessadorEmprestimo extends MaquinaAdapter implements Pr
 		processaValor(4);
 		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
@@ -74,16 +74,16 @@ public class SantanderProcessadorEmprestimo extends MaquinaAdapter implements Pr
 		processaValor(5);
 		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaNum06Digitada() {
 		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
@@ -91,8 +91,8 @@ public class SantanderProcessadorEmprestimo extends MaquinaAdapter implements Pr
 		processaValor(7);
 		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
@@ -100,8 +100,8 @@ public class SantanderProcessadorEmprestimo extends MaquinaAdapter implements Pr
 		processaValor(8);
 		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
@@ -109,8 +109,8 @@ public class SantanderProcessadorEmprestimo extends MaquinaAdapter implements Pr
 		processaValor(9);
 		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
@@ -118,26 +118,26 @@ public class SantanderProcessadorEmprestimo extends MaquinaAdapter implements Pr
 		processaValor(0);
 		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaConfirmaDigitada() {
 
-		MaquinaSantander.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.instance.getContaDigitada()));
-		MaquinaSantander.instance.getTransacaoBancaria().setValor(valorDigitado);
-		MaquinaSantander.instance.getTransacaoBancaria().obterEmprestimo();
+		MaquinaBancoBrasil.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.instance.getContaDigitada()));
+		MaquinaBancoBrasil.instance.getTransacaoBancaria().setValor(valorDigitado);
+		MaquinaBancoBrasil.instance.getTransacaoBancaria().obterEmprestimo();
 		
 		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new SantanderProcessadorTransacaoFinalizada());
+			listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaBancoBrasil.instance);
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(new OperacaoSucesso().getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		evento.setNovaTela(new OperacaoSucesso().getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 		
 	}
 
@@ -149,14 +149,14 @@ public class SantanderProcessadorEmprestimo extends MaquinaAdapter implements Pr
 	public void teclaCancelarDigitada() {
 		
 		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new SantanderProcessadorEscolhendoTransacao());
+			listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaBancoBrasil.instance);
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(new Operacoes().getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		evento.setNovaTela(new Operacoes().getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 		
 	}
 
@@ -205,7 +205,5 @@ public class SantanderProcessadorEmprestimo extends MaquinaAdapter implements Pr
 		this.listeners.remove(listener);
 		
 	}
-
-	
 
 }

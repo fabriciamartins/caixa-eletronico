@@ -1,6 +1,5 @@
 package br.edu.facisa.caixa.gui;
 
-import java.awt.EventQueue;
 import java.awt.SystemColor;
 
 import javax.swing.JLabel;
@@ -36,22 +35,6 @@ public class Transferencia {
 	
 	public void setTextValor(String valor){
 		this.textValorTransferencia.setText(valor);
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Transferencia window = new Transferencia();
-					window.panel.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 
 	/**

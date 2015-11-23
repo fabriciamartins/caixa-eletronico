@@ -1,7 +1,6 @@
 package br.edu.facisa.caixa.gui;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 
@@ -32,22 +31,6 @@ public class Extrato {
 
 	public void setLblDeposito(JLabel lblDeposito) {
 		this.lblSaque = lblDeposito;
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Extrato window = new Extrato();
-					window.panel.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 
 	/**

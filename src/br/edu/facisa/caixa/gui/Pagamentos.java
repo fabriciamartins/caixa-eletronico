@@ -1,6 +1,5 @@
 package br.edu.facisa.caixa.gui;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 
@@ -13,13 +12,13 @@ import java.awt.Color;
 public class Pagamentos {
 
 	private JPanel panel;
-	private JLabel lbl;
-	private JLabel lblNewLabel_1;
-	private JTextField textField_1;
-	private JLabel lblNewLabel_2;
-	private JTextField textField_2;
-	private JLabel lblNewLabel_3;
-	private JTextField textField_3;
+	private JLabel lblTitulo;
+	private JLabel lblDataVencimento;
+	public JTextField textDataVencimento;
+	private JLabel lblCodBarras;
+	public JTextField textCodBarras;
+	private JLabel lblValor;
+	public JTextField textValor;
 	
 	public JPanel getPanel() {
 		return panel;
@@ -28,31 +27,63 @@ public class Pagamentos {
 	public void setPanel(JPanel panel) {
 		this.panel = panel;
 	}
-
-	public JLabel getLbl() {
-		return lbl;
+	
+	public JLabel getLblTitulo() {
+		return lblTitulo;
 	}
 
-	public void setLblDeposito(JLabel lbl) {
-		this.lbl = lbl;
+	public void setLblTitulo(JLabel lblTitulo) {
+		this.lblTitulo = lblTitulo;
 	}
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Pagamentos window = new Pagamentos();
-					window.panel.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public JLabel getLblDataVencimento() {
+		return lblDataVencimento;
 	}
 
+	public void setLblDataVencimento(JLabel lblDataVencimento) {
+		this.lblDataVencimento = lblDataVencimento;
+	}
+
+	public JTextField getTextDataVencimento() {
+		return textDataVencimento;
+	}
+
+	public void setTextDataVencimento(JTextField textDataVencimento) {
+		this.textDataVencimento = textDataVencimento;
+	}
+
+	public JLabel getLblCodBarras() {
+		return lblCodBarras;
+	}
+
+	public void setLblCodBarras(JLabel lblCodBarras) {
+		this.lblCodBarras = lblCodBarras;
+	}
+
+	public JTextField getTextCodBarras() {
+		return textCodBarras;
+	}
+
+	public void setTextCodBarras(JTextField textCodBarras) {
+		this.textCodBarras = textCodBarras;
+	}
+
+	public JLabel getLblValor() {
+		return lblValor;
+	}
+
+	public void setLblValor(JLabel lblValor) {
+		this.lblValor = lblValor;
+	}
+
+	public JTextField getTextValor() {
+		return textValor;
+	}
+
+	public void setTextValor(JTextField textValor) {
+		this.textValor = textValor;
+	}
+	
 	/**
 	 * Create the application.
 	 */
@@ -69,46 +100,46 @@ public class Pagamentos {
 		panel.setSize(535,  320);
 		panel.setLayout(null);
 		
-		lbl = new JLabel("Pagamentos");
-		lbl.setBounds(10, 117, 515, 17);
-		lbl.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lbl.setForeground(new Color(0, 128, 0));
-		lbl.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl.setVisible(false);
-		panel.add(lbl);
+		lblTitulo = new JLabel("Pagamentos");
+		lblTitulo.setBounds(10, 117, 515, 17);
+		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTitulo.setForeground(new Color(0, 128, 0));
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulo.setVisible(false);
+		panel.add(lblTitulo);
 		
-		lblNewLabel_1 = new JLabel("Data");
-		lblNewLabel_1.setBounds(93, 157, 46, 14);
-		panel.add(lblNewLabel_1);
+		lblDataVencimento = new JLabel("Data Vencimento");
+		lblDataVencimento.setBounds(64, 155, 105, 14);
+		panel.add(lblDataVencimento);
 		
-		textField_1 = new JTextField();
-		textField_1.setEnabled(false);
-		textField_1.setToolTipText("");
-		textField_1.setColumns(10);
-		textField_1.setBounds(88, 176, 132, 33);
-		panel.add(textField_1);
+		textDataVencimento = new JTextField();
+		textDataVencimento.setEditable(false);
+		textDataVencimento.setToolTipText("");
+		textDataVencimento.setColumns(10);
+		textDataVencimento.setBounds(64, 176, 132, 33);
+		panel.add(textDataVencimento);
 		
-		lblNewLabel_2 = new JLabel("C\u00F3digo de Barras");
-		lblNewLabel_2.setBounds(252, 157, 120, 14);
-		panel.add(lblNewLabel_2);
+		lblCodBarras = new JLabel("C\u00F3digo de Barras");
+		lblCodBarras.setBounds(252, 157, 120, 14);
+		panel.add(lblCodBarras);
 		
-		textField_2 = new JTextField();
-		textField_2.setEditable(false);
-		textField_2.setToolTipText("");
-		textField_2.setColumns(10);
-		textField_2.setBounds(251, 176, 217, 33);
-		panel.add(textField_2);
+		textCodBarras = new JTextField();
+		textCodBarras.setEditable(false);
+		textCodBarras.setToolTipText("");
+		textCodBarras.setColumns(10);
+		textCodBarras.setBounds(251, 176, 217, 33);
+		panel.add(textCodBarras);
 		
-		lblNewLabel_3 = new JLabel("Valor");
-		lblNewLabel_3.setBounds(150, 249, 31, 14);
-		panel.add(lblNewLabel_3);
+		lblValor = new JLabel("Valor");
+		lblValor.setBounds(150, 249, 31, 14);
+		panel.add(lblValor);
 		
-		textField_3 = new JTextField();
-		textField_3.setToolTipText("");
-		textField_3.setEditable(false);
-		textField_3.setColumns(10);
-		textField_3.setBounds(191, 240, 168, 33);
-		panel.add(textField_3);
+		textValor = new JTextField();
+		textValor.setToolTipText("");
+		textValor.setEditable(false);
+		textValor.setColumns(10);
+		textValor.setBounds(191, 240, 168, 33);
+		panel.add(textValor);
 		
 	}
 }

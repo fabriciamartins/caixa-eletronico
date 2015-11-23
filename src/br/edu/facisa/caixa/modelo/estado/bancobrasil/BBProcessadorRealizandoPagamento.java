@@ -1,4 +1,4 @@
-package br.edu.facisa.caixa.modelo.estado.santander;
+package br.edu.facisa.caixa.modelo.estado.bancobrasil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
-import br.edu.facisa.caixa.adapter.MaquinaSantander;
+import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
 import br.edu.facisa.caixa.gui.OperacaoSucesso;
 import br.edu.facisa.caixa.gui.Operacoes;
 import br.edu.facisa.caixa.gui.Pagamentos;
@@ -17,7 +17,7 @@ import br.edu.facisa.caixa.modelo.Titulo;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
 
-public class SantanderProcessadorPagamentos extends MaquinaAdapter implements ProcessadorEstado {
+public class BBProcessadorRealizandoPagamento extends MaquinaAdapter implements ProcessadorEstado{
 	
 	private final String DIGITANDO_DATA_VENCIMENTO = "Digitando Data Vencimento";
 	private final String DIGITANDO_COD_BARRAS = "Digitando Código de Barras";
@@ -30,7 +30,7 @@ public class SantanderProcessadorPagamentos extends MaquinaAdapter implements Pr
 	private List<EstadoListener> listeners;
 	private Pagamentos telaPagamentos = new Pagamentos();
 	
-	public SantanderProcessadorPagamentos(){
+	public BBProcessadorRealizandoPagamento(){
 		this.listeners = new ArrayList<EstadoListener>();
 		this.estado = DIGITANDO_DATA_VENCIMENTO;
 		this.telaPagamentos = new Pagamentos();
@@ -40,35 +40,88 @@ public class SantanderProcessadorPagamentos extends MaquinaAdapter implements Pr
 		
 	}	
 	
+	public Titulo getTitulo() {
+		return titulo;
+	}
+
+
+	public void setTitulo(Titulo titulo) {
+		this.titulo = titulo;
+	}
+
+
 	public String getDataVencimento() {
 		return dataVencimento;
 	}
+
 
 	public void setDataVencimento(String dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
 
+
 	public String getCodigoDeBarras() {
 		return codigoDeBarras;
 	}
+
 
 	public void setCodigoDeBarras(String codigoDeBarras) {
 		this.codigoDeBarras = codigoDeBarras;
 	}
 
+
 	public double getValorDigitado() {
 		return valorDigitado;
 	}
+
 
 	public void setValorDigitado(double valorDigitado) {
 		this.valorDigitado = valorDigitado;
 	}
 
+
+	public List<EstadoListener> getListeners() {
+		return listeners;
+	}
+
+
+	public void setListeners(List<EstadoListener> listeners) {
+		this.listeners = listeners;
+	}
+
+
+	public Pagamentos getTelaPagamentos() {
+		return telaPagamentos;
+	}
+
+
+	public void setTelaPagamentos(Pagamentos telaPagamentos) {
+		this.telaPagamentos = telaPagamentos;
+	}
+
+
+	public String getDIGITANDO_DATA_VENCIMENTO() {
+		return DIGITANDO_DATA_VENCIMENTO;
+	}
+
+
+	public String getDIGITANDO_COD_BARRAS() {
+		return DIGITANDO_COD_BARRAS;
+	}
+
+
+	public String getDIGITANDO_VALOR() {
+		return DIGITANDO_VALOR;
+	}
+
+
+	
+	
 	private void processaValor(double d) {
 		this.valorDigitado *= 10;
 		this.valorDigitado += d;
 	}
-	
+
 	@Override
 	public void iniciar() {
 		
@@ -126,6 +179,7 @@ public class SantanderProcessadorPagamentos extends MaquinaAdapter implements Pr
 
 	@Override
 	public void teclaConfirmaDigitada() {
+
 		if(estado.equals(DIGITANDO_DATA_VENCIMENTO) && (this.dataVencimento!="")){
 			estado = DIGITANDO_COD_BARRAS;
 			setDataVencimento(dataVencimento);
@@ -137,14 +191,13 @@ public class SantanderProcessadorPagamentos extends MaquinaAdapter implements Pr
 		}else if((estado.equals(DIGITANDO_VALOR)) && (this.valorDigitado!=0)){
 			
 			for (EstadoListener listener : this.listeners) {
-				listener.estadoAcabou(new SantanderProcessadorTransacaoFinalizada());
+				listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
 			}
 			
-			this.removeEstadoListener(MaquinaSantander.instance);
+			this.removeEstadoListener(MaquinaBancoBrasil.instance);
 			
-			MaquinaSantander.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance()
-					.getConta("Santander", MaquinaSantander.instance.getContaDigitada()));
-			/*CORRIGIR -  CORRIGIR ABAIXO*/
+			MaquinaBancoBrasil.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance()
+					.getConta("Banco do Brasil", MaquinaBancoBrasil.instance.getContaDigitada()));
 			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 			
 			Date dataFormatada;
@@ -161,13 +214,14 @@ public class SantanderProcessadorPagamentos extends MaquinaAdapter implements Pr
 				e.printStackTrace();
 			}
 			
-			MaquinaSantander.instance.getTransacaoBancaria().setTitulo(titulo);
-			MaquinaSantander.instance.getTransacaoBancaria().pagarConta();
+			MaquinaBancoBrasil.instance.getTransacaoBancaria().setTitulo(titulo);
+			MaquinaBancoBrasil.instance.getTransacaoBancaria().pagarConta();
 			/*ATE AQUI*/
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(new OperacaoSucesso().getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-			MaquinaSantander.instance.notificaMudanca(evento);
+			evento.setNovaTela(new OperacaoSucesso().getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+			MaquinaBancoBrasil.instance.notificaMudanca(evento);
 		}
+		
 	}
 
 	@Override
@@ -178,15 +232,14 @@ public class SantanderProcessadorPagamentos extends MaquinaAdapter implements Pr
 	public void teclaCancelarDigitada() {
 		
 		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new SantanderProcessadorEscolhendoTransacao());
+			listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaBancoBrasil.instance);
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(new Operacoes().getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
-		
+		evento.setNovaTela(new Operacoes().getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.instance.notificaMudanca(evento);
 	}
 
 	@Override
@@ -240,20 +293,20 @@ public class SantanderProcessadorPagamentos extends MaquinaAdapter implements Pr
 			dataVencimento += tecla;
 			telaPagamentos.textDataVencimento.setText(dataVencimento);
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(telaPagamentos.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
-			MaquinaSantander.instance.notificaMudanca(evento);
+			evento.setNovaTela(telaPagamentos.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+			MaquinaBancoBrasil.instance.notificaMudanca(evento);
 		}else if(estado.equals(DIGITANDO_COD_BARRAS)){
 			codigoDeBarras += tecla;
 			telaPagamentos.textCodBarras.setText(codigoDeBarras);
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(telaPagamentos.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
-			MaquinaSantander.instance.notificaMudanca(evento);
+			evento.setNovaTela(telaPagamentos.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+			MaquinaBancoBrasil.instance.notificaMudanca(evento);
 		}else{
 			processaValor(Double.valueOf(tecla));
 			telaPagamentos.textValor.setText((String.valueOf(valorDigitado)));
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(telaPagamentos.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
-			MaquinaSantander.instance.notificaMudanca(evento);
+			evento.setNovaTela(telaPagamentos.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+			MaquinaBancoBrasil.instance.notificaMudanca(evento);
 		}
 	}
 
