@@ -55,8 +55,8 @@ public class Tela extends JFrame implements MaquinaDeEstadosListener{
 		getContentPane().setForeground(Color.LIGHT_GRAY);
 		getContentPane().setBackground(SystemColor.control);
 
-		MaquinaPrimaria.instance.adicionaMaquinaDeEstadosListener(this);
-		maquinaAtual = MaquinaPrimaria.instance;
+		MaquinaPrimaria.getInstance().adicionaMaquinaDeEstadosListener(this);
+		maquinaAtual = MaquinaPrimaria.getInstance();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 905, 650);

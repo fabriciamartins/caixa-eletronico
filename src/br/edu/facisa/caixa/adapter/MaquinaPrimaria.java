@@ -8,12 +8,19 @@ import br.edu.facisa.caixa.modelo.estado.ProcessadorEstadoInicial;
 
 public class MaquinaPrimaria extends MaquinaGenericaDeBancos implements EstadoListener{
 
-	public static MaquinaPrimaria instance = new MaquinaPrimaria();
+	private static MaquinaPrimaria instance;
 	private ProcessadorEstado processadorEstado;
 	
 	private MaquinaPrimaria(){
 		processadorEstado = new ProcessadorEstadoInicial();
 		processadorEstado.addEstadoListener(this);
+	}
+	
+	public static MaquinaPrimaria getInstance(){
+		if(instance == null){
+			instance = new MaquinaPrimaria();
+		}
+		return instance;
 	}
 
 	public void iniciar() {

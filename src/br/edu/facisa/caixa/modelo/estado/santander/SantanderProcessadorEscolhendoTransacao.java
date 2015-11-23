@@ -105,11 +105,11 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 			listener.estadoAcabou(new ProcessadorEstadoInicial());
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setTrocaMaquinaDeEstados("Maquina Primaria");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -119,13 +119,13 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 			listener.estadoAcabou(new SantanderProcessadorEmprestimo());
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
 		JPanel telaEmprestimo = new Emprestimo().getPanel();
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaEmprestimo, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 		
 	}
 
@@ -135,13 +135,13 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 			listener.estadoAcabou(new SantanderProcessadorPagamentos());
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
 		JPanel telaPagamentos = new Pagamentos().getPanel();
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaPagamentos, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -150,13 +150,13 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 			listener.estadoAcabou(new SantanderProcessadorRecarga());
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
 		JPanel telaRecarga = new Recarga().getPanel();
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaRecarga, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -165,13 +165,13 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 			listener.estadoAcabou(new SantanderProcessadorTransferencia());
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
 		JPanel telaTransferencia = new Transferencia().getPanel();
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaTransferencia, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -180,13 +180,13 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 			listener.estadoAcabou(new SantanderProcessadorSaque());
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
 		JPanel telaSaque = new Saque().getPanel();
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaSaque, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -195,16 +195,16 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 			listener.estadoAcabou(new SantanderProcessadorExtrato());
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
-		MaquinaSantander.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.instance.getContaDigitada()));
+		MaquinaSantander.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.getInstance().getContaDigitada()));
 		
 		Extrato telaExtrato = new Extrato();
-		telaExtrato.txtpnLoremIpsum.setText(MaquinaSantander.instance.getTransacaoBancaria().consultarExtrato());
+		telaExtrato.txtpnLoremIpsum.setText(MaquinaSantander.getInstance().getTransacaoBancaria().consultarExtrato());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaExtrato.getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -214,11 +214,11 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 			listener.estadoAcabou(new SantanderProcessadorRealizandoDeposito());
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(new Deposito().getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -227,13 +227,13 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 			listener.estadoAcabou(new SantanderProcessadorBloquearCartao());
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
 		JPanel telaBloquearCartao = new BloquearCartao().getPanel();
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaBloquearCartao, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
 	@Override

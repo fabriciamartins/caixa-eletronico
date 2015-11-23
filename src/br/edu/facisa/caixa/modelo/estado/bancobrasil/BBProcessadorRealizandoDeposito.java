@@ -33,7 +33,7 @@ public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements P
 		telaDeposito.textField.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements P
 		telaDeposito.textField.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements P
 		telaDeposito.textField.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements P
 		telaDeposito.textField.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements P
 		telaDeposito.textField.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements P
 		processaValor(6);telaDeposito.textField.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements P
 		telaDeposito.textField.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -95,7 +95,7 @@ public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements P
 		telaDeposito.textField.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -104,7 +104,7 @@ public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements P
 		telaDeposito.textField.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -113,24 +113,24 @@ public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements P
 		telaDeposito.textField.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaConfirmaDigitada() {
-		MaquinaBancoBrasil.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.instance.getContaDigitada()));
-		MaquinaBancoBrasil.instance.getTransacaoBancaria().setValor(valorDigitado);
-		MaquinaBancoBrasil.instance.getTransacaoBancaria().depositar();
+		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
+		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setValor(valorDigitado);
+		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().depositar();
 		
 		for (EstadoListener listener : this.listeners) {
 			listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
 		}
 		
-		this.removeEstadoListener(MaquinaBancoBrasil.instance);
+		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(new OperacaoSucesso().getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 		
 	}
 

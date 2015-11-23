@@ -7,11 +7,18 @@ import br.edu.facisa.caixa.modelo.estado.santander.SantanderProcessadorDigitando
 
 public class MaquinaSantander extends MaquinaGenericaDeBancos{
 
-	public static MaquinaSantander instance = new MaquinaSantander();
+	private static MaquinaSantander instance;
 	
 	private MaquinaSantander() {
 		super.processadorEstado = new SantanderProcessadorDigitandoSenha();
 		super.processadorEstado.addEstadoListener(this);
+	}
+	
+	public static MaquinaSantander getInstance(){
+		if(instance == null){
+			instance = new MaquinaSantander();
+		}
+		return instance;
 	}
 
 	@Override
@@ -27,9 +34,14 @@ public class MaquinaSantander extends MaquinaGenericaDeBancos{
 			}
 		}).start();
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		setContaDigitada(MaquinaPrimaria.instance.getContaDigitada());
+		setContaDigitada(MaquinaPrimaria.getInstance().getContaDigitada());
 		evento.setNovaTela(new Senha().getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
 		this.estado = ESTADO_INICIAL;
 		notificaMudanca(evento);
+	}
+	
+	@Override
+	public void parar(){
+		instance = null;
 	}
 }

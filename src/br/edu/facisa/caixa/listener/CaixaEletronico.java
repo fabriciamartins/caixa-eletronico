@@ -53,27 +53,6 @@ public class CaixaEletronico implements MaquinaDeEstadosListener {
 					Tela.instance.setMaquinaAtual(maquinaAtual);
 					this.maquinaAtual.iniciar();
 					break;
-				case "Bradesco":
-					this.maquinaAtual.parar();
-					this.maquinaAtual = MaquinaDeEstadosFactory.criaMaquinaBradesco();
-					this.maquinaAtual.adicionaMaquinaDeEstadosListener(this);
-					Tela.instance.setMaquinaAtual(maquinaAtual);
-					this.maquinaAtual.iniciar();
-					break;
-				case "Itau":
-					this.maquinaAtual.parar();
-					this.maquinaAtual = MaquinaDeEstadosFactory.criaMaquinaItau();
-					this.maquinaAtual.adicionaMaquinaDeEstadosListener(this);
-					Tela.instance.setMaquinaAtual(maquinaAtual);
-					this.maquinaAtual.iniciar();
-					break;
-				case "Caixa Economica":
-					this.maquinaAtual.parar();
-					this.maquinaAtual = MaquinaDeEstadosFactory.criaMaquinaCaixaEconomica();
-					this.maquinaAtual.adicionaMaquinaDeEstadosListener(this);
-					Tela.instance.setMaquinaAtual(maquinaAtual);
-					this.maquinaAtual.iniciar();
-					break;
 				default:
 					break;
 			}

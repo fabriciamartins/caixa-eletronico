@@ -133,16 +133,16 @@ public class BBProcessadorEscolhendoTransacao extends MaquinaAdapter implements 
 			listener.estadoAcabou(new BBProcessadorExtrato());
 		}
 		
-		this.removeEstadoListener(MaquinaBancoBrasil.instance);
+		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 		
-		MaquinaBancoBrasil.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.instance.getContaDigitada()));
+		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
 		
 		Extrato telaExtrato = new Extrato();
-		telaExtrato.txtpnLoremIpsum.setText(MaquinaBancoBrasil.instance.getTransacaoBancaria().consultarExtrato());
+		telaExtrato.txtpnLoremIpsum.setText(MaquinaBancoBrasil.getInstance().getTransacaoBancaria().consultarExtrato());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaExtrato.getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -152,11 +152,11 @@ public class BBProcessadorEscolhendoTransacao extends MaquinaAdapter implements 
 			listener.estadoAcabou(new BBProcessadorRealizandoDeposito());
 		}
 		
-		this.removeEstadoListener(MaquinaBancoBrasil.instance);
+		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(new Deposito().getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 		
 	}
 

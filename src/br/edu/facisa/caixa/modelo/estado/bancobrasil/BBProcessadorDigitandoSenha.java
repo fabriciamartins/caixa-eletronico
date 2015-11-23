@@ -36,7 +36,7 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 		telaSenha.textField.setText(asteriscos);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaSenha.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 		telaSenha.textField.setText(asteriscos);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaSenha.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 		telaSenha.textField.setText(asteriscos);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaSenha.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 		telaSenha.textField.setText(asteriscos);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaSenha.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 		telaSenha.textField.setText(asteriscos);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaSenha.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 		telaSenha.textField.setText(asteriscos);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaSenha.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 		telaSenha.textField.setText(asteriscos);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaSenha.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -99,7 +99,7 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 		telaSenha.textField.setText(asteriscos);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaSenha.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 		telaSenha.textField.setText(asteriscos);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaSenha.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -117,13 +117,13 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 		telaSenha.textField.setText(asteriscos);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaSenha.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
 	public void teclaConfirmaDigitada() {
-		if(Dados.getInstance().isContaValida("Banco do Brasil", MaquinaBancoBrasil.instance.getContaDigitada(), senhaDigitada)){
-			MaquinaBancoBrasil.instance.setSenhaDigitada(senhaDigitada);
+		if(Dados.getInstance().isContaValida("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada(), senhaDigitada)){
+			MaquinaBancoBrasil.getInstance().setSenhaDigitada(senhaDigitada);
 			this.senhaDigitada = 0;
 			this.asteriscos = "";
 			
@@ -131,11 +131,11 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 				listener.estadoAcabou(new BBProcessadorEscolhendoTransacao());
 			}
 			
-			this.removeEstadoListener(MaquinaBancoBrasil.instance);
+			this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 			
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 			evento.setNovaTela(new Operacoes().getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-			MaquinaBancoBrasil.instance.notificaMudanca(evento);
+			MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 		}
 		else {
 			this.senhaDigitada = 0;
@@ -143,7 +143,7 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 			telaSenha.textField.setText(asteriscos);
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 			evento.setNovaTela(telaSenha.getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-			MaquinaBancoBrasil.instance.notificaMudanca(evento);
+			MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 		}
 	}
 
@@ -152,7 +152,7 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 		this.senhaDigitada = 0;
 		this.asteriscos = "";
 		String msg = " - Continue a digitar a senha ou digite CONFIRMA\n - Senha: ";
-		MaquinaBancoBrasil.instance.configurarEvento(msg, DIGITANDO_SENHA, null);
+		MaquinaBancoBrasil.getInstance().configurarEvento(msg, DIGITANDO_SENHA, null);
 	}
 
 	@Override

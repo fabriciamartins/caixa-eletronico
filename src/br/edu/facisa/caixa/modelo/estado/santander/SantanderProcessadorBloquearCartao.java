@@ -73,9 +73,9 @@ public class SantanderProcessadorBloquearCartao implements ProcessadorEstado {
 
 	@Override
 	public void teclaConfirmaDigitada() {
-		MaquinaSantander.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.instance.getContaDigitada()));
-		MaquinaSantander.instance.getTransacaoBancaria().setBloqueado(true);
-		MaquinaSantander.instance.getTransacaoBancaria().bloquearCartao();
+		MaquinaSantander.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.getInstance().getContaDigitada()));
+		MaquinaSantander.getInstance().getTransacaoBancaria().setBloqueado(true);
+		MaquinaSantander.getInstance().getTransacaoBancaria().bloquearCartao();
 		setEventoDeEstadoFinal(new SantanderProcessadorTransacaoFinalizada(), new OperacaoSucesso().getPanel());
 	}
 
@@ -155,11 +155,11 @@ public class SantanderProcessadorBloquearCartao implements ProcessadorEstado {
 			listener.estadoAcabou(processadorestado);
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(operacao, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
 }

@@ -80,19 +80,19 @@ public class SantanderProcessadorRealizandoDeposito extends MaquinaAdapter imple
 
 	@Override
 	public void teclaConfirmaDigitada() {
-		MaquinaSantander.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.instance.getContaDigitada()));
-		MaquinaSantander.instance.getTransacaoBancaria().setValor(valorDigitado);
-		MaquinaSantander.instance.getTransacaoBancaria().depositar();
+		MaquinaSantander.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.getInstance().getContaDigitada()));
+		MaquinaSantander.getInstance().getTransacaoBancaria().setValor(valorDigitado);
+		MaquinaSantander.getInstance().getTransacaoBancaria().depositar();
 		
 		for (EstadoListener listener : this.listeners) {
 			listener.estadoAcabou(new SantanderProcessadorTransacaoFinalizada());
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(new OperacaoSucesso().getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 
 	}
 
@@ -102,7 +102,7 @@ public class SantanderProcessadorRealizandoDeposito extends MaquinaAdapter imple
 		telaDeposito.textField.setText("");
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -111,11 +111,11 @@ public class SantanderProcessadorRealizandoDeposito extends MaquinaAdapter imple
 			listener.estadoAcabou(new SantanderProcessadorEscolhendoTransacao());
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(new Operacoes().getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -187,7 +187,7 @@ public class SantanderProcessadorRealizandoDeposito extends MaquinaAdapter imple
 		telaDeposito.textField.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
 }

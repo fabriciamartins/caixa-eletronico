@@ -83,8 +83,8 @@ public class SantanderProcessadorDigitandoSenha extends MaquinaAdapter implement
 	@Override
 	public void teclaConfirmaDigitada() {
 
-		if(Dados.getInstance().isContaValida("Santander", MaquinaSantander.instance.getContaDigitada(), senhaDigitada)){
-			MaquinaSantander.instance.setSenhaDigitada(senhaDigitada);
+		if(Dados.getInstance().isContaValida("Santander", MaquinaSantander.getInstance().getContaDigitada(), senhaDigitada)){
+			MaquinaSantander.getInstance().setSenhaDigitada(senhaDigitada);
 			this.senhaDigitada = 0;
 			this.asteriscos = "";
 			
@@ -92,11 +92,11 @@ public class SantanderProcessadorDigitandoSenha extends MaquinaAdapter implement
 				listener.estadoAcabou(new SantanderProcessadorEscolhendoTransacao());
 			}
 			
-			this.removeEstadoListener(MaquinaSantander.instance);
+			this.removeEstadoListener(MaquinaSantander.getInstance());
 			
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 			evento.setNovaTela(new Operacoes().getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-			MaquinaSantander.instance.notificaMudanca(evento);
+			MaquinaSantander.getInstance().notificaMudanca(evento);
 		}
 		else {
 			this.senhaDigitada = 0;
@@ -104,7 +104,7 @@ public class SantanderProcessadorDigitandoSenha extends MaquinaAdapter implement
 			telaSenha.textField.setText(asteriscos);
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 			evento.setNovaTela(telaSenha.getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-			MaquinaSantander.instance.notificaMudanca(evento);
+			MaquinaSantander.getInstance().notificaMudanca(evento);
 		}
 		
 	}
@@ -116,7 +116,7 @@ public class SantanderProcessadorDigitandoSenha extends MaquinaAdapter implement
 		telaSenha.textField.setText(asteriscos);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaSenha.getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -125,11 +125,11 @@ public class SantanderProcessadorDigitandoSenha extends MaquinaAdapter implement
 			listener.estadoAcabou(new ProcessadorEstadoInicial());
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setTrocaMaquinaDeEstados("Maquina Primaria");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -201,7 +201,7 @@ public class SantanderProcessadorDigitandoSenha extends MaquinaAdapter implement
 		telaSenha.textField.setText(asteriscos);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaSenha.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 	
 }

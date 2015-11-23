@@ -194,10 +194,10 @@ public class BBProcessadorRealizandoPagamento extends MaquinaAdapter implements 
 				listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
 			}
 			
-			this.removeEstadoListener(MaquinaBancoBrasil.instance);
+			this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 			
-			MaquinaBancoBrasil.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance()
-					.getConta("Banco do Brasil", MaquinaBancoBrasil.instance.getContaDigitada()));
+			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance()
+					.getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
 			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 			
 			Date dataFormatada;
@@ -214,12 +214,12 @@ public class BBProcessadorRealizandoPagamento extends MaquinaAdapter implements 
 				e.printStackTrace();
 			}
 			
-			MaquinaBancoBrasil.instance.getTransacaoBancaria().setTitulo(titulo);
-			MaquinaBancoBrasil.instance.getTransacaoBancaria().pagarConta();
+			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setTitulo(titulo);
+			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().pagarConta();
 			/*ATE AQUI*/
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 			evento.setNovaTela(new OperacaoSucesso().getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-			MaquinaBancoBrasil.instance.notificaMudanca(evento);
+			MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 		}
 		
 	}
@@ -235,11 +235,11 @@ public class BBProcessadorRealizandoPagamento extends MaquinaAdapter implements 
 			listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
 		}
 		
-		this.removeEstadoListener(MaquinaBancoBrasil.instance);
+		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(new Operacoes().getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -294,19 +294,19 @@ public class BBProcessadorRealizandoPagamento extends MaquinaAdapter implements 
 			telaPagamentos.textDataVencimento.setText(dataVencimento);
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 			evento.setNovaTela(telaPagamentos.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-			MaquinaBancoBrasil.instance.notificaMudanca(evento);
+			MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 		}else if(estado.equals(DIGITANDO_COD_BARRAS)){
 			codigoDeBarras += tecla;
 			telaPagamentos.textCodBarras.setText(codigoDeBarras);
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 			evento.setNovaTela(telaPagamentos.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-			MaquinaBancoBrasil.instance.notificaMudanca(evento);
+			MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 		}else{
 			processaValor(Double.valueOf(tecla));
 			telaPagamentos.textValor.setText((String.valueOf(valorDigitado)));
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 			evento.setNovaTela(telaPagamentos.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-			MaquinaBancoBrasil.instance.notificaMudanca(evento);
+			MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 		}
 	}
 

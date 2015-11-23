@@ -115,11 +115,11 @@ public class BBProcessadorExtrato implements ProcessadorEstado {
 
 	@Override
 	public void teclaEsquerda04Digitada() {
-		this.removeEstadoListener(MaquinaBancoBrasil.instance);
+		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setTrocaMaquinaDeEstados("Maquina Primaria");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -146,11 +146,11 @@ public class BBProcessadorExtrato implements ProcessadorEstado {
 			listener.estadoAcabou(new BBProcessadorEscolhendoTransacao());
 		}
 		
-		this.removeEstadoListener(MaquinaBancoBrasil.instance);
+		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(new Operacoes().getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override

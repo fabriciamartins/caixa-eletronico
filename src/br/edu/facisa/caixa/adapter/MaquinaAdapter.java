@@ -47,7 +47,6 @@ public abstract class MaquinaAdapter implements IMaquinaDeEstados {
 	}
 	
 	public void parar() {
-		this.estado = null;
 	}
 	
 	public void configurarEvento(String tela, String estado, Operacao operacao) {

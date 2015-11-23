@@ -106,11 +106,11 @@ public class SantanderProcessadorTransacaoFinalizada extends MaquinaAdapter impl
 	@Override
 	public void teclaEsquerda04Digitada() {
 
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setTrocaMaquinaDeEstados("Maquina Primaria");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -137,11 +137,11 @@ public class SantanderProcessadorTransacaoFinalizada extends MaquinaAdapter impl
 			listener.estadoAcabou(new SantanderProcessadorEscolhendoTransacao());
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(new Operacoes().getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
 	@Override

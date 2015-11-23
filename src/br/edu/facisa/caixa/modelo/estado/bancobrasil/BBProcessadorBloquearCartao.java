@@ -73,9 +73,9 @@ public class BBProcessadorBloquearCartao implements ProcessadorEstado {
 
 	@Override
 	public void teclaConfirmaDigitada() {
-		MaquinaBancoBrasil.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.instance.getContaDigitada()));
-		MaquinaBancoBrasil.instance.getTransacaoBancaria().setBloqueado(true);
-		MaquinaBancoBrasil.instance.getTransacaoBancaria().bloquearCartao();
+		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
+		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setBloqueado(true);
+		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().bloquearCartao();
 		setEventoDeEstadoFinal(new BBProcessadorTransacaoFinalizada(), new OperacaoSucesso().getPanel());
 	}
 
@@ -156,11 +156,11 @@ public class BBProcessadorBloquearCartao implements ProcessadorEstado {
 			listener.estadoAcabou(processadorestado);
 		}
 		
-		this.removeEstadoListener(MaquinaBancoBrasil.instance);
+		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(operacao, "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.instance.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 }

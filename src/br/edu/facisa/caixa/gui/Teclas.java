@@ -25,7 +25,7 @@ public class Teclas extends JPanel implements MaquinaDeEstadosListener{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private IMaquinaDeEstados maquinaAtual = MaquinaPrimaria.instance;
+	private IMaquinaDeEstados maquinaAtual = MaquinaPrimaria.getInstance();
 	private JButton tecla01;
 	private JButton tecla02;
 	private JButton tecla03;
@@ -48,7 +48,7 @@ public class Teclas extends JPanel implements MaquinaDeEstadosListener{
 		setForeground(Color.LIGHT_GRAY);
 		setBackground(SystemColor.control);
 
-		MaquinaPrimaria.instance.adicionaMaquinaDeEstadosListener(this);
+		MaquinaPrimaria.getInstance().adicionaMaquinaDeEstadosListener(this);
 		
 		tecla00 = new JButton("0");
 		tecla00.addActionListener(new ActionListener() {

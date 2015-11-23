@@ -87,10 +87,10 @@ public class SantanderProcessadorSaque implements ProcessadorEstado {
 
 	@Override
 	public void teclaConfirmaDigitada() {
-		MaquinaSantander.instance.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.instance.getContaDigitada()));
-		MaquinaSantander.instance.getTransacaoBancaria().setValor(valorDigitado);
-		MaquinaSantander.instance.getTransacaoBancaria().sacar();
-		String msg = MaquinaSantander.instance.getTransacaoBancaria().getMensagem();
+		MaquinaSantander.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.getInstance().getContaDigitada()));
+		MaquinaSantander.getInstance().getTransacaoBancaria().setValor(valorDigitado);
+		MaquinaSantander.getInstance().getTransacaoBancaria().sacar();
+		String msg = MaquinaSantander.getInstance().getTransacaoBancaria().getMensagem();
 		if (msg != null) {
 			setEventoDeEstadoFinal(new SantanderProcessadorTransacaoFinalizada(), new OperacaoCancelada(msg).getPanel());
 		} else {
@@ -177,7 +177,7 @@ public class SantanderProcessadorSaque implements ProcessadorEstado {
 		telaSaque.getTextField().setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaSaque.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 	
 	private void setEventoDeEstadoFinal(ProcessadorEstado processadorestado, JPanel operacao) {
@@ -185,11 +185,11 @@ public class SantanderProcessadorSaque implements ProcessadorEstado {
 			listener.estadoAcabou(processadorestado);
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.instance);
+		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(operacao, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
-		MaquinaSantander.instance.notificaMudanca(evento);
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
 }

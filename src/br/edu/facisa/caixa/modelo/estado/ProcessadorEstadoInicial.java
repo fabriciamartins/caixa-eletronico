@@ -23,17 +23,17 @@ public class ProcessadorEstadoInicial extends MaquinaAdapter implements Processa
 	public void teclaConfirmaDigitada() {
 		if(!(numeroCartao.equals(""))){
 			
-			this.removeEstadoListener(MaquinaPrimaria.instance);
+			this.removeEstadoListener(MaquinaPrimaria.getInstance());
 			
 			int numeroConta = Integer.valueOf(numeroCartao);
 			String banco = Dados.getInstance().validarConta(numeroConta);
-			MaquinaPrimaria.instance.setContaDigitada(numeroConta);
+			MaquinaPrimaria.getInstance().setContaDigitada(numeroConta);
 			
 			this.numeroCartao = "";
 			
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 			evento.setTrocaMaquinaDeEstados(banco);
-			MaquinaPrimaria.instance.notificaMudanca(evento);
+			MaquinaPrimaria.getInstance().notificaMudanca(evento);
 		}
 		else{
 			teclaCorrigeDigitada();
@@ -51,7 +51,7 @@ public class ProcessadorEstadoInicial extends MaquinaAdapter implements Processa
 		Home.getInstance().textField.setText(numeroCartao);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(Home.getInstance());
-		MaquinaPrimaria.instance.notificaMudanca(evento);
+		MaquinaPrimaria.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class ProcessadorEstadoInicial extends MaquinaAdapter implements Processa
 		Home.getInstance().textField.setText(numeroCartao);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(Home.getInstance());
-		MaquinaPrimaria.instance.notificaMudanca(evento);
+		MaquinaPrimaria.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class ProcessadorEstadoInicial extends MaquinaAdapter implements Processa
 		Home.getInstance().textField.setText(numeroCartao);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(Home.getInstance());
-		MaquinaPrimaria.instance.notificaMudanca(evento);
+		MaquinaPrimaria.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class ProcessadorEstadoInicial extends MaquinaAdapter implements Processa
 		Home.getInstance().textField.setText(numeroCartao);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(Home.getInstance());
-		MaquinaPrimaria.instance.notificaMudanca(evento);
+		MaquinaPrimaria.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class ProcessadorEstadoInicial extends MaquinaAdapter implements Processa
 		Home.getInstance().textField.setText(numeroCartao);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(Home.getInstance());
-		MaquinaPrimaria.instance.notificaMudanca(evento);
+		MaquinaPrimaria.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class ProcessadorEstadoInicial extends MaquinaAdapter implements Processa
 		Home.getInstance().textField.setText(numeroCartao);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(Home.getInstance());
-		MaquinaPrimaria.instance.notificaMudanca(evento);
+		MaquinaPrimaria.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -105,7 +105,7 @@ public class ProcessadorEstadoInicial extends MaquinaAdapter implements Processa
 		Home.getInstance().textField.setText(numeroCartao);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(Home.getInstance());
-		MaquinaPrimaria.instance.notificaMudanca(evento);
+		MaquinaPrimaria.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public class ProcessadorEstadoInicial extends MaquinaAdapter implements Processa
 		Home.getInstance().textField.setText(numeroCartao);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(Home.getInstance());
-		MaquinaPrimaria.instance.notificaMudanca(evento);
+		MaquinaPrimaria.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -123,7 +123,7 @@ public class ProcessadorEstadoInicial extends MaquinaAdapter implements Processa
 		Home.getInstance().textField.setText(numeroCartao);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(Home.getInstance());
-		MaquinaPrimaria.instance.notificaMudanca(evento);
+		MaquinaPrimaria.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public class ProcessadorEstadoInicial extends MaquinaAdapter implements Processa
 		Home.getInstance().textField.setText(numeroCartao);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(Home.getInstance());
-		MaquinaPrimaria.instance.notificaMudanca(evento);
+		MaquinaPrimaria.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -141,7 +141,7 @@ public class ProcessadorEstadoInicial extends MaquinaAdapter implements Processa
 		Home.getInstance().textField.setText(numeroCartao);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(Home.getInstance());
-		MaquinaPrimaria.instance.notificaMudanca(evento);
+		MaquinaPrimaria.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
@@ -150,7 +150,7 @@ public class ProcessadorEstadoInicial extends MaquinaAdapter implements Processa
 		Home.getInstance().textField.setText(numeroCartao);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(Home.getInstance());
-		MaquinaPrimaria.instance.notificaMudanca(evento);
+		MaquinaPrimaria.getInstance().notificaMudanca(evento);
 	}
 
 	@Override
