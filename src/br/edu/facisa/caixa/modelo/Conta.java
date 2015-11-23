@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.facisa.caixa.command.TransacaoCommand;
-import br.edu.facisa.caixa.exception.LimiteDeCréditoExcedidoException;
+import br.edu.facisa.caixa.exception.LimiteDeCreditoExcedidoException;
 import br.edu.facisa.caixa.exception.SaldoInsuficienteException;
 
 public class Conta {
@@ -74,11 +74,11 @@ public class Conta {
 		return emprestimoObtido;
 	}
 
-	public void obterEmprestimo(double valor) throws LimiteDeCréditoExcedidoException {
+	public void obterEmprestimo(double valor) throws LimiteDeCreditoExcedidoException {
 		if(this.emprestimoObtido <= this.limiteDeCredito){
 			this.emprestimoObtido = valor;
 		} else {
-			throw new LimiteDeCréditoExcedidoException();
+			throw new LimiteDeCreditoExcedidoException();
 		}		
 	}
 	

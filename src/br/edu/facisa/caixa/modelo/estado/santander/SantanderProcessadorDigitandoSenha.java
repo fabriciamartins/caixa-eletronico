@@ -31,56 +31,6 @@ public class SantanderProcessadorDigitandoSenha extends MaquinaAdapter implement
 	}
 	
 	@Override
-	public void teclaNum01Digitada() {
-		teclaDigitada(1);
-	}
-
-	@Override
-	public void teclaNum02Digitada() {
-		teclaDigitada(2);
-	}
-
-	@Override
-	public void teclaNum03Digitada() {
-		teclaDigitada(3);
-	}
-
-	@Override
-	public void teclaNum04Digitada() {
-		teclaDigitada(4);
-	}
-
-	@Override
-	public void teclaNum05Digitada() {
-		teclaDigitada(5);
-	}
-
-	@Override
-	public void teclaNum06Digitada() {
-		teclaDigitada(6);
-	}
-
-	@Override
-	public void teclaNum07Digitada() {
-		teclaDigitada(7);
-	}
-
-	@Override
-	public void teclaNum08Digitada() {
-		teclaDigitada(8);
-	}
-
-	@Override
-	public void teclaNum09Digitada() {
-		teclaDigitada(9);
-	}
-
-	@Override
-	public void teclaNum00Digitada() {
-		teclaDigitada(0);
-	}
-
-	@Override
 	public void teclaConfirmaDigitada() {
 
 		if(Dados.getInstance().isContaValida("Santander", MaquinaSantander.getInstance().getContaDigitada(), senhaDigitada)){
@@ -196,8 +146,9 @@ public class SantanderProcessadorDigitandoSenha extends MaquinaAdapter implement
 		this.listeners.remove(listener);
 	}
 
-	public void teclaDigitada(int tecla){
-		processaSenha(tecla);
+	@Override
+	public void teclaNumericaDigitada(String numTecla) {
+		processaSenha(Integer.valueOf(numTecla));
 		telaSenha.textField.setText(asteriscos);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaSenha.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");

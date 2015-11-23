@@ -32,54 +32,10 @@ public class MaquinaPrimaria extends MaquinaGenericaDeBancos implements EstadoLi
 		notificaMudanca(evento);
 	}
 
-	public void teclaNum01Digitada() {
-		processadorEstado.teclaNum01Digitada();
+	public void teclaNumericaDigitada(String numTecla){
+		processadorEstado.teclaNumericaDigitada(numTecla);
 	}
 	
-	public void teclaNum02Digitada() {
-		processadorEstado.teclaNum02Digitada();
-	}
-
-	@Override
-	public void teclaNum03Digitada() {
-		processadorEstado.teclaNum03Digitada();
-	}
-
-	@Override
-	public void teclaNum04Digitada() {
-		processadorEstado.teclaNum04Digitada();
-	}
-
-	@Override
-	public void teclaNum05Digitada() {
-		processadorEstado.teclaNum05Digitada();
-	}
-
-	@Override
-	public void teclaNum06Digitada() {
-		processadorEstado.teclaNum06Digitada();
-	}
-
-	@Override
-	public void teclaNum07Digitada() {
-		processadorEstado.teclaNum07Digitada();
-	}
-
-	@Override
-	public void teclaNum08Digitada() {
-		processadorEstado.teclaNum08Digitada();
-	}
-
-	@Override
-	public void teclaNum09Digitada() {
-		processadorEstado.teclaNum09Digitada();
-	}
-
-	@Override
-	public void teclaNum00Digitada() {
-		processadorEstado.teclaNum00Digitada();
-	}
-
 	@Override
 	public void teclaConfirmaDigitada() {
 		processadorEstado.teclaConfirmaDigitada();

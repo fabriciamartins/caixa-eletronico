@@ -53,7 +53,7 @@ public class Teclas extends JPanel implements MaquinaDeEstadosListener{
 		tecla00 = new JButton("0");
 		tecla00.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				maquinaAtual.teclaNum00Digitada();
+				maquinaAtual.teclaNumericaDigitada("0");
 			}
 		});
 		tecla00.setBackground(Color.LIGHT_GRAY);
@@ -65,7 +65,7 @@ public class Teclas extends JPanel implements MaquinaDeEstadosListener{
 		tecla01 = new JButton("1");
 		tecla01.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				maquinaAtual.teclaNum01Digitada();
+				maquinaAtual.teclaNumericaDigitada("1");
 			}
 		});
 		tecla01.setBackground(Color.LIGHT_GRAY);
@@ -77,7 +77,7 @@ public class Teclas extends JPanel implements MaquinaDeEstadosListener{
 		tecla02 = new JButton("2");
 		tecla02.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				maquinaAtual.teclaNum02Digitada();
+				maquinaAtual.teclaNumericaDigitada("2");
 			}
 		});
 		tecla02.setBackground(Color.LIGHT_GRAY);
@@ -89,7 +89,7 @@ public class Teclas extends JPanel implements MaquinaDeEstadosListener{
 		tecla03 = new JButton("3");
 		tecla03.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				maquinaAtual.teclaNum03Digitada();
+				maquinaAtual.teclaNumericaDigitada("3");
 			}
 		});
 		tecla03.setBackground(Color.LIGHT_GRAY);
@@ -101,7 +101,7 @@ public class Teclas extends JPanel implements MaquinaDeEstadosListener{
 		tecla04 = new JButton("4");
 		tecla04.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				maquinaAtual.teclaNum04Digitada();
+				maquinaAtual.teclaNumericaDigitada("4");
 			}
 		});
 		tecla04.setBackground(Color.LIGHT_GRAY);
@@ -113,7 +113,7 @@ public class Teclas extends JPanel implements MaquinaDeEstadosListener{
 		tecla05 = new JButton("5");
 		tecla05.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				maquinaAtual.teclaNum05Digitada();
+				maquinaAtual.teclaNumericaDigitada("5");
 			}
 		});
 		tecla05.setBackground(Color.LIGHT_GRAY);
@@ -125,7 +125,7 @@ public class Teclas extends JPanel implements MaquinaDeEstadosListener{
 		tecla06 = new JButton("6");
 		tecla06.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				maquinaAtual.teclaNum06Digitada();
+				maquinaAtual.teclaNumericaDigitada("6");
 			}
 		});
 		tecla06.setBackground(Color.LIGHT_GRAY);
@@ -137,7 +137,7 @@ public class Teclas extends JPanel implements MaquinaDeEstadosListener{
 		tecla07 = new JButton("7");
 		tecla07.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				maquinaAtual.teclaNum07Digitada();
+				maquinaAtual.teclaNumericaDigitada("7");
 			}
 		});
 		tecla07.setBackground(Color.LIGHT_GRAY);
@@ -149,7 +149,7 @@ public class Teclas extends JPanel implements MaquinaDeEstadosListener{
 		tecla08 = new JButton("8");
 		tecla08.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				maquinaAtual.teclaNum08Digitada();
+				maquinaAtual.teclaNumericaDigitada("8");
 			}
 		});
 		tecla08.setBackground(Color.LIGHT_GRAY);
@@ -161,7 +161,7 @@ public class Teclas extends JPanel implements MaquinaDeEstadosListener{
 		tecla09 = new JButton("9");
 		tecla09.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				maquinaAtual.teclaNum09Digitada();
+				maquinaAtual.teclaNumericaDigitada("9");
 			}
 		});
 		tecla09.setBackground(Color.LIGHT_GRAY);

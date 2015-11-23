@@ -18,66 +18,6 @@ public class BBProcessadorExtrato implements ProcessadorEstado {
 	}
 	
 	@Override
-	public void teclaNum01Digitada() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void teclaNum02Digitada() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void teclaNum03Digitada() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void teclaNum04Digitada() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void teclaNum05Digitada() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void teclaNum06Digitada() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void teclaNum07Digitada() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void teclaNum08Digitada() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void teclaNum09Digitada() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void teclaNum00Digitada() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void teclaConfirmaDigitada() {
 		// TODO Auto-generated method stub
 
@@ -161,6 +101,12 @@ public class BBProcessadorExtrato implements ProcessadorEstado {
 	@Override
 	public void removeEstadoListener(EstadoListener listener) {
 		this.listeners.remove(listener);
+	}
+
+	@Override
+	public void teclaNumericaDigitada(String numTecla) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

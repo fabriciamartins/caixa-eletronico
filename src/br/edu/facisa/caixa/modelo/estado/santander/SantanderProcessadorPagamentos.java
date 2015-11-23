@@ -75,56 +75,6 @@ public class SantanderProcessadorPagamentos extends MaquinaAdapter implements Pr
 	}
 
 	@Override
-	public void teclaNum01Digitada() {
-		teclaDigitada("1");
-	}
-
-	@Override
-	public void teclaNum02Digitada() {
-		teclaDigitada("2");
-	}
-
-	@Override
-	public void teclaNum03Digitada() {
-		teclaDigitada("3");
-	}
-
-	@Override
-	public void teclaNum04Digitada() {
-		teclaDigitada("4");
-	}
-
-	@Override
-	public void teclaNum05Digitada() {
-		teclaDigitada("5");
-	}
-
-	@Override
-	public void teclaNum06Digitada() {
-		teclaDigitada("6");
-	}
-
-	@Override
-	public void teclaNum07Digitada() {
-		teclaDigitada("7");
-	}
-
-	@Override
-	public void teclaNum08Digitada() {
-		teclaDigitada("8");
-	}
-
-	@Override
-	public void teclaNum09Digitada() {
-		teclaDigitada("9");
-	}
-
-	@Override
-	public void teclaNum00Digitada() {
-		teclaDigitada("0");
-	}
-
-	@Override
 	public void teclaConfirmaDigitada() {
 		if(estado.equals(DIGITANDO_DATA_VENCIMENTO) && (this.dataVencimento!="")){
 			estado = DIGITANDO_COD_BARRAS;
@@ -234,22 +184,23 @@ public class SantanderProcessadorPagamentos extends MaquinaAdapter implements Pr
 		this.listeners.remove(listener);
 		
 	}
-	
-	public void teclaDigitada(String tecla){
+
+	@Override
+	public void teclaNumericaDigitada(String numTecla) {
 		if(estado.equals(DIGITANDO_DATA_VENCIMENTO)){
-			dataVencimento += tecla;
+			dataVencimento += numTecla;
 			telaPagamentos.textDataVencimento.setText(dataVencimento);
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 			evento.setNovaTela(telaPagamentos.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
 			MaquinaSantander.getInstance().notificaMudanca(evento);
 		}else if(estado.equals(DIGITANDO_COD_BARRAS)){
-			codigoDeBarras += tecla;
+			codigoDeBarras += numTecla;
 			telaPagamentos.textCodBarras.setText(codigoDeBarras);
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 			evento.setNovaTela(telaPagamentos.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
 			MaquinaSantander.getInstance().notificaMudanca(evento);
 		}else{
-			processaValor(Double.valueOf(tecla));
+			processaValor(Double.valueOf(numTecla));
 			telaPagamentos.textValor.setText((String.valueOf(valorDigitado)));
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 			evento.setNovaTela(telaPagamentos.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");

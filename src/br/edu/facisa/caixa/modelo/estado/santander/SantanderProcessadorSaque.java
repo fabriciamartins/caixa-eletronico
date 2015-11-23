@@ -26,66 +26,6 @@ public class SantanderProcessadorSaque implements ProcessadorEstado {
 	}
 	
 	@Override
-	public void teclaNum01Digitada() {
-		processaValor(1);
-		setEventoDeTeclaNumDigitada();
-	}
-
-	@Override
-	public void teclaNum02Digitada() {
-		processaValor(2);
-		setEventoDeTeclaNumDigitada();
-	}
-
-	@Override
-	public void teclaNum03Digitada() {
-		processaValor(3);
-		setEventoDeTeclaNumDigitada();
-	}
-
-	@Override
-	public void teclaNum04Digitada() {
-		processaValor(4);
-		setEventoDeTeclaNumDigitada();
-	}
-
-	@Override
-	public void teclaNum05Digitada() {
-		processaValor(5);
-		setEventoDeTeclaNumDigitada();
-	}
-
-	@Override
-	public void teclaNum06Digitada() {
-		processaValor(6);
-		setEventoDeTeclaNumDigitada();
-	}
-
-	@Override
-	public void teclaNum07Digitada() {
-		processaValor(7);
-		setEventoDeTeclaNumDigitada();
-	}
-
-	@Override
-	public void teclaNum08Digitada() {
-		processaValor(8);
-		setEventoDeTeclaNumDigitada();
-	}
-
-	@Override
-	public void teclaNum09Digitada() {
-		processaValor(9);
-		setEventoDeTeclaNumDigitada();
-	}
-
-	@Override
-	public void teclaNum00Digitada() {
-		processaValor(0);
-		setEventoDeTeclaNumDigitada();
-	}
-
-	@Override
 	public void teclaConfirmaDigitada() {
 		MaquinaSantander.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.getInstance().getContaDigitada()));
 		MaquinaSantander.getInstance().getTransacaoBancaria().setValor(valorDigitado);
@@ -190,6 +130,12 @@ public class SantanderProcessadorSaque implements ProcessadorEstado {
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(operacao, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
 		MaquinaSantander.getInstance().notificaMudanca(evento);
+	}
+
+	@Override
+	public void teclaNumericaDigitada(String numTecla) {
+		processaValor(Integer.valueOf(numTecla));
+		setEventoDeTeclaNumDigitada();
 	}
 
 }

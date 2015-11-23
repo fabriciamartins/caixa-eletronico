@@ -22,56 +22,6 @@ public class SantanderProcessadorBloquearCartao implements ProcessadorEstado {
 	}
 	
 	@Override
-	public void teclaNum01Digitada() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void teclaNum02Digitada() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void teclaNum03Digitada() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void teclaNum04Digitada() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void teclaNum05Digitada() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void teclaNum06Digitada() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void teclaNum07Digitada() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void teclaNum08Digitada() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void teclaNum09Digitada() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void teclaNum00Digitada() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
 	public void teclaConfirmaDigitada() {
 		MaquinaSantander.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.getInstance().getContaDigitada()));
 		MaquinaSantander.getInstance().getTransacaoBancaria().setBloqueado(true);
@@ -160,6 +110,12 @@ public class SantanderProcessadorBloquearCartao implements ProcessadorEstado {
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(operacao, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
 		MaquinaSantander.getInstance().notificaMudanca(evento);
+	}
+
+	@Override
+	public void teclaNumericaDigitada(String numTecla) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

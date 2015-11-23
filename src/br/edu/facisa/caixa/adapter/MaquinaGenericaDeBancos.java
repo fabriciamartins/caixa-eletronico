@@ -25,44 +25,8 @@ public abstract class MaquinaGenericaDeBancos extends MaquinaAdapter implements 
 		
 	}
 	
-	public void teclaNum01Digitada() {
-		processadorEstado.teclaNum01Digitada();
-	}
-
-	public void teclaNum02Digitada() {
-		processadorEstado.teclaNum02Digitada();
-	}
-
-	public void teclaNum03Digitada() {
-		processadorEstado.teclaNum03Digitada();
-	}
-
-	public void teclaNum04Digitada() {
-		processadorEstado.teclaNum04Digitada();
-	}
-
-	public void teclaNum05Digitada() {
-		processadorEstado.teclaNum05Digitada();
-	}
-
-	public void teclaNum06Digitada() {
-		processadorEstado.teclaNum06Digitada();
-	}
-
-	public void teclaNum07Digitada() {
-		processadorEstado.teclaNum07Digitada();
-	}
-
-	public void teclaNum08Digitada() {
-		processadorEstado.teclaNum08Digitada();
-	}
-
-	public void teclaNum09Digitada() {
-		processadorEstado.teclaNum09Digitada();
-	}
-
-	public void teclaNum00Digitada() {
-		processadorEstado.teclaNum00Digitada();
+	public void teclaNumericaDigitada(String numTecla){
+		processadorEstado.teclaNumericaDigitada(numTecla);
 	}
 
 	public void teclaConfirmaDigitada() {

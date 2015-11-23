@@ -3,7 +3,7 @@ package br.edu.facisa.caixa.command;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import br.edu.facisa.caixa.exception.LimiteDeCréditoExcedidoException;
+import br.edu.facisa.caixa.exception.LimiteDeCreditoExcedidoException;
 import br.edu.facisa.caixa.facade.TransacaoBancariaFacade;
 import br.edu.facisa.caixa.modelo.Conta;
 
@@ -25,7 +25,7 @@ public class Emprestimo implements TransacaoCommand {
 			conta.obterEmprestimo(valor);
 			conta.incrementar(valor);
 			conta.addTransacao(this);
-		} catch (LimiteDeCréditoExcedidoException e) {
+		} catch (LimiteDeCreditoExcedidoException e) {
 			System.out.println(e.getMessage());
 		}
 	}

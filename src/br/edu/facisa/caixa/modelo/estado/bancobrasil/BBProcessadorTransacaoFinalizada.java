@@ -19,54 +19,6 @@ public class BBProcessadorTransacaoFinalizada extends MaquinaAdapter implements 
 	}
 
 	@Override
-	public void teclaNum01Digitada() {
-	}
-
-	@Override
-	public void teclaNum02Digitada() {
-	}
-
-	@Override
-	public void teclaNum03Digitada() {
-		
-	}
-
-	@Override
-	public void teclaNum04Digitada() {
-		
-	}
-
-	@Override
-	public void teclaNum05Digitada() {
-		
-	}
-
-	@Override
-	public void teclaNum06Digitada() {
-		
-	}
-
-	@Override
-	public void teclaNum07Digitada() {
-		
-	}
-
-	@Override
-	public void teclaNum08Digitada() {
-		
-	}
-
-	@Override
-	public void teclaNum09Digitada() {
-		
-	}
-
-	@Override
-	public void teclaNum00Digitada() {
-		
-	}
-
-	@Override
 	public void teclaConfirmaDigitada() {
 		
 	}
@@ -155,6 +107,11 @@ public class BBProcessadorTransacaoFinalizada extends MaquinaAdapter implements 
 	@Override
 	public void removeEstadoListener(EstadoListener listener) {
 		this.listeners.remove(listener);
+	}
+
+	@Override
+	public void teclaNumericaDigitada(String numTecla) {
+		
 	}
 
 }

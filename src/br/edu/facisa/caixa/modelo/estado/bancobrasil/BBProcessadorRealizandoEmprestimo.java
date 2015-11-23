@@ -34,95 +34,6 @@ public class BBProcessadorRealizandoEmprestimo extends MaquinaAdapter implements
 	}
 
 	@Override
-	public void teclaNum01Digitada() {
-		processaValor(1);
-		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
-	}
-
-	@Override
-	public void teclaNum02Digitada() {
-		processaValor(2);
-		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
-	}
-
-	@Override
-	public void teclaNum03Digitada() {
-		processaValor(3);
-		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
-	}
-
-	@Override
-	public void teclaNum04Digitada() {
-		processaValor(4);
-		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
-	}
-
-	@Override
-	public void teclaNum05Digitada() {
-		processaValor(5);
-		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
-	}
-
-	@Override
-	public void teclaNum06Digitada() {
-		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
-	}
-
-	@Override
-	public void teclaNum07Digitada() {
-		processaValor(7);
-		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
-	}
-
-	@Override
-	public void teclaNum08Digitada() {
-		processaValor(8);
-		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
-	}
-
-	@Override
-	public void teclaNum09Digitada() {
-		processaValor(9);
-		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
-	}
-
-	@Override
-	public void teclaNum00Digitada() {
-		processaValor(0);
-		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
-		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
-	}
-
-	@Override
 	public void teclaConfirmaDigitada() {
 
 		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
@@ -204,6 +115,15 @@ public class BBProcessadorRealizandoEmprestimo extends MaquinaAdapter implements
 	public void removeEstadoListener(EstadoListener listener) {
 		this.listeners.remove(listener);
 		
+	}
+
+	@Override
+	public void teclaNumericaDigitada(String numTecla) {
+		processaValor(Integer.valueOf(numTecla));
+		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 }

@@ -3,9 +3,6 @@ package br.edu.facisa.caixa.adapter;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.JPanel;
-
-import br.edu.facisa.caixa.enumerador.Operacao;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosListener;
 
@@ -47,51 +44,8 @@ public abstract class MaquinaAdapter implements IMaquinaDeEstados {
 	}
 	
 	public void parar() {
+	
 	}
 	
-	public void configurarEvento(String tela, String estado, Operacao operacao) {
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		this.estado = estado;				
-		if (operacao == Operacao.TROCA_DE_MAQUINA) {
-			evento.setTrocaMaquinaDeEstados(tela);
-		} else {
-			evento.setNovaTela(new JPanel());
-			evento.setOperacaoHardware(operacao);
-		}
-		notificaMudanca(evento);
-	}
-	
-	protected String exibirTela1() {
-		return "Escolha uma opção:\n"
-				+ "1) Inserir Cartão (Em construção)\n"
-				+ "2) Escolher Banco";
-	}
-	
-	protected String exibirTela2() {
-		return "Escolha uma opcao:\n"
-				+ "1) Banco do Brasil\n"
-				+ "2) Santander\n"
-				+ "3) Caixa Economica\n"
-				+ "4) Bradesco\n"
-				+ "5) Itau";
-	}
-	
-	protected String exibirTela3() {
-		return "Escolha uma das operações:\n"
-				+ "1) Deposito\n"
-				+ "2) Saque\n"
-				+ "3) Transferência\n"
-				+ "4) Extrato\n"
-				+ "5) Pagamentos\n"
-				+ "6) Recarga\n"
-				+ "7) Emprestimos\n"
-				+ "8) Bloquear Cartão";
-	}
-	
-	protected String exibirTela4() {
-		return "Escolha uma opção:\n"
-				+ "1) Retorne a tela de seleção de operações\n"
-				+ "2) Finalizar sessão";
-	}
 	
 }

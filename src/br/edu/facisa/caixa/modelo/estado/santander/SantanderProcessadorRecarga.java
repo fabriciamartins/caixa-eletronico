@@ -39,56 +39,6 @@ public class SantanderProcessadorRecarga implements ProcessadorEstado {
 	}
 	
 	@Override
-	public void teclaNum01Digitada() {
-		teclaDigitada("1");
-	}
-
-	@Override
-	public void teclaNum02Digitada() {
-		teclaDigitada("2");
-	}
-
-	@Override
-	public void teclaNum03Digitada() {
-		teclaDigitada("3");
-	}
-
-	@Override
-	public void teclaNum04Digitada() {
-		teclaDigitada("4");
-	}
-
-	@Override
-	public void teclaNum05Digitada() {
-		teclaDigitada("5");
-	}
-
-	@Override
-	public void teclaNum06Digitada() {
-		teclaDigitada("6");
-	}
-
-	@Override
-	public void teclaNum07Digitada() {
-		teclaDigitada("7");
-	}
-
-	@Override
-	public void teclaNum08Digitada() {
-		teclaDigitada("8");
-	}
-
-	@Override
-	public void teclaNum09Digitada() {
-		teclaDigitada("9");
-	}
-
-	@Override
-	public void teclaNum00Digitada() {
-		teclaDigitada("0");
-	}
-
-	@Override
 	public void teclaConfirmaDigitada() {
 		if(estado.equals(DIGITANDO_NUMERO_CELULAR)){
 			estado = DIGITANDO_VALOR;
@@ -203,15 +153,16 @@ public class SantanderProcessadorRecarga implements ProcessadorEstado {
 		this.listeners.remove(listener);
 	}
 
-	public void teclaDigitada(String tecla){
+	@Override
+	public void teclaNumericaDigitada(String numTecla) {
 		if(estado.equals(DIGITANDO_NUMERO_CELULAR)){
-			numeroCelular += tecla;
+			numeroCelular += numTecla;
 			telaRecarga.setTextNumeroCelular(numeroCelular);
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 			evento.setNovaTela(telaRecarga.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
 			MaquinaSantander.getInstance().notificaMudanca(evento);
 		}else{
-			processaValor(Double.valueOf(tecla));
+			processaValor(Double.valueOf(numTecla));
 			telaRecarga.setTextValorRecarga(String.valueOf(valorDigitado));
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 			evento.setNovaTela(telaRecarga.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
