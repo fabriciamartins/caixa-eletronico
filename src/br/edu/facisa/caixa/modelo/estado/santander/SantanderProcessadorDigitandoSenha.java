@@ -9,6 +9,7 @@ import br.edu.facisa.caixa.gui.Operacoes;
 import br.edu.facisa.caixa.gui.Senha;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.modelo.Dados;
+import br.edu.facisa.caixa.modelo.Images;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstadoInicial;
@@ -45,7 +46,7 @@ public class SantanderProcessadorDigitandoSenha extends MaquinaAdapter implement
 			this.removeEstadoListener(MaquinaSantander.getInstance());
 			
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(new Operacoes().getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+			evento.setNovaTela(new Operacoes().getPanel(), new Images().getPATH_IMG_SANTANDER());
 			MaquinaSantander.getInstance().notificaMudanca(evento);
 		}
 		else {
@@ -53,7 +54,7 @@ public class SantanderProcessadorDigitandoSenha extends MaquinaAdapter implement
 			this.asteriscos = "";
 			telaSenha.textField.setText(asteriscos);
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(telaSenha.getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+			evento.setNovaTela(telaSenha.getPanel(), new Images().getPATH_IMG_SANTANDER());
 			MaquinaSantander.getInstance().notificaMudanca(evento);
 		}
 		
@@ -65,7 +66,7 @@ public class SantanderProcessadorDigitandoSenha extends MaquinaAdapter implement
 		this.asteriscos = "";
 		telaSenha.textField.setText(asteriscos);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaSenha.getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		evento.setNovaTela(telaSenha.getPanel(), new Images().getPATH_IMG_SANTANDER());
 		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
@@ -151,7 +152,7 @@ public class SantanderProcessadorDigitandoSenha extends MaquinaAdapter implement
 		processaSenha(Integer.valueOf(numTecla));
 		telaSenha.textField.setText(asteriscos);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaSenha.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		evento.setNovaTela(telaSenha.getPanel(), new Images().getPATH_IMG_SANTANDER());
 		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 	

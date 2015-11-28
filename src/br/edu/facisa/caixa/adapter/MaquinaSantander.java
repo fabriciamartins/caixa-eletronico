@@ -2,6 +2,7 @@ package br.edu.facisa.caixa.adapter;
 
 import br.edu.facisa.caixa.gui.Senha;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
+import br.edu.facisa.caixa.modelo.Images;
 import br.edu.facisa.caixa.modelo.Timeout;
 import br.edu.facisa.caixa.modelo.estado.santander.SantanderProcessadorDigitandoSenha;
 
@@ -35,7 +36,7 @@ public class MaquinaSantander extends MaquinaGenericaDeBancos{
 		}).start();
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		setContaDigitada(MaquinaPrimaria.getInstance().getContaDigitada());
-		evento.setNovaTela(new Senha().getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		evento.setNovaTela(new Senha().getPanel(), new Images().getPATH_IMG_SANTANDER());
 		this.estado = ESTADO_INICIAL;
 		notificaMudanca(evento);
 	}
@@ -44,4 +45,5 @@ public class MaquinaSantander extends MaquinaGenericaDeBancos{
 	public void parar(){
 		instance = null;
 	}
+
 }

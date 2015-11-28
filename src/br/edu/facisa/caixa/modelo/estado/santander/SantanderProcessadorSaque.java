@@ -6,12 +6,13 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import br.edu.facisa.caixa.adapter.MaquinaSantander;
-import br.edu.facisa.caixa.gui.OperacaoSucesso;
 import br.edu.facisa.caixa.gui.OperacaoCancelada;
+import br.edu.facisa.caixa.gui.OperacaoSucesso;
 import br.edu.facisa.caixa.gui.Operacoes;
 import br.edu.facisa.caixa.gui.Saque;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.modelo.Dados;
+import br.edu.facisa.caixa.modelo.Images;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
 
@@ -116,7 +117,7 @@ public class SantanderProcessadorSaque implements ProcessadorEstado {
 	private void setEventoDeTeclaNumDigitada() {
 		telaSaque.getTextField().setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaSaque.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		evento.setNovaTela(telaSaque.getPanel(), new Images().getPATH_IMG_SANTANDER());
 		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 	
@@ -128,7 +129,7 @@ public class SantanderProcessadorSaque implements ProcessadorEstado {
 		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(operacao, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		evento.setNovaTela(operacao, new Images().getPATH_IMG_SANTANDER());
 		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 

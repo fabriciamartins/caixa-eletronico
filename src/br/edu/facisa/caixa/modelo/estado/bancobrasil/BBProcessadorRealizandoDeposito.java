@@ -9,6 +9,7 @@ import br.edu.facisa.caixa.gui.Deposito;
 import br.edu.facisa.caixa.gui.OperacaoSucesso;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.modelo.Dados;
+import br.edu.facisa.caixa.modelo.Images;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
 
@@ -40,7 +41,7 @@ public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements P
 		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(new OperacaoSucesso().getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_BB());
 		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 		
 	}
@@ -126,7 +127,7 @@ public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements P
 		processaValor(Integer.valueOf(numTecla));
 		telaDeposito.textField.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaDeposito.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		evento.setNovaTela(telaDeposito.getPanel(),new Images().getPATH_IMG_BB());
 		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 

@@ -17,6 +17,7 @@ import br.edu.facisa.caixa.gui.Saque;
 import br.edu.facisa.caixa.gui.Transferencia;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.modelo.Dados;
+import br.edu.facisa.caixa.modelo.Images;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstadoInicial;
@@ -66,7 +67,7 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 		JPanel telaEmprestimo = new Emprestimo().getPanel();
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		evento.setNovaTela(telaEmprestimo, new Images().getPATH_IMG_SANTANDER());
 		MaquinaSantander.getInstance().notificaMudanca(evento);
 		
 	}
@@ -82,7 +83,7 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 		JPanel telaPagamentos = new Pagamentos().getPanel();
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaPagamentos, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		evento.setNovaTela(telaPagamentos, new Images().getPATH_IMG_SANTANDER());
 		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
@@ -97,7 +98,7 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 		JPanel telaRecarga = new Recarga().getPanel();
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaRecarga, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		evento.setNovaTela(telaRecarga, new Images().getPATH_IMG_SANTANDER());
 		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
@@ -112,7 +113,7 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 		JPanel telaTransferencia = new Transferencia().getPanel();
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaTransferencia, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		evento.setNovaTela(telaTransferencia, new Images().getPATH_IMG_SANTANDER());
 		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
@@ -127,7 +128,7 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 		JPanel telaSaque = new Saque().getPanel();
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaSaque, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		evento.setNovaTela(telaSaque, new Images().getPATH_IMG_SANTANDER());
 		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
@@ -145,7 +146,7 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 		telaExtrato.txtpnLoremIpsum.setText(MaquinaSantander.getInstance().getTransacaoBancaria().consultarExtrato());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaExtrato.getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		evento.setNovaTela(telaExtrato.getPanel(), new Images().getPATH_IMG_SANTANDER());
 		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
@@ -159,7 +160,7 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(new Deposito().getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		evento.setNovaTela(new Deposito().getPanel(), new Images().getPATH_IMG_SANTANDER());
 		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
@@ -174,7 +175,7 @@ public class SantanderProcessadorEscolhendoTransacao extends MaquinaAdapter impl
 		JPanel telaBloquearCartao = new BloquearCartao().getPanel();
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaBloquearCartao, "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		evento.setNovaTela(telaBloquearCartao, new Images().getPATH_IMG_SANTANDER());
 		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 

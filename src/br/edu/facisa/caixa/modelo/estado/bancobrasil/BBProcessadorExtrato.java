@@ -6,6 +6,7 @@ import java.util.List;
 import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
 import br.edu.facisa.caixa.gui.Operacoes;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
+import br.edu.facisa.caixa.modelo.Images;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
 
@@ -89,7 +90,7 @@ public class BBProcessadorExtrato implements ProcessadorEstado {
 		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(new Operacoes().getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		evento.setNovaTela(new Operacoes().getPanel(), new Images().getPATH_IMG_BB());
 		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 

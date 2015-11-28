@@ -9,6 +9,7 @@ import br.edu.facisa.caixa.gui.Operacoes;
 import br.edu.facisa.caixa.gui.Senha;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.modelo.Dados;
+import br.edu.facisa.caixa.modelo.Images;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
 
@@ -43,7 +44,7 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 			this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 			
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(new Operacoes().getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+			evento.setNovaTela(new Operacoes().getPanel(), new Images().getPATH_IMG_BB());
 			MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 		}
 		else {
@@ -51,7 +52,7 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 			this.asteriscos = "";
 			telaSenha.textField.setText(asteriscos);
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(telaSenha.getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+			evento.setNovaTela(telaSenha.getPanel(), new Images().getPATH_IMG_BB());
 			MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 		}
 	}
@@ -62,7 +63,7 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 		this.asteriscos = "";
 		telaSenha.textField.setText(asteriscos);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaSenha.getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		evento.setNovaTela(telaSenha.getPanel(), new Images().getPATH_IMG_BB());
 		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
@@ -140,7 +141,7 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 		processaSenha(Integer.valueOf(numTecla));
 		telaSenha.textField.setText(asteriscos);
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaSenha.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		evento.setNovaTela(telaSenha.getPanel(), new Images().getPATH_IMG_BB());
 		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 

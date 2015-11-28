@@ -8,7 +8,9 @@ import br.edu.facisa.caixa.modelo.estado.bancobrasil.BBProcessadorDigitandoSenha
 public class MaquinaBancoBrasil extends MaquinaGenericaDeBancos {
 	
 	private static MaquinaBancoBrasil instance;
+	public static String PATH_IMG_BB = "/br/edu/facisa/caixa/resource/banco_brasil.jpg";
 	
+
 	private MaquinaBancoBrasil() {
 		super.processadorEstado = new BBProcessadorDigitandoSenha();
 		super.processadorEstado.addEstadoListener(this);
@@ -19,6 +21,10 @@ public class MaquinaBancoBrasil extends MaquinaGenericaDeBancos {
 			instance = new MaquinaBancoBrasil();
 		}
 		return instance;
+	}
+
+	public  String getPathImgBb() {
+		return PATH_IMG_BB;
 	}
 
 	@Override
@@ -35,7 +41,7 @@ public class MaquinaBancoBrasil extends MaquinaGenericaDeBancos {
 		}).start();
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		setContaDigitada(MaquinaPrimaria.getInstance().getContaDigitada());
-		evento.setNovaTela(new Senha().getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		evento.setNovaTela(new Senha().getPanel(), PATH_IMG_BB);
 		this.estado = ESTADO_INICIAL;
 		notificaMudanca(evento);
 	}
@@ -44,5 +50,5 @@ public class MaquinaBancoBrasil extends MaquinaGenericaDeBancos {
 	public void parar(){
 		instance = null;
 	}
-	
+
 }

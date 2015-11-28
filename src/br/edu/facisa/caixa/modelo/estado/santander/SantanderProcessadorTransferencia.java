@@ -9,6 +9,7 @@ import br.edu.facisa.caixa.gui.Operacoes;
 import br.edu.facisa.caixa.gui.Transferencia;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.modelo.Dados;
+import br.edu.facisa.caixa.modelo.Images;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
 
@@ -55,7 +56,7 @@ public class SantanderProcessadorTransferencia implements ProcessadorEstado {
 			MaquinaSantander.getInstance().getTransacaoBancaria().tranferir();
 			
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(new OperacaoSucesso().getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+			evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_SANTANDER());
 			MaquinaSantander.getInstance().notificaMudanca(evento);
 		}
 	}
@@ -66,13 +67,13 @@ public class SantanderProcessadorTransferencia implements ProcessadorEstado {
 			this.contaDestino = "";
 			telaTransferencia.setTextContaDestino("");
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(telaTransferencia.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
+			evento.setNovaTela(telaTransferencia.getPanel(),new Images().getPATH_IMG_SANTANDER());
 			MaquinaSantander.getInstance().notificaMudanca(evento);
 		}else{
 			this.valorDigitado = 0;
 			telaTransferencia.setTextValor("");
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(telaTransferencia.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
+			evento.setNovaTela(telaTransferencia.getPanel(),new Images().getPATH_IMG_SANTANDER());
 			MaquinaSantander.getInstance().notificaMudanca(evento);
 		}
 	}
@@ -86,7 +87,7 @@ public class SantanderProcessadorTransferencia implements ProcessadorEstado {
 		this.removeEstadoListener(MaquinaSantander.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(new Operacoes().getPanel(), "/br/edu/facisa/caixa/resource/banco_santander.jpg");
+		evento.setNovaTela(new Operacoes().getPanel(), new Images().getPATH_IMG_SANTANDER());
 		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
@@ -155,13 +156,13 @@ public class SantanderProcessadorTransferencia implements ProcessadorEstado {
 			contaDestino += numTecla;
 			telaTransferencia.setTextContaDestino(contaDestino);
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(telaTransferencia.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
+			evento.setNovaTela(telaTransferencia.getPanel(), new Images().getPATH_IMG_SANTANDER());
 			MaquinaSantander.getInstance().notificaMudanca(evento);
 		}else{
 			processaValor(Double.valueOf(numTecla));
 			telaTransferencia.setTextValor(String.valueOf(valorDigitado));
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(telaTransferencia.getPanel(),"/br/edu/facisa/caixa/resource/banco_santander.jpg");
+			evento.setNovaTela(telaTransferencia.getPanel(), new Images().getPATH_IMG_SANTANDER());
 			MaquinaSantander.getInstance().notificaMudanca(evento);
 		}
 	}

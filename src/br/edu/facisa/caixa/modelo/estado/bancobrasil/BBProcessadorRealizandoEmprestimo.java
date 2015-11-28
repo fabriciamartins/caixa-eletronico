@@ -10,6 +10,7 @@ import br.edu.facisa.caixa.gui.OperacaoSucesso;
 import br.edu.facisa.caixa.gui.Operacoes;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.modelo.Dados;
+import br.edu.facisa.caixa.modelo.Images;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
 
@@ -47,7 +48,7 @@ public class BBProcessadorRealizandoEmprestimo extends MaquinaAdapter implements
 		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(new OperacaoSucesso().getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_BB());
 		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 		
 	}
@@ -66,7 +67,7 @@ public class BBProcessadorRealizandoEmprestimo extends MaquinaAdapter implements
 		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(new Operacoes().getPanel(), "/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		evento.setNovaTela(new Operacoes().getPanel(), new Images().getPATH_IMG_BB());
 		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 		
 	}
@@ -122,7 +123,7 @@ public class BBProcessadorRealizandoEmprestimo extends MaquinaAdapter implements
 		processaValor(Integer.valueOf(numTecla));
 		telaEmprestimo.textValorEmprestimo.setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaEmprestimo.getPanel(),"/br/edu/facisa/caixa/resource/banco_brasil.jpg");
+		evento.setNovaTela(telaEmprestimo.getPanel(),new Images().getPATH_IMG_BB());
 		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
