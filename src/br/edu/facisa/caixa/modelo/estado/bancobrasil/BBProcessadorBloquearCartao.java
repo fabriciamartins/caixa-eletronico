@@ -6,8 +6,8 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
+import br.edu.facisa.caixa.gui.BloquearCartaoFinalizado;
 import br.edu.facisa.caixa.gui.OperacaoCancelada;
-import br.edu.facisa.caixa.gui.OperacaoSucesso;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.modelo.Dados;
 import br.edu.facisa.caixa.modelo.Images;
@@ -27,7 +27,7 @@ public class BBProcessadorBloquearCartao implements ProcessadorEstado {
 		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
 		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setBloqueado(true);
 		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().bloquearCartao();
-		setEventoDeEstadoFinal(new BBProcessadorTransacaoFinalizada(), new OperacaoSucesso().getPanel());
+		setEventoDeEstadoFinal(new BBProcessadorCartaoBloqueado(), new BloquearCartaoFinalizado().getPanel());
 	}
 
 	@Override

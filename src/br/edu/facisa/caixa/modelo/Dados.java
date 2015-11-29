@@ -49,11 +49,11 @@ public class Dados {
 		return ok;
 	}
 	
-	public String validarConta(int numeroCartao){
+	public Conta validarConta(int numeroCartao){
 		for(Banco banco : bancos.values()){
 			for(Conta conta : banco.getContas()){
 				if(conta.getNumero() == numeroCartao){
-					return banco.getNome();
+					return conta;
 				}
 			}
 		}

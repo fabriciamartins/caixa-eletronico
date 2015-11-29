@@ -6,8 +6,8 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import br.edu.facisa.caixa.adapter.MaquinaSantander;
+import br.edu.facisa.caixa.gui.BloquearCartaoFinalizado;
 import br.edu.facisa.caixa.gui.OperacaoCancelada;
-import br.edu.facisa.caixa.gui.OperacaoSucesso;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.modelo.Dados;
 import br.edu.facisa.caixa.modelo.Images;
@@ -27,7 +27,7 @@ public class SantanderProcessadorBloquearCartao implements ProcessadorEstado {
 		MaquinaSantander.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.getInstance().getContaDigitada()));
 		MaquinaSantander.getInstance().getTransacaoBancaria().setBloqueado(true);
 		MaquinaSantander.getInstance().getTransacaoBancaria().bloquearCartao();
-		setEventoDeEstadoFinal(new SantanderProcessadorTransacaoFinalizada(), new OperacaoSucesso().getPanel());
+		setEventoDeEstadoFinal(new SantanderProcessadorCartaoBloqueado(), new BloquearCartaoFinalizado().getPanel());
 	}
 
 	@Override

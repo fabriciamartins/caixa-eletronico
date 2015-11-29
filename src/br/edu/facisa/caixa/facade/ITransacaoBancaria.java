@@ -4,7 +4,7 @@ public interface ITransacaoBancaria {
 
 	public void depositar();
 	
-	public void sacar();
+	public boolean sacar();
 	
 	public void tranferir();
 	

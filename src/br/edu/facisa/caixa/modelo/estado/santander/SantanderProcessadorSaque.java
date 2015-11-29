@@ -30,12 +30,11 @@ public class SantanderProcessadorSaque implements ProcessadorEstado {
 	public void teclaConfirmaDigitada() {
 		MaquinaSantander.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.getInstance().getContaDigitada()));
 		MaquinaSantander.getInstance().getTransacaoBancaria().setValor(valorDigitado);
-		MaquinaSantander.getInstance().getTransacaoBancaria().sacar();
-		String msg = MaquinaSantander.getInstance().getTransacaoBancaria().getMensagem();
-		if (msg != null) {
-			setEventoDeEstadoFinal(new SantanderProcessadorTransacaoFinalizada(), new OperacaoCancelada(msg).getPanel());
-		} else {
+		
+		if (MaquinaSantander.getInstance().getTransacaoBancaria().sacar()) {
 			setEventoDeEstadoFinal(new SantanderProcessadorTransacaoFinalizada(), new OperacaoSucesso().getPanel());
+		} else {
+			setEventoDeEstadoFinal(new SantanderProcessadorTransacaoFinalizada(), new OperacaoCancelada("Operação Cancelada!\n Saldo da conta insuficiente.").getPanel());
 		}
 				
 	}

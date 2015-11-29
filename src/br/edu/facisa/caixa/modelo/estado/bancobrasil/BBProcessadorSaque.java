@@ -18,26 +18,23 @@ import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
 
 public class BBProcessadorSaque implements ProcessadorEstado {
 	
-	private MaquinaBancoBrasil maquina;
 	private double valorDigitado;
 	private List<EstadoListener> listeners;
 	private Saque telaSaque = new Saque();
 
-	public BBProcessadorSaque(MaquinaBancoBrasil maquina){
-		this.maquina = maquina;
+	public BBProcessadorSaque(){
 		this.listeners = new ArrayList<>();
 	}
 	
 	@Override
 	public void teclaConfirmaDigitada() {
-		maquina.getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", maquina.getContaDigitada()));
-		maquina.getTransacaoBancaria().setValor(valorDigitado);
-		maquina.getTransacaoBancaria().sacar();
-		String msg = maquina.getTransacaoBancaria().getMensagem();
-		if (msg != null) {
-			setEventoDeEstadoFinal(new BBProcessadorTransacaoFinalizada(), new OperacaoCancelada(msg).getPanel());
-		} else {
+		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
+		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setValor(valorDigitado);
+		
+		if (MaquinaBancoBrasil.getInstance().getTransacaoBancaria().sacar()) {
 			setEventoDeEstadoFinal(new BBProcessadorTransacaoFinalizada(), new OperacaoSucesso().getPanel());
+		} else {
+			setEventoDeEstadoFinal(new BBProcessadorTransacaoFinalizada(), new OperacaoCancelada("Operação Cancelada!\n Saldo da conta insuficiente.").getPanel());
 		}
 				
 	}
@@ -120,7 +117,7 @@ public class BBProcessadorSaque implements ProcessadorEstado {
 		telaSaque.getTextField().setText(String.valueOf(valorDigitado));
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaSaque.getPanel(),new Images().getPATH_IMG_BB());
-		maquina.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 	
 	private void setEventoDeEstadoFinal(ProcessadorEstado processadorestado, JPanel operacao) {
@@ -128,11 +125,11 @@ public class BBProcessadorSaque implements ProcessadorEstado {
 			listener.estadoAcabou(processadorestado);
 		}
 		
-		this.removeEstadoListener(maquina);
+		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 		
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(operacao, new Images().getPATH_IMG_BB());
-		maquina.notificaMudanca(evento);
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override

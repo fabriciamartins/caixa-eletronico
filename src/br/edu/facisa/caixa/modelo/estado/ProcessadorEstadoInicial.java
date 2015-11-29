@@ -3,10 +3,13 @@ package br.edu.facisa.caixa.modelo.estado;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaPrimaria;
 import br.edu.facisa.caixa.gui.Home;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
+import br.edu.facisa.caixa.modelo.Conta;
 import br.edu.facisa.caixa.modelo.Dados;
 
 
@@ -35,14 +38,24 @@ public class ProcessadorEstadoInicial extends MaquinaAdapter implements Processa
 			this.removeEstadoListener(MaquinaPrimaria.getInstance());
 			
 			int numeroConta = Integer.valueOf(numeroCartao);
-			String banco = Dados.getInstance().validarConta(numeroConta);
+			Conta conta = Dados.getInstance().validarConta(numeroConta);
 			MaquinaPrimaria.getInstance().setContaDigitada(numeroConta);
 			
 			this.numeroCartao = "";
 			
-			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setTrocaMaquinaDeEstados(banco);
-			MaquinaPrimaria.getInstance().notificaMudanca(evento);
+			if((conta != null) && (conta.getCartao().isBloqueado())){
+				JOptionPane.showMessageDialog(null, "Cartão Bloqueado");
+				teclaCorrigeDigitada();
+			}
+			else if(conta == null){
+				JOptionPane.showMessageDialog(null,"Numero de cartão inválido");
+				teclaCorrigeDigitada();
+			}
+			else{
+				MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+				evento.setTrocaMaquinaDeEstados(conta.getBanco().getNome());
+				MaquinaPrimaria.getInstance().notificaMudanca(evento);
+			}
 		}
 		else{
 			teclaCorrigeDigitada();

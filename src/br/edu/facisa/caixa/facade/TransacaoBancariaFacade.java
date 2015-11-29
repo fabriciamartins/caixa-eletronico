@@ -26,8 +26,10 @@ public class TransacaoBancariaFacade implements ITransacaoBancaria {
 		new Deposito(this).executar();	
 	}
 	
-	public void sacar() {
-		new Saque(this).executar();
+	public boolean sacar() {
+		Saque saque = new Saque(this);
+		saque.executar();
+		return saque.isValorValido();
 	}
 	
 	public void tranferir() {

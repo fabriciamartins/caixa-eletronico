@@ -8,10 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 
+public class BloquearCartaoFinalizado {
 
-public class OperacaoCancelada {
-
-	private String mensagem;
 	private JPanel panel;
 	private JLabel lbl;
 	
@@ -34,8 +32,7 @@ public class OperacaoCancelada {
 	/**
 	 * Create the application.
 	 */
-	public OperacaoCancelada(String msg) {
-		this.mensagem = msg;
+	public BloquearCartaoFinalizado() {
 		initialize();
 	}
 
@@ -48,10 +45,10 @@ public class OperacaoCancelada {
 		panel.setSize(535,  320);
 		panel.setLayout(null);
 		
-		lbl = new JLabel(mensagem);
-		lbl.setBounds(39, 118, 451, 50);
+		lbl = new JLabel("Cart\u00E3o bloqueado com sucesso!");
+		lbl.setBounds(147, 118, 246, 26);
 		lbl.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lbl.setForeground(new Color(255, 0, 0));
+		lbl.setForeground(new Color(0, 128, 0));
 		lbl.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl.setVisible(true);
 		panel.add(lbl);
@@ -63,14 +60,6 @@ public class OperacaoCancelada {
 		lbl_finalizar_sessao.setBounds(24, 241, 141, 26);
 		lbl_finalizar_sessao.setVisible(true);
 		panel.add(lbl_finalizar_sessao);
-		
-		JLabel lblRetornarATela = new JLabel("Retornar a tela de opera\u00E7\u00F5es");
-		lblRetornarATela.setHorizontalAlignment(SwingConstants.LEFT);
-		lblRetornarATela.setForeground(Color.DARK_GRAY);
-		lblRetornarATela.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblRetornarATela.setBounds(314, 241, 211, 26);
-		lblRetornarATela.setVisible(true);
-		panel.add(lblRetornarATela);
 		
 	}
 }
