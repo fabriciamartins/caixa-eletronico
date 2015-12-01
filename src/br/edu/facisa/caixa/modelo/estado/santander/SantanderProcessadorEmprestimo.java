@@ -6,6 +6,7 @@ import java.util.List;
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaSantander;
 import br.edu.facisa.caixa.gui.Emprestimo;
+import br.edu.facisa.caixa.gui.OperacaoCancelada;
 import br.edu.facisa.caixa.gui.OperacaoSucesso;
 import br.edu.facisa.caixa.gui.Operacoes;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
@@ -40,17 +41,35 @@ public class SantanderProcessadorEmprestimo extends MaquinaAdapter implements Pr
 
 		MaquinaSantander.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.getInstance().getContaDigitada()));
 		MaquinaSantander.getInstance().getTransacaoBancaria().setValor(valorDigitado);
-		MaquinaSantander.getInstance().getTransacaoBancaria().obterEmprestimo();
 		
-		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new SantanderProcessadorTransacaoFinalizada());
+		if(MaquinaSantander.getInstance().getTransacaoBancaria().obterEmprestimo()){
+			for (EstadoListener listener : this.listeners) {
+				listener.estadoAcabou(new SantanderProcessadorTransacaoFinalizada());
+			}
+			
+			this.removeEstadoListener(MaquinaSantander.getInstance());
+			
+			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+			evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_SANTANDER());
+			MaquinaSantander.getInstance().notificaMudanca(evento);
+		}else{
+			for(EstadoListener listener : this.listeners) {
+				listener.estadoAcabou(new SantanderProcessadorTransacaoFinalizada());
+			}
+			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+			evento.setNovaTela(new OperacaoCancelada(MaquinaSantander.getInstance().getTransacaoBancaria().getMensagem()).getPanel(), new Images().getPATH_IMG_SANTANDER());
+			MaquinaSantander.getInstance().notificaMudanca(evento);
 		}
 		
-		this.removeEstadoListener(MaquinaSantander.getInstance());
-		
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_SANTANDER());
-		MaquinaSantander.getInstance().notificaMudanca(evento);
+//		for (EstadoListener listener : this.listeners) {
+//			listener.estadoAcabou(new SantanderProcessadorTransacaoFinalizada());
+//		}
+//		
+//		this.removeEstadoListener(MaquinaSantander.getInstance());
+//		
+//		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+//		evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_SANTANDER());
+//		MaquinaSantander.getInstance().notificaMudanca(evento);
 		
 	}
 

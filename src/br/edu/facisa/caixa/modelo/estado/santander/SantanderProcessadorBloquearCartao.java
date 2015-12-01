@@ -27,7 +27,7 @@ public class SantanderProcessadorBloquearCartao implements ProcessadorEstado {
 		MaquinaSantander.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.getInstance().getContaDigitada()));
 		MaquinaSantander.getInstance().getTransacaoBancaria().setBloqueado(true);
 		MaquinaSantander.getInstance().getTransacaoBancaria().bloquearCartao();
-		setEventoDeEstadoFinal(new SantanderProcessadorCartaoBloqueado(), new BloquearCartaoFinalizado().getPanel());
+		setEventoDeEstadoFinal(new SantanderProcessadorCartaoBloqueado(), new BloquearCartaoFinalizado("Cartão Bloqueado com sucesso!").getPanel());
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
+import br.edu.facisa.caixa.gui.OperacaoCancelada;
 import br.edu.facisa.caixa.gui.OperacaoSucesso;
 import br.edu.facisa.caixa.gui.Operacoes;
 import br.edu.facisa.caixa.gui.Recarga;
@@ -47,22 +48,28 @@ public class BBProcessadorRecarga implements ProcessadorEstado {
 		}
 		else if((estado.equals(DIGITANDO_VALOR)) && (this.valorDigitado!=0)){
 			
-			
-			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance()
-					.getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
-			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setCelular(celular);
-			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setValor(valorDigitado);
-			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().recarregarCelular();
-			
 			for (EstadoListener listener : this.listeners) {
 				listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
 			}
 			
 			this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 			
-			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_BB());
-			MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
+			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance()
+					.getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
+			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setCelular(celular);
+			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setValor(valorDigitado);
+			
+			if(MaquinaBancoBrasil.getInstance().getTransacaoBancaria().recarregarCelular()){
+				
+				MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+				evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_BB());
+				MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
+			}else{
+				
+				MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+				evento.setNovaTela(new OperacaoCancelada(MaquinaBancoBrasil.getInstance().getTransacaoBancaria().getMensagem()).getPanel(), new Images().getPATH_IMG_BB());
+				MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
+			}
 		}
 	}
 

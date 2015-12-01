@@ -14,6 +14,8 @@ public class RecargaCelular implements TransacaoCommand {
 	private Celular celular;
 	private Conta conta;
 	private double valor;
+	private String mensagem;
+	private boolean isValido =false;
 	
 	public RecargaCelular(TransacaoBancariaFacade transacaoBancaria) {
 		this.data = new Date();
@@ -27,15 +29,33 @@ public class RecargaCelular implements TransacaoCommand {
 		try {
 			conta.decrementar(valor);
 			celular.setRecarregado(true);
-			this.conta.addTransacao(this);			
+			this.conta.addTransacao(this);
+			this.isValido = true;
 		} catch (SaldoInsuficienteException e) {
-			System.out.println(e.getMessage());
+			this.isValido = false;
+			this.mensagem = e.getMessage();
 		}	
 	}
 	
 	public String toString() {
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");		
 		return formato.format(data) + " Recarga Celular  " + valor + "\n";
+	}
+
+	public boolean isValido() {
+		return isValido;
+	}
+
+	public void setValido(boolean isValido) {
+		this.isValido = isValido;
+	}
+
+	public String getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
 	}
 
 }

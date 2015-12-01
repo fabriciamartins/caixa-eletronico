@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.facisa.caixa.adapter.MaquinaSantander;
+import br.edu.facisa.caixa.gui.OperacaoCancelada;
 import br.edu.facisa.caixa.gui.OperacaoSucesso;
 import br.edu.facisa.caixa.gui.Operacoes;
 import br.edu.facisa.caixa.gui.Recarga;
@@ -57,11 +58,19 @@ public class SantanderProcessadorRecarga implements ProcessadorEstado {
 					.getConta("Santander", MaquinaSantander.getInstance().getContaDigitada()));
 			MaquinaSantander.getInstance().getTransacaoBancaria().setCelular(celular);
 			MaquinaSantander.getInstance().getTransacaoBancaria().setValor(valorDigitado);
-			MaquinaSantander.getInstance().getTransacaoBancaria().recarregarCelular();
 			
-			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_SANTANDER());
-			MaquinaSantander.getInstance().notificaMudanca(evento);
+			if(MaquinaSantander.getInstance().getTransacaoBancaria().recarregarCelular()){
+				
+				MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+				evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_SANTANDER());
+				MaquinaSantander.getInstance().notificaMudanca(evento);
+			}else{
+				
+				MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+				evento.setNovaTela(new OperacaoCancelada(MaquinaSantander.getInstance().getTransacaoBancaria().getMensagem()).getPanel(), new Images().getPATH_IMG_SANTANDER());
+				MaquinaSantander.getInstance().notificaMudanca(evento);
+			}
+			
 		}
 	}
 

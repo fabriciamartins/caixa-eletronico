@@ -6,6 +6,7 @@ import java.util.List;
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
 import br.edu.facisa.caixa.gui.Emprestimo;
+import br.edu.facisa.caixa.gui.OperacaoCancelada;
 import br.edu.facisa.caixa.gui.OperacaoSucesso;
 import br.edu.facisa.caixa.gui.Operacoes;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
@@ -39,17 +40,25 @@ public class BBProcessadorRealizandoEmprestimo extends MaquinaAdapter implements
 
 		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
 		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setValor(valorDigitado);
-		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().obterEmprestimo();
 		
-		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
+		if(MaquinaBancoBrasil.getInstance().getTransacaoBancaria().obterEmprestimo()){
+			for (EstadoListener listener : this.listeners) {
+				listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
+			}
+			
+			this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
+			
+			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+			evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_BB());
+			MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
+		}else{
+			for(EstadoListener listener : this.listeners) {
+				listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
+			}
+			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+			evento.setNovaTela(new OperacaoCancelada(MaquinaBancoBrasil.getInstance().getTransacaoBancaria().getMensagem()).getPanel(), new Images().getPATH_IMG_BB());
+			MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 		}
-		
-		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
-		
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_BB());
-		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 		
 	}
 

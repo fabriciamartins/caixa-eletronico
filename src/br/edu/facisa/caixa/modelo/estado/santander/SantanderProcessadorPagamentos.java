@@ -106,7 +106,6 @@ public class SantanderProcessadorPagamentos extends MaquinaAdapter implements Pr
 				MaquinaSantander.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.getInstance().getContaDigitada()));
 				MaquinaSantander.getInstance().getTransacaoBancaria().setValor(valorDigitado);
 				MaquinaSantander.getInstance().getTransacaoBancaria().setTitulo(titulo);
-				MaquinaSantander.getInstance().getTransacaoBancaria().pagarConta();
 				
 				if (MaquinaSantander.getInstance().getTransacaoBancaria().pagarConta()) {
 					setEventoDeEstadoFinal(new SantanderProcessadorTransacaoFinalizada(), new OperacaoSucesso().getPanel());

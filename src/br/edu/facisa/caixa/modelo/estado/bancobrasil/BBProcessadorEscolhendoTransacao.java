@@ -27,6 +27,7 @@ public class BBProcessadorEscolhendoTransacao extends MaquinaAdapter implements 
 		for (EstadoListener listener : this.listeners) {
 			listener.estadoAcabou(opcao);
 		}
+		
 		opcao.setOperacaoEscolhida(operacaoEscolhida);
 		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 		

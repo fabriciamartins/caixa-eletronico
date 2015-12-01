@@ -27,7 +27,7 @@ public class BBProcessadorBloquearCartao implements ProcessadorEstado {
 		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
 		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setBloqueado(true);
 		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().bloquearCartao();
-		setEventoDeEstadoFinal(new BBProcessadorCartaoBloqueado(), new BloquearCartaoFinalizado().getPanel());
+		setEventoDeEstadoFinal(new BBProcessadorCartaoBloqueado(), new BloquearCartaoFinalizado("Cartão Bloqueado com sucesso!").getPanel());
 	}
 
 	@Override

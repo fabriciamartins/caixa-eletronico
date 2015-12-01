@@ -55,15 +55,19 @@ public class SantanderProcessadorTransferencia implements ProcessadorEstado {
 					.getConta(Integer.valueOf(contaDestino)));
 			MaquinaSantander.getInstance().getTransacaoBancaria().setValor(valorDigitado);
 			
-			if(MaquinaSantander.getInstance().getTransacaoBancaria().getContaDestino() != null){
-				MaquinaSantander.getInstance().getTransacaoBancaria().tranferir();
+			if(MaquinaSantander.getInstance().getTransacaoBancaria().getContaDestino() == null){
 				
+				MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+				evento.setNovaTela(new OperacaoCancelada("Operação Cancelada!\n Conta Destino inválida").getPanel(), new Images().getPATH_IMG_SANTANDER());
+				MaquinaSantander.getInstance().notificaMudanca(evento);
+				
+			}else if(MaquinaSantander.getInstance().getTransacaoBancaria().tranferir()){
 				MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 				evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_SANTANDER());
 				MaquinaSantander.getInstance().notificaMudanca(evento);
 			}else{
 				MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-				evento.setNovaTela(new OperacaoCancelada("Operação Cancelada!\n Conta Destino inválida").getPanel(), new Images().getPATH_IMG_SANTANDER());
+				evento.setNovaTela(new OperacaoCancelada(MaquinaSantander.getInstance().getTransacaoBancaria().getMensagem()).getPanel(), new Images().getPATH_IMG_SANTANDER());
 				MaquinaSantander.getInstance().notificaMudanca(evento);
 			}
 

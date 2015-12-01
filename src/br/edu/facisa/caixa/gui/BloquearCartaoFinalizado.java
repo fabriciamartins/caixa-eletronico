@@ -12,6 +12,7 @@ public class BloquearCartaoFinalizado {
 
 	private JPanel panel;
 	private JLabel lbl;
+	private String mensagem;
 	
 	public JPanel getPanel() {
 		return panel;
@@ -32,7 +33,8 @@ public class BloquearCartaoFinalizado {
 	/**
 	 * Create the application.
 	 */
-	public BloquearCartaoFinalizado() {
+	public BloquearCartaoFinalizado(String mensagem) {
+		this.mensagem = mensagem;
 		initialize();
 	}
 
@@ -45,7 +47,7 @@ public class BloquearCartaoFinalizado {
 		panel.setSize(535,  320);
 		panel.setLayout(null);
 		
-		lbl = new JLabel("Cart\u00E3o bloqueado com sucesso!");
+		lbl = new JLabel(mensagem);
 		lbl.setBounds(147, 118, 246, 26);
 		lbl.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lbl.setForeground(new Color(0, 128, 0));

@@ -6,15 +6,15 @@ public interface ITransacaoBancaria {
 	
 	public boolean sacar();
 	
-	public void tranferir();
+	public boolean tranferir();
 	
 	public String consultarExtrato();
 	
 	public boolean pagarConta();
 	
-	public void recarregarCelular();
+	public boolean recarregarCelular();
 	
-	public void obterEmprestimo();
+	public boolean obterEmprestimo();
 	
 	public void bloquearCartao();
 	

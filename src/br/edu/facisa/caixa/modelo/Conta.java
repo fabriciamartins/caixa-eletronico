@@ -12,6 +12,7 @@ public class Conta {
 	private Banco banco;
 	private int numero;
 	private int senha;
+	private String senhaLetras;
 	private double saldo;
 	private double limiteDeCredito;
 	private double emprestimoObtido;
@@ -96,6 +97,14 @@ public class Conta {
 
 	public void addTransacao(TransacaoCommand transacao) {
 		this.extrato.add(transacao);
+	}
+	
+	public String getSenhaLetras() {
+		return senhaLetras;
+	}
+
+	public void setSenhaLetras(String senhaLetras) {
+		this.senhaLetras = senhaLetras;
 	}
 
 }

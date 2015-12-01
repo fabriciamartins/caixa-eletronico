@@ -5,8 +5,8 @@ import java.util.List;
 
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaSantander;
-import br.edu.facisa.caixa.gui.Operacoes;
 import br.edu.facisa.caixa.gui.Senha;
+import br.edu.facisa.caixa.gui.SenhaLetras;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.modelo.Dados;
 import br.edu.facisa.caixa.modelo.Images;
@@ -20,9 +20,11 @@ public class SantanderProcessadorDigitandoSenha extends MaquinaAdapter implement
 	private int senhaDigitada;	
 	private String asteriscos = "";
 	private Senha telaSenha = new Senha();
+	private SenhaLetras telaSenhaLetras;
 	
 	public SantanderProcessadorDigitandoSenha(){
 		listeners = new ArrayList<EstadoListener>();
+		this.telaSenhaLetras = new SenhaLetras();
 	}
 	
 	private void processaSenha(int i) {
@@ -40,13 +42,15 @@ public class SantanderProcessadorDigitandoSenha extends MaquinaAdapter implement
 			this.asteriscos = "";
 			
 			for (EstadoListener listener : this.listeners) {
-				listener.estadoAcabou(new SantanderProcessadorEscolhendoTransacao());
+				SantanderProcessadorSenhaLetras senhaLetras = new SantanderProcessadorSenhaLetras();
+				senhaLetras.setTelaSenhaLetras(telaSenhaLetras);
+				listener.estadoAcabou(senhaLetras);
 			}
 			
 			this.removeEstadoListener(MaquinaSantander.getInstance());
 			
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(new Operacoes().getPanel(), new Images().getPATH_IMG_SANTANDER());
+			evento.setNovaTela(telaSenhaLetras.getPanel(), new Images().getPATH_IMG_SANTANDER());
 			MaquinaSantander.getInstance().notificaMudanca(evento);
 		}
 		else {

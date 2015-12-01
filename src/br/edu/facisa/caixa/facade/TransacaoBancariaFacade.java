@@ -32,8 +32,11 @@ public class TransacaoBancariaFacade implements ITransacaoBancaria {
 		return saque.isValorValido();
 	}
 	
-	public void tranferir() {
-		new Transferencia(this).executar();
+	public boolean tranferir() {
+		Transferencia transferencia = new Transferencia(this);
+		transferencia.executar();
+		this.mensagem = transferencia.getMensagem();
+		return transferencia.isValido();
 	}
 	
 	public String consultarExtrato() {
@@ -49,12 +52,18 @@ public class TransacaoBancariaFacade implements ITransacaoBancaria {
 		return pagamento.isValido();
 	}
 	
-	public void recarregarCelular() {
-		new RecargaCelular(this).executar();
+	public boolean recarregarCelular() {
+		RecargaCelular recarga = new RecargaCelular(this);
+		recarga.executar();
+		this.mensagem = recarga.getMensagem();
+		return recarga.isValido();
 	}
 	
-	public void obterEmprestimo() {
-		new Emprestimo(this).executar();
+	public boolean obterEmprestimo() {
+		Emprestimo emprestimo = new Emprestimo(this);
+		emprestimo.executar();
+		this.mensagem = emprestimo.getMensagem();
+		return emprestimo.isValido();
 	}
 	
 	public void bloquearCartao() {

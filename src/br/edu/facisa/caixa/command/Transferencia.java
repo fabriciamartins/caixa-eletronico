@@ -13,6 +13,8 @@ public class Transferencia implements TransacaoCommand {
 	private Conta contaOrigem;
 	private Conta contaDestino;
 	private double valor;
+	private String mensagem;
+	private boolean isValido = false;
 	
 	public Transferencia(TransacaoBancariaFacade transacaoBancaria) {
 		this.data = new Date();
@@ -28,14 +30,32 @@ public class Transferencia implements TransacaoCommand {
 			contaDestino.incrementar(valor);
 			this.contaOrigem.addTransacao(this);
 			this.contaDestino.addTransacao(this);
+			this.setValido(true);
 		} catch (SaldoInsuficienteException e) {
-			System.out.println(e.getMessage());
+			this.setValido(false);
+			this.setMensagem(e.getMessage());
 		}
 	}
 	
 	public String toString() {
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");		
 		return formato.format(data) + " Transferência    " + valor + "\n";
+	}
+
+	public boolean isValido() {
+		return isValido;
+	}
+
+	public void setValido(boolean isValido) {
+		this.isValido = isValido;
+	}
+
+	public String getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
 	}
 
 }
