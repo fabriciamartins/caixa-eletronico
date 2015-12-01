@@ -3,23 +3,14 @@ package br.edu.facisa.caixa.modelo.estado.bancobrasil;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JPanel;
-
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
-import br.edu.facisa.caixa.gui.BloquearCartao;
-import br.edu.facisa.caixa.gui.Deposito;
-import br.edu.facisa.caixa.gui.Emprestimo;
-import br.edu.facisa.caixa.gui.Extrato;
-import br.edu.facisa.caixa.gui.Pagamentos;
-import br.edu.facisa.caixa.gui.Saque;
+import br.edu.facisa.caixa.gui.Senha;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
-import br.edu.facisa.caixa.modelo.Dados;
 import br.edu.facisa.caixa.modelo.Images;
 import br.edu.facisa.caixa.modelo.estado.EstadoListener;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstado;
 import br.edu.facisa.caixa.modelo.estado.ProcessadorEstadoInicial;
-import br.edu.facisa.caixa.modelo.estado.bancobrasil.BBProcessadorSaque;
 
 public class BBProcessadorEscolhendoTransacao extends MaquinaAdapter implements ProcessadorEstado{
 
@@ -27,6 +18,21 @@ public class BBProcessadorEscolhendoTransacao extends MaquinaAdapter implements 
 	
 	public BBProcessadorEscolhendoTransacao() {
 		listeners = new ArrayList<EstadoListener>();
+	}
+	
+	public void confirmaSenha(int operacaoEscolhida) {
+
+		BBProcessadorDigitandoSenha opcao = new BBProcessadorDigitandoSenha();
+		
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(opcao);
+		}
+		opcao.setOperacaoEscolhida(operacaoEscolhida);
+		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
+		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(new Senha().getPanel(), new Images().getPATH_IMG_BB());
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 	
 	@Override
@@ -52,112 +58,46 @@ public class BBProcessadorEscolhendoTransacao extends MaquinaAdapter implements 
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setTrocaMaquinaDeEstados("Maquina Primaria");
 		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
-	}
+	}	
 
 	@Override
 	public void teclaEsquerda01Digitada() {
-		
-		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new BBProcessadorRealizandoEmprestimo());
-		}
-		
-		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
-		
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(new Emprestimo().getPanel(), new Images().getPATH_IMG_BB());
-		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
-		
+		confirmaSenha(1);
 	}
 
 	@Override
 	public void teclaEsquerda02Digitada() {
-		
-		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new BBProcessadorRealizandoPagamento());
-		}
-		
-		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
-		
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(new Pagamentos().getPanel(), new Images().getPATH_IMG_BB());
-		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
-		
+		confirmaSenha(2);
 	}
 
 	@Override
 	public void teclaEsquerda03Digitada() {
-		// TODO Auto-generated method stub
-		
+		confirmaSenha(3);
 	}
 
 	@Override
 	public void teclaEsquerda04Digitada() {
-		// TODO Auto-generated method stub
-		
+		confirmaSenha(4);
 	}
 
 	@Override
 	public void teclaDireita01Digitada() {
-		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new BBProcessadorSaque());
-		}
-		
-		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
-		
-		JPanel telaSaque = new Saque().getPanel();
-		
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaSaque, new Images().getPATH_IMG_BB());
-		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
+		confirmaSenha(5);
 	}
 
 	@Override
 	public void teclaDireita02Digitada() {
-		
-		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new BBProcessadorExtrato());
-		}
-		
-		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
-		
-		MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
-		
-		Extrato telaExtrato = new Extrato();
-		telaExtrato.txtpnLoremIpsum.setText(MaquinaBancoBrasil.getInstance().getTransacaoBancaria().consultarExtrato());
-		
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaExtrato.getPanel(), new Images().getPATH_IMG_BB());
-		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
+		confirmaSenha(6);
 	}
 
 	@Override
 	public void teclaDireita03Digitada() {
-		
-		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new BBProcessadorRealizandoDeposito());
-		}
-		
-		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
-		
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(new Deposito().getPanel(), new Images().getPATH_IMG_BB());
-		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
-		
+		confirmaSenha(7);
 	}
 
 	@Override
 	public void teclaDireita04Digitada() {
-		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new BBProcessadorBloquearCartao());
-		}
-		
-		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
-		
-		JPanel telaBloquearCartao = new BloquearCartao().getPanel();
-		
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(telaBloquearCartao, new Images().getPATH_IMG_BB());
-		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
+		confirmaSenha(8);
 	}
 
 	@Override

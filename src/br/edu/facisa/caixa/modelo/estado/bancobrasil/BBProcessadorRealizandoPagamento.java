@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JPanel;
+
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
 import br.edu.facisa.caixa.gui.OperacaoSucesso;
@@ -141,35 +143,34 @@ public class BBProcessadorRealizandoPagamento extends MaquinaAdapter implements 
 			setCodigoDeBarras(codigoDeBarras);
 		}else if((estado.equals(DIGITANDO_VALOR)) && (this.valorDigitado!=0)){
 			
-			for (EstadoListener listener : this.listeners) {
-				listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
-			}
-			
-			this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
-			
-			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance()
-					.getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
-			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-			
-			Date dataFormatada;
-			
 			try {
+
+				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+				Date dataFormatada;
 				String dt = dataVencimento.substring(0,2) + "/" + dataVencimento.substring(2,4) + "/" + dataVencimento.substring(4);
 				dataFormatada = formatter.parse(dt);
+
 				titulo.setCodigoDeBarras(codigoDeBarras);
 				titulo.setPago(true);
 				titulo.setValor(valorDigitado);			
 				titulo.setVencimento(dataFormatada);
-				Double novoValor = MaquinaBancoBrasil.getInstance().getTransacaoBancaria().getValor() - valorDigitado;
-				MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setValor(novoValor);
+				
+				MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
+				MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setValor(valorDigitado);
 				MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setTitulo(titulo);
 				MaquinaBancoBrasil.getInstance().getTransacaoBancaria().pagarConta();
-				/*ATE AQUI*/
+				
+				for (EstadoListener listener : this.listeners) {
+					listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
+				}
+				
+				this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
+				
 				MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 				evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_BB());
 				MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
+				
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -240,6 +241,18 @@ public class BBProcessadorRealizandoPagamento extends MaquinaAdapter implements 
 		
 	}
 	
+	
+	private void setEventoDeEstadoFinal(ProcessadorEstado processadorestado, JPanel operacao) {
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(processadorestado);
+		}
+		
+		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
+		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(operacao, new Images().getPATH_IMG_BB());
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
+	}
 
 	@Override
 	public void teclaNumericaDigitada(String numTecla) {

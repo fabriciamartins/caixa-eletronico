@@ -28,7 +28,7 @@ public class PagamentoTitulo implements TransacaoCommand {
 		try {
 			if (!isVencido()) {
 				conta.decrementar(valor);
-				this.conta.addTransacao(this);
+				conta.addTransacao(this);
 			}			
 		} catch (SaldoInsuficienteException | TituloVencidoException e) {
 			System.out.println(e.getMessage());
@@ -36,8 +36,9 @@ public class PagamentoTitulo implements TransacaoCommand {
 	}
 	
 	private boolean isVencido() throws TituloVencidoException {
-		if (data.after(titulo.getVencimento())) {
-			return true;
+
+		if (data.before(titulo.getVencimento())) {
+			return false;
 		} else {
 			throw new TituloVencidoException();
 		}

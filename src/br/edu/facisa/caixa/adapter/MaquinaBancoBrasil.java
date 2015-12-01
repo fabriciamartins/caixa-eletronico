@@ -1,18 +1,18 @@
 package br.edu.facisa.caixa.adapter;
 
-import br.edu.facisa.caixa.gui.Senha;
+import br.edu.facisa.caixa.gui.Operacoes;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
+import br.edu.facisa.caixa.modelo.Images;
 import br.edu.facisa.caixa.modelo.Timeout;
-import br.edu.facisa.caixa.modelo.estado.bancobrasil.BBProcessadorDigitandoSenha;
+import br.edu.facisa.caixa.modelo.estado.bancobrasil.BBProcessadorEscolhendoTransacao;
 
 public class MaquinaBancoBrasil extends MaquinaGenericaDeBancos {
 	
 	private static MaquinaBancoBrasil instance;
 	public static String PATH_IMG_BB = "/br/edu/facisa/caixa/resource/banco_brasil.jpg";
 	
-
 	private MaquinaBancoBrasil() {
-		super.processadorEstado = new BBProcessadorDigitandoSenha();
+		super.processadorEstado = new BBProcessadorEscolhendoTransacao();
 		super.processadorEstado.addEstadoListener(this);
 	}
 	
@@ -41,8 +41,8 @@ public class MaquinaBancoBrasil extends MaquinaGenericaDeBancos {
 		}).start();
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		setContaDigitada(MaquinaPrimaria.getInstance().getContaDigitada());
-		evento.setNovaTela(new Senha().getPanel(), PATH_IMG_BB);
-		this.estado = ESTADO_INICIAL;
+		evento.setNovaTela(new Operacoes().getPanel(), new Images().getPATH_IMG_BB());
+		this.estado = ESCOLHENDO_TRANSACAO;
 		notificaMudanca(evento);
 	}
 	

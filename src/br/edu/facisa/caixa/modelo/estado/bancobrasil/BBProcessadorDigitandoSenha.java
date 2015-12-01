@@ -5,8 +5,15 @@ import java.util.List;
 
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
-import br.edu.facisa.caixa.gui.Operacoes;
+import br.edu.facisa.caixa.gui.BloquearCartao;
+import br.edu.facisa.caixa.gui.Deposito;
+import br.edu.facisa.caixa.gui.Emprestimo;
+import br.edu.facisa.caixa.gui.Extrato;
+import br.edu.facisa.caixa.gui.Pagamentos;
+import br.edu.facisa.caixa.gui.Recarga;
+import br.edu.facisa.caixa.gui.Saque;
 import br.edu.facisa.caixa.gui.Senha;
+import br.edu.facisa.caixa.gui.Transferencia;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.modelo.Dados;
 import br.edu.facisa.caixa.modelo.Images;
@@ -19,6 +26,7 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 	private int senhaDigitada;
 	private String asteriscos = "";
 	private Senha telaSenha = new Senha();
+	private int operacaoEscolhida;
 	
 	public BBProcessadorDigitandoSenha(){
 		listeners = new ArrayList<EstadoListener>();
@@ -37,14 +45,76 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 			this.senhaDigitada = 0;
 			this.asteriscos = "";
 			
-			for (EstadoListener listener : this.listeners) {
-				listener.estadoAcabou(new BBProcessadorEscolhendoTransacao());
-			}
-			
-			this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 			
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(new Operacoes().getPanel(), new Images().getPATH_IMG_BB());
+			switch (getOperacaoEscolhida()) {
+				case 1:
+					for (EstadoListener listener : this.listeners) {
+						listener.estadoAcabou(new BBProcessadorRealizandoEmprestimo());
+					}
+					this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
+					evento.setNovaTela(new Emprestimo().getPanel(), new Images().getPATH_IMG_BB());
+					break;
+				case 2:
+					for (EstadoListener listener : this.listeners) {
+						listener.estadoAcabou(new BBProcessadorRealizandoPagamento());
+					}
+					this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
+					evento.setNovaTela(new Pagamentos().getPanel(), new Images().getPATH_IMG_BB());
+					break;
+				case 3:
+					for (EstadoListener listener : this.listeners) {
+						listener.estadoAcabou(new BBProcessadorRecarga());
+					}
+					this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
+					evento.setNovaTela(new Recarga().getPanel(), new Images().getPATH_IMG_BB());
+					break;
+				case 4:
+					for (EstadoListener listener : this.listeners) {
+						listener.estadoAcabou(new BBProcessadorTransferencia());
+					}
+					this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
+					evento.setNovaTela(new Transferencia().getPanel(), new Images().getPATH_IMG_BB());
+					break;
+				case 5:
+					for (EstadoListener listener : this.listeners) {
+						listener.estadoAcabou( new BBProcessadorSaque());
+					}
+					this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
+					evento.setNovaTela(new Saque().getPanel(), new Images().getPATH_IMG_BB());
+					break;
+				case 6:
+					for (EstadoListener listener : this.listeners) {
+						listener.estadoAcabou(new BBProcessadorExtrato());
+					}
+					this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
+					
+					MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
+					
+					Extrato telaExtrato = new Extrato();
+					telaExtrato.txtpnLoremIpsum.setText(MaquinaBancoBrasil.getInstance().getTransacaoBancaria().consultarExtrato());
+					
+					evento.setNovaTela(telaExtrato.getPanel(), new Images().getPATH_IMG_BB());
+					break;
+				case 7:
+					for (EstadoListener listener : this.listeners) {
+						listener.estadoAcabou(new BBProcessadorRealizandoDeposito());
+					}
+					this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
+					evento.setNovaTela(new Deposito().getPanel(), new Images().getPATH_IMG_BB());
+					break;
+					
+				case 8:
+					for (EstadoListener listener : this.listeners) {
+						listener.estadoAcabou(new BBProcessadorBloquearCartao());
+					}
+					this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
+					evento.setNovaTela(new BloquearCartao().getPanel(), new Images().getPATH_IMG_BB());
+					break;
+			default:
+				break;
+			}
+			
 			MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 		}
 		else {
@@ -143,6 +213,14 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 		evento.setNovaTela(telaSenha.getPanel(), new Images().getPATH_IMG_BB());
 		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
+	}
+
+	public int getOperacaoEscolhida() {
+		return operacaoEscolhida;
+	}
+
+	public void setOperacaoEscolhida(int operacaoEscolhida) {
+		this.operacaoEscolhida = operacaoEscolhida;
 	}
 
 }

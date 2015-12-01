@@ -87,37 +87,36 @@ public class SantanderProcessadorPagamentos extends MaquinaAdapter implements Pr
 			setCodigoDeBarras(codigoDeBarras);
 		}else if((estado.equals(DIGITANDO_VALOR)) && (this.valorDigitado!=0)){
 			
-			for (EstadoListener listener : this.listeners) {
-				listener.estadoAcabou(new SantanderProcessadorTransacaoFinalizada());
-			}
-			
-			this.removeEstadoListener(MaquinaSantander.getInstance());
-			
-			MaquinaSantander.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance()
-					.getConta("Santander", MaquinaSantander.getInstance().getContaDigitada()));
-			/*CORRIGIR -  CORRIGIR ABAIXO*/
-			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-			
-			Date dataFormatada;
-			
 			try {
+
+				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+				Date dataFormatada;
 				String dt = dataVencimento.substring(0,2) + "/" + dataVencimento.substring(2,4) + "/" + dataVencimento.substring(4);
 				dataFormatada = formatter.parse(dt);
+
 				titulo.setCodigoDeBarras(codigoDeBarras);
 				titulo.setPago(true);
 				titulo.setValor(valorDigitado);			
 				titulo.setVencimento(dataFormatada);
+				
+				MaquinaSantander.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Santander", MaquinaSantander.getInstance().getContaDigitada()));
+				MaquinaSantander.getInstance().getTransacaoBancaria().setValor(valorDigitado);
+				MaquinaSantander.getInstance().getTransacaoBancaria().setTitulo(titulo);
+				MaquinaSantander.getInstance().getTransacaoBancaria().pagarConta();
+				
+				for (EstadoListener listener : this.listeners) {
+					listener.estadoAcabou(new SantanderProcessadorTransacaoFinalizada());
+				}
+				
+				this.removeEstadoListener(MaquinaSantander.getInstance());
+				
+				MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+				evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_SANTANDER());
+				MaquinaSantander.getInstance().notificaMudanca(evento);
+				
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			MaquinaSantander.getInstance().getTransacaoBancaria().setTitulo(titulo);
-			MaquinaSantander.getInstance().getTransacaoBancaria().pagarConta();
-			/*ATE AQUI*/
-			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_SANTANDER());
-			MaquinaSantander.getInstance().notificaMudanca(evento);
 		}
 	}
 
