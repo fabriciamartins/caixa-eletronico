@@ -2,11 +2,15 @@ package br.edu.facisa.caixa.gui;
 
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.text.ParseException;
 
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.text.MaskFormatter;
+
 import java.awt.Color;
 
 public class Pagamentos {
@@ -14,7 +18,8 @@ public class Pagamentos {
 	private JPanel panel;
 	private JLabel lblTitulo;
 	private JLabel lblDataVencimento;
-	public JTextField textDataVencimento;
+	//public JTextField textDataVencimento;
+	public JFormattedTextField textDataVencimento;
 	private JLabel lblCodBarras;
 	public JTextField textCodBarras;
 	private JLabel lblValor;
@@ -48,7 +53,7 @@ public class Pagamentos {
 		return textDataVencimento;
 	}
 
-	public void setTextDataVencimento(JTextField textDataVencimento) {
+	public void setTextDataVencimento(JFormattedTextField textDataVencimento) {
 		this.textDataVencimento = textDataVencimento;
 	}
 
@@ -95,6 +100,15 @@ public class Pagamentos {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		MaskFormatter mascara = null;
+		try {
+			mascara = new MaskFormatter("##/##/####");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		panel = new JPanel();
 		panel.setBackground(SystemColor.window);
 		panel.setSize(535,  320);
@@ -112,7 +126,7 @@ public class Pagamentos {
 		lblDataVencimento.setBounds(64, 155, 105, 14);
 		panel.add(lblDataVencimento);
 		
-		textDataVencimento = new JTextField();
+		textDataVencimento = new JFormattedTextField(mascara);
 		textDataVencimento.setEditable(false);
 		textDataVencimento.setToolTipText("");
 		textDataVencimento.setColumns(10);
