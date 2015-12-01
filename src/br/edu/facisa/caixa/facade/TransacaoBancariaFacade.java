@@ -42,8 +42,11 @@ public class TransacaoBancariaFacade implements ITransacaoBancaria {
 		return consultaExtrato.toString();
 	}
 	
-	public void pagarConta() {
-		new PagamentoTitulo(this).executar();
+	public boolean pagarConta() {
+		PagamentoTitulo pagamento = new PagamentoTitulo(this);
+		pagamento.executar();
+		this.mensagem = pagamento.getMensagem();
+		return pagamento.isValido();
 	}
 	
 	public void recarregarCelular() {

@@ -25,6 +25,17 @@ public class Dados {
 		Dados.instance = instance;
 	}
 
+	public Conta getConta(int num){
+		for(Banco banco : bancos.values()){
+			for(Conta conta : banco.getContas()){
+				if(conta.getNumero() == num){
+					return conta;
+				}
+			}
+		}
+		return null;
+	}
+	
 	public Banco getBanco(String key) {
 		return bancos.get(key);
 	}

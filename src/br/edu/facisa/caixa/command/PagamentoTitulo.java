@@ -15,6 +15,8 @@ public class PagamentoTitulo implements TransacaoCommand {
 	private Titulo titulo;
 	private Conta conta;
 	private double valor;
+	private boolean isValido = false;
+	private String mensagem;
 	
 	public PagamentoTitulo(TransacaoBancariaFacade transacaoBancaria) {
 		this.data = new Date();
@@ -29,15 +31,18 @@ public class PagamentoTitulo implements TransacaoCommand {
 			if (!isVencido()) {
 				conta.decrementar(valor);
 				conta.addTransacao(this);
+				this.isValido = true;
 			}			
 		} catch (SaldoInsuficienteException | TituloVencidoException e) {
-			System.out.println(e.getMessage());
+			this.setMensagem(e.getMessage());
 		}	
 	}
 	
+	@SuppressWarnings("deprecation")
 	private boolean isVencido() throws TituloVencidoException {
+		this.data.setDate((this.data.getDate())-1);
 
-		if (data.before(titulo.getVencimento())) {
+		if (this.data.before(titulo.getVencimento())) {
 			return false;
 		} else {
 			throw new TituloVencidoException();
@@ -47,6 +52,22 @@ public class PagamentoTitulo implements TransacaoCommand {
 	public String toString() {
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");		
 		return formato.format(data) + " Pagamento Título " + valor + "\n";
+	}
+
+	public boolean isValido() {
+		return isValido;
+	}
+
+	public void setValido(boolean isValido) {
+		this.isValido = isValido;
+	}
+
+	public String getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
 	}
 
 }

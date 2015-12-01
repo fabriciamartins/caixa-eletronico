@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
+import br.edu.facisa.caixa.gui.OperacaoCancelada;
 import br.edu.facisa.caixa.gui.OperacaoSucesso;
 import br.edu.facisa.caixa.gui.Operacoes;
 import br.edu.facisa.caixa.gui.Pagamentos;
@@ -158,20 +160,15 @@ public class BBProcessadorRealizandoPagamento extends MaquinaAdapter implements 
 				MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance().getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
 				MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setValor(valorDigitado);
 				MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setTitulo(titulo);
-				MaquinaBancoBrasil.getInstance().getTransacaoBancaria().pagarConta();
 				
-				for (EstadoListener listener : this.listeners) {
-					listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
+				if (MaquinaBancoBrasil.getInstance().getTransacaoBancaria().pagarConta()) {
+					setEventoDeEstadoFinal(new BBProcessadorTransacaoFinalizada(), new OperacaoSucesso().getPanel());
+				} else {
+					setEventoDeEstadoFinal(new BBProcessadorTransacaoFinalizada(), new OperacaoCancelada(MaquinaBancoBrasil.getInstance().getTransacaoBancaria().getMensagem()).getPanel());
 				}
-				
-				this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
-				
-				MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-				evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_BB());
-				MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
-				
+	
 			} catch (ParseException e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, e.getMessage());
 			}
 		}
 		

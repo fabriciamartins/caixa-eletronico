@@ -54,7 +54,7 @@ public class BBProcessadorRecarga implements ProcessadorEstado {
 			this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 			
 			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance()
-					.getConta("Banco Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
+					.getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
 			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setCelular(celular);
 			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setValor(valorDigitado);
 			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().recarregarCelular();

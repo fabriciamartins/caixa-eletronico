@@ -10,7 +10,7 @@ public interface ITransacaoBancaria {
 	
 	public String consultarExtrato();
 	
-	public void pagarConta();
+	public boolean pagarConta();
 	
 	public void recarregarCelular();
 	

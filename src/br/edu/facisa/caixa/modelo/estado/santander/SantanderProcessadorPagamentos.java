@@ -6,8 +6,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaSantander;
+import br.edu.facisa.caixa.gui.OperacaoCancelada;
 import br.edu.facisa.caixa.gui.OperacaoSucesso;
 import br.edu.facisa.caixa.gui.Operacoes;
 import br.edu.facisa.caixa.gui.Pagamentos;
@@ -104,18 +108,24 @@ public class SantanderProcessadorPagamentos extends MaquinaAdapter implements Pr
 				MaquinaSantander.getInstance().getTransacaoBancaria().setTitulo(titulo);
 				MaquinaSantander.getInstance().getTransacaoBancaria().pagarConta();
 				
-				for (EstadoListener listener : this.listeners) {
-					listener.estadoAcabou(new SantanderProcessadorTransacaoFinalizada());
+				if (MaquinaSantander.getInstance().getTransacaoBancaria().pagarConta()) {
+					setEventoDeEstadoFinal(new SantanderProcessadorTransacaoFinalizada(), new OperacaoSucesso().getPanel());
+				} else {
+					setEventoDeEstadoFinal(new SantanderProcessadorTransacaoFinalizada(), new OperacaoCancelada(MaquinaSantander.getInstance().getTransacaoBancaria().getMensagem()).getPanel());
 				}
 				
-				this.removeEstadoListener(MaquinaSantander.getInstance());
-				
-				MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-				evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_SANTANDER());
-				MaquinaSantander.getInstance().notificaMudanca(evento);
+//				for (EstadoListener listener : this.listeners) {
+//					listener.estadoAcabou(new SantanderProcessadorTransacaoFinalizada());
+//				}
+//				
+//				this.removeEstadoListener(MaquinaSantander.getInstance());
+//				
+//				MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+//				evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_SANTANDER());
+//				MaquinaSantander.getInstance().notificaMudanca(evento);
 				
 			} catch (ParseException e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, e.getMessage());
 			}
 		}
 	}
@@ -206,6 +216,18 @@ public class SantanderProcessadorPagamentos extends MaquinaAdapter implements Pr
 			evento.setNovaTela(telaPagamentos.getPanel(),new Images().getPATH_IMG_SANTANDER());
 			MaquinaSantander.getInstance().notificaMudanca(evento);
 		}
+	}
+	
+	private void setEventoDeEstadoFinal(ProcessadorEstado processadorestado, JPanel operacao) {
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(processadorestado);
+		}
+		
+		this.removeEstadoListener(MaquinaSantander.getInstance());
+		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(operacao, new Images().getPATH_IMG_SANTANDER());
+		MaquinaSantander.getInstance().notificaMudanca(evento);
 	}
 
 }

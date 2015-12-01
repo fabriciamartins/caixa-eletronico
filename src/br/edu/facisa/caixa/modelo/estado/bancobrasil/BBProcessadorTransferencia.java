@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
+import br.edu.facisa.caixa.gui.OperacaoCancelada;
 import br.edu.facisa.caixa.gui.OperacaoSucesso;
 import br.edu.facisa.caixa.gui.Operacoes;
 import br.edu.facisa.caixa.gui.Transferencia;
@@ -49,15 +50,23 @@ public class BBProcessadorTransferencia implements ProcessadorEstado {
 			this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 			
 			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance()
-					.getConta("Santander", MaquinaBancoBrasil.getInstance().getContaDigitada()));
+					.getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
 			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaDestino(Dados.getInstance()
-					.getConta("Santander", Integer.valueOf(contaDestino)));
+					.getConta(Integer.valueOf(contaDestino)));
 			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setValor(valorDigitado);
-			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().tranferir();
 			
-			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-			evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_BB());
-			MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
+			if(MaquinaBancoBrasil.getInstance().getTransacaoBancaria().getContaDestino() != null){
+				MaquinaBancoBrasil.getInstance().getTransacaoBancaria().tranferir();
+				
+				MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+				evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_BB());
+				MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
+			}else{
+				MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+				evento.setNovaTela(new OperacaoCancelada("Operação Cancelada!\n Conta Destino inválida").getPanel(), new Images().getPATH_IMG_BB());
+				MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
+			}
+			
 		}
 	}
 
