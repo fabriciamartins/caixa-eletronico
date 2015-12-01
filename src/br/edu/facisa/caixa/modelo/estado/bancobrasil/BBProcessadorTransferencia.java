@@ -42,18 +42,20 @@ public class BBProcessadorTransferencia implements ProcessadorEstado {
 		}
 		else if((estado.equals(DIGITANDO_VALOR)) && (this.valorDigitado!=0)){
 			
+			
+			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance()
+					.getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
+			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaDestino(Dados.getInstance()
+					.getConta("Banco do Brasil", Integer.valueOf(contaDestino)));
+			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setValor(valorDigitado);
+			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().tranferir();
+			
 			for (EstadoListener listener : this.listeners) {
 				listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
 			}
 			
 			this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
 			
-			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance()
-					.getConta("Santander", MaquinaBancoBrasil.getInstance().getContaDigitada()));
-			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaDestino(Dados.getInstance()
-					.getConta("Santander", Integer.valueOf(contaDestino)));
-			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setValor(valorDigitado);
-			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().tranferir();
 			
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 			evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_BB());

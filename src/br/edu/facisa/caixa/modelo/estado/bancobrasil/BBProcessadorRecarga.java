@@ -47,17 +47,18 @@ public class BBProcessadorRecarga implements ProcessadorEstado {
 		}
 		else if((estado.equals(DIGITANDO_VALOR)) && (this.valorDigitado!=0)){
 			
+			
+			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance()
+					.getConta("Banco do Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
+			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setCelular(celular);
+			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setValor(valorDigitado);
+			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().recarregarCelular();
+			
 			for (EstadoListener listener : this.listeners) {
 				listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
 			}
 			
 			this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
-			
-			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setContaOrigem(Dados.getInstance()
-					.getConta("Banco Brasil", MaquinaBancoBrasil.getInstance().getContaDigitada()));
-			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setCelular(celular);
-			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().setValor(valorDigitado);
-			MaquinaBancoBrasil.getInstance().getTransacaoBancaria().recarregarCelular();
 			
 			MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
 			evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_BB());
