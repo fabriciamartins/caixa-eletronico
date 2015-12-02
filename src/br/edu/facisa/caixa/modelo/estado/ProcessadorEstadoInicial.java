@@ -42,6 +42,7 @@ public class ProcessadorEstadoInicial extends MaquinaAdapter implements Processa
 			MaquinaPrimaria.getInstance().setContaDigitada(numeroConta);
 			
 			this.numeroCartao = "";
+			Home.getInstance().textField.setText(numeroCartao);
 			
 			if((conta != null) && (conta.getCartao().isBloqueado())){
 				JOptionPane.showMessageDialog(null, "Cartão Bloqueado");

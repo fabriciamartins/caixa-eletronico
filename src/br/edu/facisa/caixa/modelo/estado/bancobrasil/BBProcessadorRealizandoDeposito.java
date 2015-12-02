@@ -7,6 +7,7 @@ import br.edu.facisa.caixa.adapter.MaquinaAdapter;
 import br.edu.facisa.caixa.adapter.MaquinaBancoBrasil;
 import br.edu.facisa.caixa.gui.Deposito;
 import br.edu.facisa.caixa.gui.OperacaoSucesso;
+import br.edu.facisa.caixa.gui.Operacoes;
 import br.edu.facisa.caixa.listener.MaquinaDeEstadosEvent;
 import br.edu.facisa.caixa.modelo.Dados;
 import br.edu.facisa.caixa.modelo.Images;
@@ -54,8 +55,15 @@ public class BBProcessadorRealizandoDeposito extends MaquinaAdapter implements P
 
 	@Override
 	public void teclaCancelarDigitada() {
-		// TODO Auto-generated method stub
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(new BBProcessadorEscolhendoTransacao());
+		}
 		
+		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
+		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(new Operacoes().getPanel(), new Images().getPATH_IMG_BB());
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override

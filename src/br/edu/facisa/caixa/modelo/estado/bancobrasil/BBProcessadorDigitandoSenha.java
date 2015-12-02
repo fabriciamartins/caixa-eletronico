@@ -9,6 +9,7 @@ import br.edu.facisa.caixa.gui.BloquearCartao;
 import br.edu.facisa.caixa.gui.Deposito;
 import br.edu.facisa.caixa.gui.Emprestimo;
 import br.edu.facisa.caixa.gui.Extrato;
+import br.edu.facisa.caixa.gui.Operacoes;
 import br.edu.facisa.caixa.gui.Pagamentos;
 import br.edu.facisa.caixa.gui.Recarga;
 import br.edu.facisa.caixa.gui.Saque;
@@ -139,7 +140,14 @@ public class BBProcessadorDigitandoSenha extends MaquinaAdapter implements Proce
 
 	@Override
 	public void teclaCancelarDigitada() {
-		//TO DO - voltar a tela anterior
+		for (EstadoListener listener : this.listeners) {
+			listener.estadoAcabou(new BBProcessadorEscolhendoTransacao());
+		}
+		this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
+		
+		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
+		evento.setNovaTela(new Operacoes().getPanel(), new Images().getPATH_IMG_BB());
+		MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 	}
 
 	@Override

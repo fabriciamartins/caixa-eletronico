@@ -21,7 +21,7 @@ public class SantanderProcessadorSenhaLetras extends MaquinaAdapter implements P
 	private SenhaLetras telaSenhaLetras = new SenhaLetras();
 	private List<String> letrasEscolhidas;
 	private String astericos = "";
-	private String letrasSenha = "";
+	private String senha = "";
 	
 	public SantanderProcessadorSenhaLetras(){
 		this.listeners = new ArrayList<EstadoListener>();
@@ -184,17 +184,17 @@ public class SantanderProcessadorSenhaLetras extends MaquinaAdapter implements P
 		@SuppressWarnings("unused")
 		boolean senhaValida = true;
 		
-		String[] letrasSenha = Dados.getInstance()
+		char[] letrasSenha = Dados.getInstance()
 				.getConta("Santander", MaquinaSantander.getInstance()
-						.getSenhaDigitada()).getSenhaLetras().split("");
+						.getSenhaDigitada()).getSenhaLetras().toCharArray();
 		
 		for(String letra : this.letrasEscolhidas){
 			String[] letras = letra.split("-");
 
 			for(int i=0; i < 3; i++){
-				if(letrasSenha[contSenhaCorreta].equals(letras[i])){
+				if(letrasSenha[contSenhaCorreta]==(letras[i].charAt(0))){
 					senhaValida = true;
-					this.letrasSenha+=letras[i];
+					this.senha+=letras[i];
 					break;
 				}else{
 					senhaValida = false;
@@ -206,7 +206,7 @@ public class SantanderProcessadorSenhaLetras extends MaquinaAdapter implements P
 		}
 		
 		if(Dados.getInstance().isContaValida("Santander", MaquinaSantander.getInstance()
-				.getContaDigitada(), MaquinaSantander.getInstance().getSenhaDigitada(), this.letrasSenha)){
+				.getContaDigitada(), MaquinaSantander.getInstance().getSenhaDigitada(), this.senha)){
 			telaSucesso();
 		}else{
 			telaFracasso();
@@ -217,7 +217,7 @@ public class SantanderProcessadorSenhaLetras extends MaquinaAdapter implements P
 		
 			this.astericos = "";
 			this.letrasEscolhidas.clear();
-			this.letrasSenha = "";
+			this.senha = "";
 			
 			for(EstadoListener listener : this.listeners){
 				listener.estadoAcabou(new SantanderProcessadorEscolhendoTransacao());
@@ -234,7 +234,7 @@ public class SantanderProcessadorSenhaLetras extends MaquinaAdapter implements P
 	public void telaFracasso(){
 		this.astericos = "";
 		this.letrasEscolhidas.clear();
-		this.letrasSenha = "";
+		this.senha = "";
 		
 		for(EstadoListener listener : this.listeners){
 			listener.estadoAcabou(new SantanderProcessadorCartaoBloqueado());

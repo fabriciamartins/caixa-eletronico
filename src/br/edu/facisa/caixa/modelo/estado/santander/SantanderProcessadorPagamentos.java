@@ -113,16 +113,6 @@ public class SantanderProcessadorPagamentos extends MaquinaAdapter implements Pr
 					setEventoDeEstadoFinal(new SantanderProcessadorTransacaoFinalizada(), new OperacaoCancelada(MaquinaSantander.getInstance().getTransacaoBancaria().getMensagem()).getPanel());
 				}
 				
-//				for (EstadoListener listener : this.listeners) {
-//					listener.estadoAcabou(new SantanderProcessadorTransacaoFinalizada());
-//				}
-//				
-//				this.removeEstadoListener(MaquinaSantander.getInstance());
-//				
-//				MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-//				evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_SANTANDER());
-//				MaquinaSantander.getInstance().notificaMudanca(evento);
-				
 			} catch (ParseException e) {
 				JOptionPane.showMessageDialog(null, e.getMessage());
 			}

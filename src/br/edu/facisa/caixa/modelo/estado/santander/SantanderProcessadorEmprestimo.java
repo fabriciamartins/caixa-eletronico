@@ -61,16 +61,6 @@ public class SantanderProcessadorEmprestimo extends MaquinaAdapter implements Pr
 			MaquinaSantander.getInstance().notificaMudanca(evento);
 		}
 		
-//		for (EstadoListener listener : this.listeners) {
-//			listener.estadoAcabou(new SantanderProcessadorTransacaoFinalizada());
-//		}
-//		
-//		this.removeEstadoListener(MaquinaSantander.getInstance());
-//		
-//		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-//		evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_SANTANDER());
-//		MaquinaSantander.getInstance().notificaMudanca(evento);
-		
 	}
 
 	@Override

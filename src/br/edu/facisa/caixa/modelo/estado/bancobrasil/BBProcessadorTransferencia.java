@@ -71,24 +71,6 @@ public class BBProcessadorTransferencia implements ProcessadorEstado {
 				MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
 			}
 			
-//			if(MaquinaBancoBrasil.getInstance().getTransacaoBancaria().getContaDestino() != null){
-//				MaquinaBancoBrasil.getInstance().getTransacaoBancaria().tranferir();
-//				
-//				for (EstadoListener listener : this.listeners) {
-//					listener.estadoAcabou(new BBProcessadorTransacaoFinalizada());
-//				}
-//				
-//				this.removeEstadoListener(MaquinaBancoBrasil.getInstance());
-//				
-//				MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-//				evento.setNovaTela(new OperacaoSucesso().getPanel(), new Images().getPATH_IMG_BB());
-//				MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
-//			}else{
-//				MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-//				evento.setNovaTela(new OperacaoCancelada("Operação Cancelada!\n Conta Destino inválida").getPanel(), new Images().getPATH_IMG_BB());
-//				MaquinaBancoBrasil.getInstance().notificaMudanca(evento);
-//			}
-			
 		}
 	}
 
