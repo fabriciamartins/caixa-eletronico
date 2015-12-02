@@ -176,6 +176,13 @@ public class BBProcessadorRealizandoPagamento extends MaquinaAdapter implements 
 
 	@Override
 	public void teclaCorrigeDigitada() {
+		this.codigoDeBarras = "";
+		this.dataVencimento = "";
+		this.valorDigitado = 0;
+		telaPagamentos.textCodBarras.setText(codigoDeBarras);
+		telaPagamentos.textDataVencimento.setText(dataVencimento);
+		telaPagamentos.textValor.setText("");
+		setEventoDeEstadoFinal(new BBProcessadorRealizandoPagamento(), telaPagamentos.getPanel());
 	}
 
 	@Override

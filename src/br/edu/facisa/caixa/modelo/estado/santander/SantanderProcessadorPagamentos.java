@@ -81,12 +81,11 @@ public class SantanderProcessadorPagamentos extends MaquinaAdapter implements Pr
 
 	@Override
 	public void teclaConfirmaDigitada() {
-		if(estado.equals(DIGITANDO_DATA_VENCIMENTO) && (this.dataVencimento!="")){
+		if(estado.equals(DIGITANDO_DATA_VENCIMENTO) && ((this.dataVencimento!="") && this.dataVencimento.length()==8)){
 			estado = DIGITANDO_COD_BARRAS;
 			setDataVencimento(dataVencimento);
 		}
 		else if((estado.equals(DIGITANDO_COD_BARRAS)) && (this.codigoDeBarras!="")){
-			
 			estado = DIGITANDO_VALOR;
 			setCodigoDeBarras(codigoDeBarras);
 		}else if((estado.equals(DIGITANDO_VALOR)) && (this.valorDigitado!=0)){
@@ -121,21 +120,18 @@ public class SantanderProcessadorPagamentos extends MaquinaAdapter implements Pr
 
 	@Override
 	public void teclaCorrigeDigitada() {
+		this.codigoDeBarras = "";
+		this.dataVencimento = "";
+		this.valorDigitado = 0;
+		telaPagamentos.textCodBarras.setText(codigoDeBarras);
+		telaPagamentos.textDataVencimento.setText(dataVencimento);
+		telaPagamentos.textValor.setText("");
+		setEventoDeEstadoFinal(new SantanderProcessadorPagamentos(),telaPagamentos.getPanel());
 	}
 
 	@Override
 	public void teclaCancelarDigitada() {
-		
-		for (EstadoListener listener : this.listeners) {
-			listener.estadoAcabou(new SantanderProcessadorEscolhendoTransacao());
-		}
-		
-		this.removeEstadoListener(MaquinaSantander.getInstance());
-		
-		MaquinaDeEstadosEvent evento = new MaquinaDeEstadosEvent();
-		evento.setNovaTela(new Operacoes().getPanel(), new Images().getPATH_IMG_SANTANDER());
-		MaquinaSantander.getInstance().notificaMudanca(evento);
-		
+		setEventoDeEstadoFinal(new SantanderProcessadorEscolhendoTransacao(), new Operacoes().getPanel());
 	}
 
 	@Override
